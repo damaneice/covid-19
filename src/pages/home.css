@@ -13,16 +13,39 @@
   padding: 10px;
   font-size: 14px;
 }
+.table-data  {
+  position: relative;
+}
 
+.table-data  p {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
 .table-cell {
   position: relative;
   border-top: 1px solid rgb(190, 190, 190);
   background-color: rgb(245, 245, 245);
-  padding: 10px;
   font-size: 14px;
   font-weight: 500;
 }
 
+.table-chart {
+  padding-top: 15px;
+}
+
 .container {
   background-color: rgb(245, 245, 245);
+}
+
+.linechart_path {
+  stroke-width:4;
+  fill: none;
+}
+
+.linechart_axis {
+  stroke: #bdc3c7;
 }
