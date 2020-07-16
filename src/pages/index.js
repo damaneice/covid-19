@@ -60,7 +60,7 @@ const IndexPage = ({ data }) => {
           <div key="county-header" className="table-header">COUNTY</div>
           <div key="total-header" className="table-header">TOTAL</div>
           <div key="new-cases-header" className="table-header">NEW</div>
-          <div key="chart-header" className="table-header">7 DAY TREND</div>
+          <div key="chart-header" className="table-header">7 DAY ROLLING AVERAGE</div>
           {
             Object.keys(counties).map(county => {
               return <CountyRow key={`${county}-row`} county={county} counties={counties}/>
