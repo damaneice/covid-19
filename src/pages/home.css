@@ -1,0 +1,28 @@
+.table {
+  margin: 5px;
+  display: grid;
+  max-width: 1024px;
+  grid-template-columns: 1fr 1fr 1fr minmax(140px, 3fr);
+  background-color: rgb(245, 245, 245);
+  color: #444;
+  border-radius: 5px;
+}
+
+.table-header {
+  background-color: rgb(245, 245, 245);
+  padding: 10px;
+  font-size: 14px;
+}
+
+.table-cell {
+  position: relative;
+  border-top: 1px solid rgb(190, 190, 190);
+  background-color: rgb(245, 245, 245);
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.container {
+  background-color: rgb(245, 245, 245);
+}
