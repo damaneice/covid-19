@@ -51,7 +51,7 @@ const Layout = ({ children }) => {
           fontFamily: "avenir",
         }}
       >
-        <span style={{ "margin-right": "4px" }}>
+        <span style={{ "marginRight": "4px" }}>
           Data taken from the MDHHS Coronavirus website.
         </span>
         <a href="https://www.michigan.gov/coronavirus">
