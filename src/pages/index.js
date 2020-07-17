@@ -88,7 +88,7 @@ const IndexPage = ({ data }) => {
             7 DAY ROLLING AVERAGE
           </div>
           {counties.map(county => {
-            return <CountyRow key={`${county}-row`} county={county} />
+            return <CountyRow key={`${county.name}-row`} county={county} />
           })}
         </div>
       </div>
