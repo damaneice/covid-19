@@ -13,11 +13,11 @@
   padding: 10px;
   font-size: 14px;
 }
-.table-data  {
+.table-data {
   position: relative;
 }
 
-.table-data  p {
+.table-data p {
   margin: 0;
   position: absolute;
   top: 50%;
@@ -35,6 +35,7 @@
 
 .table-chart {
   padding-top: 15px;
+  color: #000;
 }
 
 .container {
@@ -42,7 +43,7 @@
 }
 
 .linechart_path {
-  stroke-width:4;
+  stroke-width: 4;
   fill: none;
 }
 

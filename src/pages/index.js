@@ -1,8 +1,10 @@
 import React from "react"
 
+import * as d3 from "d3"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import LineChart from "../components/linechart"
+import Chart from "../components/chart"
 import SEO from "../components/seo"
 import "./home.css"
 
@@ -13,12 +15,15 @@ const createChartData = county => {
     subset.push(county.chart[i])
     if ((i + 1) % 7 === 0) {
       let total = subset.reduce((acc, current) => acc + current.cases, 0)
-      chartData.push(total / subset.length)
+      chartData.push({
+        value: total / subset.length,
+        date: d3.timeParse("%Y-%m-%d")(county.chart[i].date),
+      })
       subset = []
     }
   }
   return chartData.map((y, index) => {
-    return { x: index, y: y }
+    return { x: index, y: y.value, date: y.date }
   })
 }
 
@@ -60,7 +65,8 @@ const CountyRow = ({ county }) => {
         <p>{county.newCases}</p>
       </div>
       <div className="table-cell table-chart">
-        <LineChart color={"#2196F3"} data={createChartData(county)} />
+        {/* <LineChart color={"#2196F3"} data={createChartData(county)} /> */}
+        <Chart data={createChartData(county)} height={300} width={700} />
       </div>
     </>
   )
@@ -105,7 +111,7 @@ export const query = graphql`
         node {
           COUNTY
           Cases
-          Date
+          Date(formatString: "Y-MM-DD")
           CASE_STATUS
         }
       }
