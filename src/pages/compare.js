@@ -61,7 +61,10 @@ const ComparePage = ({ data }) => {
       <div className="container">
         <Chart
           margin={{ top: 20, right: 20, bottom: 50, left: 40 }}
-          data={createChartData(counties[0])}
+          data={[
+            { name: counties[0].name, values: createChartData(counties[0]) },
+            { name: counties[1].name, values: createChartData(counties[1]) },
+          ]}
         />
       </div>
     </Layout>
