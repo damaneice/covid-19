@@ -39,6 +39,7 @@
 }
 
 .container {
+  border: 1px solid black;
   background-color: rgb(245, 245, 245);
 }
 

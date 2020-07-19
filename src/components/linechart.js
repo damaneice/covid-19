@@ -66,7 +66,6 @@ const LineChart = ({ data, color }) => (
   <svg viewBox={`0 0 ${svgWidth} ${svgHeight}`}>
     {makePath(color, data)}
     {makeAxis(data)}
-    <Axis />
   </svg>
 )
 export default LineChart

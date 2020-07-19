@@ -1,9 +1,9 @@
 import React from "react"
 
+import Chart from "../components/chart"
 import * as d3 from "d3"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
-import LineChart from "../components/linechart"
 import SEO from "../components/seo"
 import "./home.css"
 
@@ -51,26 +51,7 @@ const transformerCountyData = edges => {
   })
   return countiesArray.sort((a, b) => b.total - a.total)
 }
-const CountyRow = ({ county }) => {
-  return (
-    <>
-      <div className="table-data table-cell">
-        <p>{county.name}</p>
-      </div>
-      <div className="table-data table-cell">
-        <p>{county.total}</p>
-      </div>
-      <div className="table-data table-cell">
-        <p>{county.newCases}</p>
-      </div>
-      <div className="table-cell table-chart">
-        <LineChart color={"#2196F3"} data={createChartData(county)} />
-      </div>
-    </>
-  )
-}
-
-const IndexPage = ({ data }) => {
+const ComparePage = ({ data }) => {
   const { edges } = data.allCasesByCountyAndDateXlsxData
 
   const counties = transformerCountyData(edges)
@@ -78,30 +59,17 @@ const IndexPage = ({ data }) => {
     <Layout>
       <SEO title="Home" />
       <div className="container">
-        <div className="table">
-          <div key="county-header" className="table-header">
-            COUNTY
-          </div>
-          <div key="total-header" className="table-header">
-            TOTAL
-          </div>
-          <div key="new-cases-header" className="table-header">
-            NEW
-          </div>
-          <div key="chart-header" className="table-header">
-            7 DAY ROLLING AVERAGE
-          </div>
-          {counties.map(county => {
-            return <CountyRow key={`${county.name}-row`} county={county} />
-          })}
-        </div>
+        <Chart
+          margin={{ top: 20, right: 20, bottom: 50, left: 40 }}
+          data={createChartData(counties[0])}
+        />
       </div>
     </Layout>
   )
 }
 
 export const query = graphql`
-  query HomepageQuery {
+  query CompareQuery {
     allCasesByCountyAndDateXlsxData(
       filter: { CASE_STATUS: { ne: "Probable" } }
     ) {
@@ -117,4 +85,4 @@ export const query = graphql`
   }
 `
 
-export default IndexPage
+export default ComparePage

@@ -1,17 +1,17 @@
 import * as d3 from "d3"
 import React, { useEffect, useRef } from "react"
 
-const Chart = ({
-  data,
-  height,
-  width,
-  margin = { left: 0, right: 0, top: 0, bottom: 0 },
-}) => {
+const Chart = ({ data, margin }) => {
+  const width = 460 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom
   const ref = useRef()
 
   useEffect(() => {
-    const svgElement = d3.select(ref.current)
-    svgElement
+    var svgElement = d3
+      .select(ref.current)
+      .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
@@ -23,10 +23,15 @@ const Chart = ({
         })
       )
       .range([0, width])
+
     svgElement
       .append("g")
       .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x))
+      .call(d3.axisBottom(x).ticks(10).tickSizeOuter(0))
+      .selectAll("text")
+      .attr("transform", "translate(-10,10)rotate(-45)")
+      .style("text-anchor", "end")
+      .style("font-size", 10)
 
     var y = d3
       .scaleLinear()
@@ -37,7 +42,7 @@ const Chart = ({
         }),
       ])
       .range([height, 0])
-    svgElement.append("g").call(d3.axisLeft(y))
+    svgElement.append("g").call(d3.axisLeft(y).tickSizeOuter(0))
 
     svgElement
       .append("path")
@@ -56,9 +61,9 @@ const Chart = ({
             return y(d.y)
           })
       )
-  }, [])
+  }, [data, margin.left, margin.top])
 
-  return <svg viewBox={`0 0 ${width} ${height}`} ref={ref} />
+  return <div ref={ref} />
 }
 
 export default Chart
