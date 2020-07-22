@@ -8,6 +8,22 @@
   border-radius: 5px;
 }
 
+.compare {
+  margin: 5px;
+  display: grid;
+  max-width: 968px;
+  grid-template-columns: 1fr minmax(130px, 5fr) 1fr;
+  background-color: rgb(245, 245, 245);
+  color: #444;
+  border-radius: 5px;
+}
+
+.compare_chart {
+  background-color: rgb(245, 245, 245);
+  padding: 10px;
+  font-size: 14px;
+}
+
 .table-header {
   background-color: rgb(245, 245, 245);
   padding: 10px;
