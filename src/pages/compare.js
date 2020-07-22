@@ -58,7 +58,15 @@ const ComparePage = ({ data }) => {
   return (
     <Layout>
       <SEO title="Home" />
-      <div className="container">
+      <div
+        style={{
+          marginTop: "16px",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          fontFamily: "avenir",
+        }}
+      >
         <Chart
           margin={{ top: 20, right: 20, bottom: 50, left: 40 }}
           data={[

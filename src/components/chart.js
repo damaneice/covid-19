@@ -7,6 +7,7 @@ const Chart = ({ data, margin }) => {
   const svgWidth = 360 - margin.left - margin.right,
     height = 260 - margin.top - margin.bottom
   const ref = useRef()
+  const svgRef = useRef()
 
   useEffect(() => {
     var svgElement = d3
@@ -14,6 +15,8 @@ const Chart = ({ data, margin }) => {
       .append("svg")
       .attr("width", svgWidth + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
+      .style("pointer-events", "none")
+      .style("z-index", 1)
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
@@ -51,7 +54,11 @@ const Chart = ({ data, margin }) => {
         ) + 100,
       ])
       .range([height, 0])
-    svgElement.append("g").call(d3.axisLeft(y).tickSizeOuter(0))
+    var svgElement2 = d3.select(svgRef.current)
+    svgElement2
+      .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+      .call(d3.axisLeft(y).tickSizeOuter(0))
 
     svgElement
       .append("path")
@@ -118,7 +125,28 @@ const Chart = ({ data, margin }) => {
       .attr("height", 10)
   }, [])
 
-  return <div ref={ref} />
+  return (
+    <div>
+      <svg
+        width={320}
+        height={260}
+        style={{
+          display: "inline-block",
+          position: "absolute",
+          pointerEvents: "none",
+          zIndex: 1,
+        }}
+        ref={svgRef}
+      ></svg>
+      <div
+        style={{
+          maxWidth: "320px",
+          overflowX: "auto",
+        }}
+        ref={ref}
+      />
+    </div>
+  )
 }
 
 export default Chart
