@@ -8,7 +8,7 @@
   border-radius: 5px;
 }
 
-.compare {
+/* .compare {
   margin: 5px;
   display: grid;
   max-width: 968px;
@@ -22,7 +22,7 @@
   background-color: rgb(245, 245, 245);
   padding: 10px;
   font-size: 14px;
-}
+} */
 
 .table-header {
   background-color: rgb(245, 245, 245);
@@ -66,4 +66,31 @@
 
 .linechart_axis {
   stroke: #bdc3c7;
+}
+
+@media screen and (min-width: 901px) {
+  .compare_chart {
+    margin: 10px;
+    width: 840px;
+    border: solid black;
+  }
+}
+
+/* On screens that are 992px or less, set the background color to blue */
+@media screen and (max-width: 900px) {
+  .compare_chart {
+    width: 400px;
+    padding: 10px;
+    border: solid black;
+  }
+}
+
+/* On screens that are 420px or less, set the background color to olive */
+@media screen and (max-width: 420px) {
+  .compare_chart {
+    width: auto;
+    max-width: 300px;
+    padding: 10px;
+    border: solid black;
+  }
 }
