@@ -2,6 +2,36 @@ import * as d3 from "d3"
 import useWindowDimensions from "../hooks/useWindowDimensions"
 import React, { useEffect, useRef } from "react"
 
+const Legend = ({ name, fill }) => {
+  return (
+    <div style={{ display: "inline-block", marginRight: "10px" }}>
+      <svg
+        width="15"
+        height="15"
+        style={{ display: "inline-block", verticalAlign: "middle" }}
+      >
+        <rect
+          width="15"
+          height="15"
+          style={{
+            fill: fill,
+          }}
+        />
+        Sorry, your browser does not support inline SVG.
+      </svg>
+      <span
+        style={{
+          marginLeft: "5px",
+          verticalAlign: "middle",
+          display: "inline-block",
+        }}
+      >
+        {name}
+      </span>
+    </div>
+  )
+}
+
 const Chart = ({ data, margin }) => {
   const { width } = useWindowDimensions()
   const svgWidth = 600,
@@ -96,43 +126,19 @@ const Chart = ({ data, margin }) => {
             return y(d.y)
           })
       )
-    const legend = {}
-    legend[data[0].name] = "steelblue"
-    legend[data[1].name] = "green"
-
-    var lineLegend = svgElement
-      .selectAll(".lineLegend")
-      .data(Object.keys(legend))
-      .enter()
-      .append("g")
-      .attr("class", "lineLegend")
-      .attr("transform", function (d, i) {
-        return "translate(" + margin.left + "," + i * 20 + ")"
-      })
-
-    lineLegend
-      .append("text")
-      .text(function (d) {
-        return d
-      })
-      .attr("transform", "translate(15,9)") //align texts with boxes
-
-    lineLegend
-      .append("rect")
-      .attr("fill", function (d, i) {
-        return legend[d]
-      })
-      .attr("width", 10)
-      .attr("height", 10)
   }, [])
 
   return (
-    <div className="compare_chart chart_width">
-      <svg
-        style={{ position: "absolute", pointerEvents: "none", zIndex: 1 }}
-        ref={svgRef}
-      ></svg>
-      <div style={{ overflowX: "scroll" }} ref={divRef}></div>
+    <div>
+      <Legend name={data[0].name} fill="steelBlue" />
+      <Legend name={data[1].name} fill="green" />
+      <div className="compare_chart chart_width">
+        <svg
+          style={{ position: "absolute", pointerEvents: "none", zIndex: 1 }}
+          ref={svgRef}
+        ></svg>
+        <div style={{ overflowX: "scroll" }} ref={divRef}></div>
+      </div>
     </div>
   )
 }
