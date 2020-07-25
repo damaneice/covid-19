@@ -68,29 +68,22 @@
   stroke: #bdc3c7;
 }
 
-@media screen and (min-width: 901px) {
+@media screen and (min-width: 421px) {
   .compare_chart {
     margin: 10px;
-    width: 840px;
-    border: solid black;
+    border: 1px solid;
   }
-}
-
-/* On screens that are 992px or less, set the background color to blue */
-@media screen and (max-width: 900px) {
-  .compare_chart {
-    width: 400px;
-    padding: 10px;
-    border: solid black;
+  .chart_width {
+    width: 600px;
   }
 }
 
 /* On screens that are 420px or less, set the background color to olive */
 @media screen and (max-width: 420px) {
   .compare_chart {
-    width: auto;
-    max-width: 300px;
     padding: 10px;
-    border: solid black;
+  }
+  .chart_width {
+    max-width: 300px;
   }
 }
