@@ -12,7 +12,7 @@ const createChartData = county => {
   let subset = []
   for (let i = 0; i < county.chart.length; i++) {
     subset.push(county.chart[i])
-    if ((i + 1) % 7 === 0) {
+    if ((i + 1) % 7 === 0 || i === county.chart.length - 1) {
       let total = subset.reduce((acc, current) => acc + current.cases, 0)
       chartData.push({
         value: total / subset.length,
