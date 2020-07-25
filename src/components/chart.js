@@ -1,5 +1,4 @@
 import * as d3 from "d3"
-import useWindowDimensions from "../hooks/useWindowDimensions"
 import React, { useEffect, useRef } from "react"
 
 const Legend = ({ name, fill }) => {
@@ -33,9 +32,8 @@ const Legend = ({ name, fill }) => {
 }
 
 const Chart = ({ data, margin }) => {
-  const { width } = useWindowDimensions()
   const svgWidth = 600,
-    height = 250
+    height = 220
   const divRef = useRef()
   const svgRef = useRef()
 
@@ -56,12 +54,12 @@ const Chart = ({ data, margin }) => {
           return d.date
         })
       )
-      .range([0, svgWidth])
+      .range([0, svgWidth - margin.right])
 
     svgElement
       .append("g")
       .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x).ticks(10).tickSizeOuter(0))
+      .call(d3.axisBottom(x).ticks(10))
       .selectAll("text")
       .attr("transform", "translate(-10,10)rotate(-45)")
       .style("text-anchor", "end")
@@ -126,7 +124,7 @@ const Chart = ({ data, margin }) => {
             return y(d.y)
           })
       )
-  }, [])
+  }, [data, margin])
 
   return (
     <div>

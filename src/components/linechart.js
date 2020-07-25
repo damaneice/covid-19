@@ -1,5 +1,4 @@
 import React from "react"
-import Axis from "./axis"
 
 const svgHeight = 300
 const svgWidth = 700
