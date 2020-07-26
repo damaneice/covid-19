@@ -51,7 +51,8 @@ const transformerCountyData = edges => {
   })
   return countiesArray.sort((a, b) => b.total - a.total)
 }
-const CountyRow = ({ county, index, selectedCounties, add, remove }) => {
+const CountyRow = ({ county, index, add, remove }) => {
+  const [checked, setChecked] = useState(false)
   return (
     <>
       <div className="table-data table-cell">
@@ -59,9 +60,10 @@ const CountyRow = ({ county, index, selectedCounties, add, remove }) => {
           <input
             className="checkbox"
             type="checkbox"
-            checked={selectedCounties.has(index)}
+            checked={checked}
             onChange={event => {
               event.target.checked ? add(index) : remove(index)
+              setChecked(event.target.checked)
             }}
           />
         </p>
@@ -95,7 +97,6 @@ const IndexPage = ({ data }) => {
   }
   const { edges } = data.allCasesByCountyAndDateXlsxData
   const counties = transformerCountyData(edges)
-  const selectedCountiesSet = new Set(selectedCounties)
 
   return (
     <Layout>
@@ -123,7 +124,6 @@ const IndexPage = ({ data }) => {
                 index={index}
                 key={`${county.name}-row`}
                 county={county}
-                selectedCounties={selectedCountiesSet}
                 add={add}
                 remove={remove}
               />
