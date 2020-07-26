@@ -95,6 +95,7 @@ const IndexPage = ({ data }) => {
   }
   const { edges } = data.allCasesByCountyAndDateXlsxData
   const counties = transformerCountyData(edges)
+  const selectedCountiesSet = new Set(selectedCounties)
 
   return (
     <Layout>
@@ -122,7 +123,7 @@ const IndexPage = ({ data }) => {
                 index={index}
                 key={`${county.name}-row`}
                 county={county}
-                selectedCounties={new Set(selectedCounties)}
+                selectedCounties={selectedCountiesSet}
                 add={add}
                 remove={remove}
               />
