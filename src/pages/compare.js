@@ -59,7 +59,7 @@ const ComparePage = ({ data }) => {
 
   const { edges } = data.allCasesByCountyAndDateXlsxData
   const counties = transformerCountyData(edges)
-  const selectedIndexes = result.selection ? result.selection.split(",") : [0]
+  const selectedIndexes = result.selection ? result.selection.split(",") : []
   const selectedCounties = selectedIndexes.map(index => {
     return {
       name: counties[index].name,
@@ -79,10 +79,12 @@ const ComparePage = ({ data }) => {
           fontFamily: "avenir",
         }}
       >
-        <Chart
-          margin={{ top: 20, bottom: 80, right: 5, left: 40 }}
-          data={selectedCounties}
-        />
+        {selectedCounties.length > 0 && (
+          <Chart
+            margin={{ top: 20, bottom: 80, right: 5, left: 40 }}
+            data={selectedCounties}
+          />
+        )}
       </div>
     </Layout>
   )
