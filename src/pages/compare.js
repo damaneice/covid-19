@@ -5,6 +5,8 @@ import * as d3 from "d3"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import { useLocation } from "@reach/router"
+import queryString from "query-string"
 import "./home.css"
 
 const createChartData = county => {
@@ -52,9 +54,20 @@ const transformerCountyData = edges => {
   return countiesArray.sort((a, b) => b.total - a.total)
 }
 const ComparePage = ({ data }) => {
-  const { edges } = data.allCasesByCountyAndDateXlsxData
+  const location = useLocation()
+  const result = queryString.parse(location.search)
 
+  const { edges } = data.allCasesByCountyAndDateXlsxData
   const counties = transformerCountyData(edges)
+  const selectedIndexes = result.selection ? result.selection.split(",") : [0]
+  const selectedCounties = selectedIndexes.map(index => {
+    return {
+      name: counties[index].name,
+      values: createChartData(counties[index]),
+    }
+  })
+  console.log(selectedCounties)
+
   return (
     <Layout>
       <SEO title="Home" />
@@ -69,10 +82,7 @@ const ComparePage = ({ data }) => {
       >
         <Chart
           margin={{ top: 20, bottom: 80, right: 5, left: 40 }}
-          data={[
-            { name: counties[0].name, values: createChartData(counties[0]) },
-            { name: counties[1].name, values: createChartData(counties[1]) },
-          ]}
+          data={selectedCounties}
         />
       </div>
     </Layout>

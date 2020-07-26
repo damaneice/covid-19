@@ -1,6 +1,19 @@
 import * as d3 from "d3"
 import React, { useEffect, useRef } from "react"
 
+const stringToColour = name => {
+  let hash = 0
+  for (let i = 0; i < name.length; i++) {
+    hash = name.charCodeAt(i) + ((hash << 5) - hash)
+  }
+  let color = "#"
+  for (let i = 0; i < 3; i++) {
+    let value = (hash >> (i * 8)) & 0xff
+    color += ("00" + value.toString(16)).substr(-2)
+  }
+  return color
+}
+
 const Legend = ({ name, fill }) => {
   return (
     <div style={{ display: "inline-block", marginRight: "10px" }}>
@@ -89,47 +102,34 @@ const Chart = ({ data, margin }) => {
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
       .call(d3.axisLeft(y).tickSizeOuter(0))
 
-    svgElement
-      .append("path")
-      .datum(data[0].values)
-      .attr("fill", "none")
-      .attr("stroke", "steelblue")
-      .attr("stroke-width", 1.5)
-      .attr(
-        "d",
-        d3
-          .line()
-          .x(function (d) {
-            return x(d.date)
-          })
-          .y(function (d) {
-            return y(d.y)
-          })
-      )
-
-    svgElement
-      .append("path")
-      .datum(data[1].values)
-      .attr("fill", "none")
-      .attr("stroke", "green")
-      .attr("stroke-width", 1.5)
-      .attr(
-        "d",
-        d3
-          .line()
-          .x(function (d) {
-            return x(d.date)
-          })
-          .y(function (d) {
-            return y(d.y)
-          })
-      )
+    data.forEach(county => {
+      svgElement
+        .append("path")
+        .datum(county.values)
+        .attr("fill", "none")
+        .attr("stroke", stringToColour(county.name))
+        .attr("stroke-width", 1.5)
+        .attr(
+          "d",
+          d3
+            .line()
+            .x(function (d) {
+              return x(d.date)
+            })
+            .y(function (d) {
+              return y(d.y)
+            })
+        )
+    })
   }, [data, margin])
 
   return (
     <div>
-      <Legend name={data[0].name} fill="steelBlue" />
-      <Legend name={data[1].name} fill="green" />
+      {data.map(county => {
+        const color = stringToColour(county.name)
+        return <Legend key={color} name={county.name} fill={color} />
+      })}
+
       <div className="compare_chart chart_width">
         <svg
           style={{ position: "absolute", pointerEvents: "none", zIndex: 1 }}
