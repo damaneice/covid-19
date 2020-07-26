@@ -125,11 +125,12 @@ const Chart = ({ data, margin }) => {
 
   return (
     <div>
-      {data.map(county => {
-        const color = stringToColour(county.name)
-        return <Legend key={color} name={county.name} fill={color} />
-      })}
-
+      <div>
+        {data.map(county => {
+          const color = stringToColour(county.name)
+          return <Legend key={color} name={county.name} fill={color} />
+        })}
+      </div>
       <div className="compare_chart chart_width">
         <svg
           style={{ position: "absolute", pointerEvents: "none", zIndex: 1 }}
