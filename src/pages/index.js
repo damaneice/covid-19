@@ -87,9 +87,11 @@ const CountyRow = ({ county, index, add, remove }) => {
 const IndexPage = ({ data }) => {
   const [selectedCounties, setSelectedCounties] = useState([])
 
-  const add = county => setSelectedCounties([...selectedCounties, county])
+  const add = countyIndex =>
+    setSelectedCounties([...selectedCounties, countyIndex])
 
-  const remove = index => {
+  const remove = countyIndex => {
+    const index = selectedCounties.indexOf(countyIndex)
     setSelectedCounties([
       ...selectedCounties.slice(0, index),
       ...selectedCounties.slice(index + 1),
