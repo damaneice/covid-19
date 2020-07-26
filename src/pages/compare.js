@@ -66,7 +66,6 @@ const ComparePage = ({ data }) => {
       values: createChartData(counties[index]),
     }
   })
-  console.log(selectedCounties)
 
   return (
     <Layout>
