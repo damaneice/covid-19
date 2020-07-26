@@ -57,6 +57,7 @@ const CountyRow = ({ county, index, selectedCounties, add, remove }) => {
       <div className="table-data table-cell">
         <p>
           <input
+            className="checkbox"
             type="checkbox"
             checked={selectedCounties.has(index)}
             onChange={event => {
