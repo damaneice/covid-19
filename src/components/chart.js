@@ -180,12 +180,6 @@ const Chart = ({ data, margin }) => {
         })
 
         d3.selectAll(".mouse-per-line").attr("transform", function (d, i) {
-          let xDate = x.invert(mouse[0]),
-            bisect = d3.bisector(function (d) {
-              return d.date
-            }).right
-          let idx = bisect(d.values, xDate)
-
           let beginning = 0,
             end = lines[i].getTotalLength(),
             target = null
