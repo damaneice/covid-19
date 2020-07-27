@@ -9,7 +9,7 @@ import { useLocation } from "@reach/router"
 import queryString from "query-string"
 import "./home.css"
 
-const createChartData = county => {
+const createCaseChartData = county => {
   const chartData = []
   let subset = []
   for (let i = 0; i < county.chart.length; i++) {
@@ -28,7 +28,20 @@ const createChartData = county => {
   })
 }
 
-const transformerCountyData = edges => {
+const creatPositivityChartData = county => {
+  const chartData = []
+  for (let i = 0; i < county.chart.length; i++) {
+    chartData.push({
+      x: i,
+      y: county.chart[i].positivityPercent,
+      date: d3.timeParse("%Y-%m-%d")(county.chart[i].date),
+    })
+  }
+  return chartData
+}
+
+const countyCaseDataTransformer = data => {
+  const { edges } = data.allCasesByCountyAndDateXlsxData
   const counties = {}
   edges.forEach(edge => {
     if (counties[edge.node.COUNTY]) {
@@ -53,17 +66,40 @@ const transformerCountyData = edges => {
   })
   return countiesArray.sort((a, b) => b.total - a.total)
 }
+// percentage of tests that were positive
+const positiveTestPercentageTransformer = data => {
+  const { edges } = data.allDiagnosticTestsByResultAndCountyXlsxData
+  const counties = {}
+  edges.forEach(edge => {
+    if (counties[edge.node.COUNTY]) {
+      counties[edge.node.COUNTY].chart.push({
+        positivityPercent: (edge.node.Positive / edge.node.Total) * 100,
+        date: edge.node.MessageDate,
+      })
+    } else {
+      counties[edge.node.COUNTY] = { chart: [] }
+    }
+  })
+  return counties
+}
+
 const ComparePage = ({ data }) => {
   const location = useLocation()
   const result = queryString.parse(location.search)
-
-  const { edges } = data.allCasesByCountyAndDateXlsxData
-  const counties = transformerCountyData(edges)
+  const counties = countyCaseDataTransformer(data)
+  const countiesPositivity = positiveTestPercentageTransformer(data)
   const selectedIndexes = result.selection ? result.selection.split(",") : []
   const selectedCounties = selectedIndexes.map(index => {
     return {
       name: counties[index].name,
-      values: createChartData(counties[index]),
+      values: createCaseChartData(counties[index]),
+    }
+  })
+
+  const selectedPositivityCounties = selectedCounties.map(county => {
+    return {
+      name: county.name,
+      values: creatPositivityChartData(countiesPositivity[county.name]),
     }
   })
 
@@ -86,6 +122,14 @@ const ComparePage = ({ data }) => {
             data={selectedCounties}
           />
         )}
+
+        {selectedPositivityCounties.length > 0 && (
+          <Chart
+            name="Percentage of Tests That Were Positive"
+            margin={{ top: 20, bottom: 80, right: 5, left: 40 }}
+            data={selectedPositivityCounties}
+          />
+        )}
       </div>
     </Layout>
   )
@@ -102,6 +146,17 @@ export const query = graphql`
           Cases
           Date(formatString: "Y-MM-DD")
           CASE_STATUS
+        }
+      }
+    }
+    allDiagnosticTestsByResultAndCountyXlsxData {
+      edges {
+        node {
+          COUNTY
+          Total
+          Positive
+          Negative
+          MessageDate(formatString: "Y-MM-DD")
         }
       }
     }

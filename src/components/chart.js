@@ -102,11 +102,19 @@ const Chart = ({ data, margin, name }) => {
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
       .call(d3.axisLeft(y).tickSizeOuter(0))
 
+    const lineClassName = name
+      .replace(/\s/g, "")
+      .replace(/\(/g, "")
+      .replace(/\)/g, "")
+      .toLowerCase()
+
+    const mouseLineClass = "mouse-line" + lineClassName
+    const mousePerLineClass = "mouse-per-line" + lineClassName
     data.forEach(county => {
       svgElement
         .append("path")
         .datum(county.values)
-        .attr("class", "line")
+        .attr("class", lineClassName)
         .attr("fill", "none")
         .attr("stroke", stringToColor(county.name))
         .attr("stroke-width", 1.5)
@@ -122,23 +130,23 @@ const Chart = ({ data, margin, name }) => {
             })
         )
     })
-    var mouseG = svgElement.append("g").attr("class", "mouse-over-effects")
+    const mouseG = svgElement.append("g").attr("class", "mouse-over-effects")
 
     mouseG
       .append("path") // this is the black vertical line to follow mouse
-      .attr("class", "mouse-line")
+      .attr("class", mouseLineClass)
       .style("stroke", "black")
       .style("stroke-width", "1px")
       .style("opacity", "0")
 
-    var lines = document.getElementsByClassName("line")
+    const lines = document.getElementsByClassName(lineClassName)
 
-    var mousePerLine = mouseG
-      .selectAll(".mouse-per-line")
+    const mousePerLine = mouseG
+      .selectAll("." + mousePerLineClass)
       .data(data)
       .enter()
       .append("g")
-      .attr("class", "mouse-per-line")
+      .attr("class", mousePerLineClass)
 
     mousePerLine
       .append("circle")
@@ -160,26 +168,29 @@ const Chart = ({ data, margin, name }) => {
       .attr("pointer-events", "all")
       .on("mouseout", function () {
         // on mouse out hide line, circles and text
-        d3.select(".mouse-line").style("opacity", "0")
-        d3.selectAll(".mouse-per-line circle").style("opacity", "0")
-        d3.selectAll(".mouse-per-line text").style("opacity", "0")
+        d3.select("." + mouseLineClass).style("opacity", "0")
+        d3.selectAll(`.${mousePerLineClass} circle`).style("opacity", "0")
+        d3.selectAll(`.${mousePerLineClass}  text`).style("opacity", "0")
       })
       .on("mouseover", function () {
         // on mouse in show line, circles and text
-        d3.select(".mouse-line").style("opacity", "1")
-        d3.selectAll(".mouse-per-line circle").style("opacity", "1")
-        d3.selectAll(".mouse-per-line text").style("opacity", "1")
+        d3.select("." + mouseLineClass).style("opacity", "1")
+        d3.selectAll(`.${mousePerLineClass} circle`).style("opacity", "1")
+        d3.selectAll(`.${mousePerLineClass} text`).style("opacity", "1")
       })
       .on("mousemove", function () {
         // mouse moving over canvas
         var mouse = d3.mouse(this)
-        d3.select(".mouse-line").attr("d", function () {
+        d3.select("." + mouseLineClass).attr("d", function () {
           var d = "M" + mouse[0] + "," + height
           d += " " + mouse[0] + "," + 0
           return d
         })
 
-        d3.selectAll(".mouse-per-line").attr("transform", function (d, i) {
+        d3.selectAll("." + mousePerLineClass).attr("transform", function (
+          d,
+          i
+        ) {
           let beginning = 0,
             end = lines[i].getTotalLength(),
             target = null
@@ -203,7 +214,7 @@ const Chart = ({ data, margin, name }) => {
           return "translate(" + mouse[0] + "," + pos.y + ")"
         })
       })
-  }, [data, margin])
+  }, [data, margin, name])
 
   return (
     <div>
