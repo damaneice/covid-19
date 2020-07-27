@@ -44,7 +44,7 @@ const Legend = ({ name, fill }) => {
   )
 }
 
-const Chart = ({ data, margin }) => {
+const Chart = ({ data, margin, name }) => {
   const svgWidth = 600,
     height = 220
   const divRef = useRef()
@@ -207,6 +207,7 @@ const Chart = ({ data, margin }) => {
 
   return (
     <div>
+      <div className="chart_name">{name}</div>
       <div>
         {data.map(county => {
           const color = stringToColor(county.name)

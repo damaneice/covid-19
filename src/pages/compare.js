@@ -81,6 +81,7 @@ const ComparePage = ({ data }) => {
       >
         {selectedCounties.length > 0 && (
           <Chart
+            name="New Cases (7-Day Moving Average)"
             margin={{ top: 20, bottom: 80, right: 5, left: 40 }}
             data={selectedCounties}
           />

@@ -43,6 +43,13 @@
   background-color: rgb(245, 245, 245);
 }
 
+.chart_name {
+  text-align: center;
+  font-weight: 600;
+  font-size: 20px;
+  padding: 25px 0px;
+}
+
 .linechart_path {
   stroke-width: 4;
   fill: none;
