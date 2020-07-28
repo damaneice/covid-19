@@ -152,7 +152,7 @@ const IndexPage = ({ data }) => {
 export const query = graphql`
   query HomepageQuery {
     allCasesByCountyAndDateXlsxData(
-      filter: { CASE_STATUS: { ne: "Probable" } }
+      filter: { COUNTY: { ne: "MDOC" }, CASE_STATUS: { ne: "Probable" } }
     ) {
       edges {
         node {

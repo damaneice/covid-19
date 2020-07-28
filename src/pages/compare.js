@@ -138,7 +138,7 @@ const ComparePage = ({ data }) => {
 export const query = graphql`
   query CompareQuery {
     allCasesByCountyAndDateXlsxData(
-      filter: { CASE_STATUS: { ne: "Probable" } }
+      filter: { COUNTY: { ne: "MDOC" }, CASE_STATUS: { ne: "Probable" } }
     ) {
       edges {
         node {
