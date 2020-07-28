@@ -1,5 +1,6 @@
-import React from "react"
+import React, { useState } from "react"
 
+import * as d3 from "d3"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import LineChart from "../components/linechart"
@@ -13,12 +14,15 @@ const createChartData = county => {
     subset.push(county.chart[i])
     if ((i + 1) % 7 === 0) {
       let total = subset.reduce((acc, current) => acc + current.cases, 0)
-      chartData.push(total / subset.length)
+      chartData.push({
+        value: total / subset.length,
+        date: d3.timeParse("%Y-%m-%d")(county.chart[i].date),
+      })
       subset = []
     }
   }
   return chartData.map((y, index) => {
-    return { x: index, y: y }
+    return { x: index, y: y.value, date: y.date }
   })
 }
 
@@ -47,9 +51,23 @@ const transformerCountyData = edges => {
   })
   return countiesArray.sort((a, b) => b.total - a.total)
 }
-const CountyRow = ({ county }) => {
+const CountyRow = ({ county, index, add, remove }) => {
+  const [checked, setChecked] = useState(false)
   return (
     <>
+      <div className="table-data table-cell">
+        <p>
+          <input
+            className="checkbox"
+            type="checkbox"
+            checked={checked}
+            onChange={event => {
+              event.target.checked ? add(index) : remove(index)
+              setChecked(event.target.checked)
+            }}
+          />
+        </p>
+      </div>
       <div className="table-data table-cell">
         <p>{county.name}</p>
       </div>
@@ -67,14 +85,29 @@ const CountyRow = ({ county }) => {
 }
 
 const IndexPage = ({ data }) => {
-  const { edges } = data.allCasesByCountyAndDateXlsxData
+  const [selectedCounties, setSelectedCounties] = useState([])
 
+  const add = countyIndex =>
+    setSelectedCounties([...selectedCounties, countyIndex])
+
+  const remove = countyIndex => {
+    const index = selectedCounties.indexOf(countyIndex)
+    setSelectedCounties([
+      ...selectedCounties.slice(0, index),
+      ...selectedCounties.slice(index + 1),
+    ])
+  }
+  const { edges } = data.allCasesByCountyAndDateXlsxData
   const counties = transformerCountyData(edges)
+
   return (
     <Layout>
       <SEO title="Home" />
       <div className="container">
         <div className="table">
+          <div key="select-county" className="table-header">
+            Select
+          </div>
           <div key="county-header" className="table-header">
             COUNTY
           </div>
@@ -87,11 +120,31 @@ const IndexPage = ({ data }) => {
           <div key="chart-header" className="table-header">
             7 DAY ROLLING AVERAGE
           </div>
-          {counties.map(county => {
-            return <CountyRow key={`${county}-row`} county={county} />
+          {counties.map((county, index) => {
+            return (
+              <CountyRow
+                index={index}
+                key={`${county.name}-row`}
+                county={county}
+                add={add}
+                remove={remove}
+              />
+            )
           })}
         </div>
       </div>
+      {selectedCounties.length > 0 && (
+        <div id="footer">
+          <div id="inner">
+            <a
+              className="compare_button"
+              href={`/compare?selection=${selectedCounties.join()}`}
+            >
+              Compare
+            </a>
+          </div>
+        </div>
+      )}
     </Layout>
   )
 }
@@ -105,7 +158,7 @@ export const query = graphql`
         node {
           COUNTY
           Cases
-          Date
+          Date(formatString: "Y-MM-DD")
           CASE_STATUS
         }
       }
