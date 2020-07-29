@@ -26,6 +26,19 @@ const createChartData = county => {
   })
 }
 
+const sortByCountyName = (descendingOrder, setDescendingOrder, counties, setCounties) => {
+  counties.sort((a, b) => {
+    if (a.name > b.name) {
+        return descendingOrder ? -1 : 1;
+    }
+    if (b.name > a.name) {
+        return descendingOrder ? 1 : -1;
+    }
+    return 0;
+  });
+  setCounties([...counties])
+  setDescendingOrder(!descendingOrder)
+}
 const transformerCountyData = edges => {
   const counties = {}
   edges.forEach(edge => {
@@ -50,6 +63,30 @@ const transformerCountyData = edges => {
     }
   })
   return countiesArray.sort((a, b) => b.total - a.total)
+}
+
+const CountiesHeader = ({descendingOrder, setDescendingOrder, counties, setCounties}) => {
+  return (
+    <>
+      <div key="select-county" className="table-header">
+        Select
+      </div>
+      <div key="county-header" className="clickable-table-header table-header">
+        <button href="#" onClick={() => {sortByCountyName(descendingOrder, setDescendingOrder, counties, setCounties)}}>
+          COUNTY
+        </button>
+      </div>
+      <div key="total-header" className="clickable-table-header table-header">
+        TOTAL
+      </div>
+      <div key="new-cases-header" className="clickable-table-header table-header">
+        NEW
+      </div>
+      <div key="chart-header" className="table-header">
+        7 DAY ROLLING AVERAGE
+      </div>
+    </>
+  )
 }
 const CountyRow = ({ county, index, add, remove }) => {
   const [checked, setChecked] = useState(false)
@@ -98,28 +135,15 @@ const IndexPage = ({ data }) => {
     ])
   }
   const { edges } = data.allCasesByCountyAndDateXlsxData
-  const counties = transformerCountyData(edges)
+  const [counties, setCounties] = useState(transformerCountyData(edges))
+  const [descendingOrder, setDescendingOrder] = useState(false)
 
   return (
     <Layout>
       <SEO title="Home" />
       <div className="container">
         <div className="table">
-          <div key="select-county" className="table-header">
-            Select
-          </div>
-          <div key="county-header" className="table-header">
-            COUNTY
-          </div>
-          <div key="total-header" className="table-header">
-            TOTAL
-          </div>
-          <div key="new-cases-header" className="table-header">
-            NEW
-          </div>
-          <div key="chart-header" className="table-header">
-            7 DAY ROLLING AVERAGE
-          </div>
+          <CountiesHeader descendingOrder={descendingOrder} setDescendingOrder={setDescendingOrder} counties={counties} setCounties={setCounties}/>
           {counties.map((county, index) => {
             return (
               <CountyRow

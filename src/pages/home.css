@@ -8,11 +8,28 @@
   border-radius: 5px;
 }
 
+.clickable-table-header button {
+  color: #444;
+  cursor: pointer;
+  background-color: rgb(245, 245, 245);
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border: none;
+}
+
+.clickable-table-header:hover button {
+  color: rebeccapurple;
+}
+
 .table-header {
   background-color: rgb(245, 245, 245);
   padding: 10px;
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 500;
 }
+
 .table-data {
   position: relative;
 }
