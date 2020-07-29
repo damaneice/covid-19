@@ -23,6 +23,7 @@
     "react-helmet": "^6.1.0"
   },
   "devDependencies": {
+    "jpeg-js": ">=0.4.0",
     "prettier": "2.0.5"
   },
   "keywords": [
