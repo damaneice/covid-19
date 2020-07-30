@@ -1,5 +1,4 @@
 .table {
-  margin: 5px;
   display: grid;
   max-width: 1024px;
   grid-template-columns: 1fr 1fr 1fr 1fr minmax(125px, 3fr);
@@ -22,6 +21,10 @@
 .table-header:hover button {
   color: white;
   background-color: #555555;
+}
+
+.chart-header {
+  margin-right: 10px
 }
 
 .table-header {
@@ -134,7 +137,7 @@
     grid-template-columns: repeat(4, 1fr);
   }
 
-  .table > div {
+  .table > div.table-cell {
     padding: 24px 8px;
   }
 
