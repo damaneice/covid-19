@@ -8,7 +8,7 @@
   border-radius: 5px;
 }
 
-.clickable-table-header button {
+.table-header button {
   color: #444;
   cursor: pointer;
   background-color: rgb(245, 245, 245);
@@ -16,19 +16,25 @@
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  border: none;
+  padding: 16px 0;
 }
 
-.clickable-table-header:hover button {
-  color: rebeccapurple;
+.table-header:hover button {
+  color: white;
+  background-color: #555555;
 }
 
 .table-header {
   background-color: rgb(245, 245, 245);
-  padding: 10px;
   font-size: 16px;
   font-weight: 500;
   text-align: center;
+}
+
+.table-header p {
+  margin: 0;
+  display: inline-block;
+  padding: 16px 0;
 }
 
 .table-data {

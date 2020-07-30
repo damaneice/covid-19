@@ -44,6 +44,26 @@ const sortByCountyName = (
   setCounties([...counties])
   setDescendingOrder(!descendingOrder)
 }
+
+const sortByTotalCases = (
+  descendingOrder,
+  setDescendingOrder,
+  counties,
+  setCounties
+) => {
+  counties.sort((a, b) => {
+    if (a.total > b.total) {
+      return descendingOrder ? -1 : 1
+    }
+    if (b.total > a.total) {
+      return descendingOrder ? 1 : -1
+    }
+    return 0
+  })
+  setCounties([...counties])
+  setDescendingOrder(!descendingOrder)
+}
+
 const transformerCountyData = edges => {
   const counties = {}
   edges.forEach(edge => {
@@ -70,20 +90,15 @@ const transformerCountyData = edges => {
   return countiesArray.sort((a, b) => b.total - a.total)
 }
 
-const CountiesHeader = ({
-  descendingOrder,
-  setDescendingOrder,
-  counties,
-  setCounties,
-}) => {
+const CountiesHeader = ({ counties, setCounties }) => {
+  const [descendingOrder, setDescendingOrder] = useState(false)
   return (
     <>
       <div key="select-county" className="table-header">
-        Select
+        <p>Select</p>
       </div>
-      <div key="county-header" className="clickable-table-header table-header">
+      <div key="county-header" className="table-header">
         <button
-          href="#"
           onClick={() => {
             sortByCountyName(
               descendingOrder,
@@ -96,22 +111,41 @@ const CountiesHeader = ({
           COUNTY
         </button>
       </div>
-      <div key="total-header" className="clickable-table-header table-header">
-        TOTAL
+      <div key="total-header" className="table-header">
+        <button
+          onClick={() => {
+            sortByTotalCases(
+              descendingOrder,
+              setDescendingOrder,
+              counties,
+              setCounties
+            )
+          }}
+        >
+          TOTAL
+        </button>
       </div>
-      <div
-        key="new-cases-header"
-        className="clickable-table-header table-header"
-      >
-        NEW
+      <div key="new-cases-header" className="table-header">
+        <button
+          onClick={() => {
+            sortByCountyName(
+              descendingOrder,
+              setDescendingOrder,
+              counties,
+              setCounties
+            )
+          }}
+        >
+          NEW
+        </button>
       </div>
-      <div key="chart-header" className="chart-header table-header">
-        7 DAY ROLLING AVERAGE
+      <div key="chart-header" className="table-header">
+        <p>7 DAY ROLLING AVERAGE</p>
       </div>
     </>
   )
 }
-const CountyRow = ({ county, index, add, remove }) => {
+const CountyRow = ({ county, add, remove }) => {
   const [checked, setChecked] = useState(false)
   return (
     <>
@@ -159,23 +193,16 @@ const IndexPage = ({ data }) => {
   }
   const { edges } = data.allCasesByCountyAndDateXlsxData
   const [counties, setCounties] = useState(transformerCountyData(edges))
-  const [descendingOrder, setDescendingOrder] = useState(false)
 
   return (
     <Layout>
       <SEO title="Home" />
       <div className="container">
         <div className="table">
-          <CountiesHeader
-            descendingOrder={descendingOrder}
-            setDescendingOrder={setDescendingOrder}
-            counties={counties}
-            setCounties={setCounties}
-          />
-          {counties.map((county, index) => {
+          <CountiesHeader counties={counties} setCounties={setCounties} />
+          {counties.map(county => {
             return (
               <CountyRow
-                index={index}
                 key={`${county.name}-row`}
                 county={county}
                 add={add}
