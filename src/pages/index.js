@@ -105,7 +105,7 @@ const CountiesHeader = ({
       >
         NEW
       </div>
-      <div key="chart-header" className="table-header">
+      <div key="chart-header" className="chart-header table-header">
         7 DAY ROLLING AVERAGE
       </div>
     </>
