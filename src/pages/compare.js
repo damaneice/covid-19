@@ -56,15 +56,8 @@ const countyCaseDataTransformer = data => {
       counties[edge.node.COUNTY] = { newCases: 0, total: 0, chart: [] }
     }
   })
-  const countiesArray = Object.keys(counties).map(county => {
-    return {
-      name: county,
-      newCases: counties[county].newCases,
-      total: counties[county].total,
-      chart: counties[county].chart,
-    }
-  })
-  return countiesArray.sort((a, b) => b.total - a.total)
+
+  return counties
 }
 // percentage of tests that were positive
 const positiveTestPercentageTransformer = data => {
@@ -88,11 +81,13 @@ const ComparePage = ({ data }) => {
   const result = queryString.parse(location.search)
   const counties = countyCaseDataTransformer(data)
   const countiesPositivity = positiveTestPercentageTransformer(data)
-  const selectedIndexes = result.selection ? result.selection.split(",") : []
-  const selectedCounties = selectedIndexes.map(index => {
+  const selectedCountyNames = result.selection
+    ? result.selection.split(",")
+    : []
+  const selectedCounties = selectedCountyNames.map(name => {
     return {
-      name: counties[index].name,
-      values: createCaseChartData(counties[index]),
+      name: name,
+      values: createCaseChartData(counties[name]),
     }
   })
 

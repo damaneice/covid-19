@@ -26,16 +26,21 @@ const createChartData = county => {
   })
 }
 
-const sortByCountyName = (descendingOrder, setDescendingOrder, counties, setCounties) => {
+const sortByCountyName = (
+  descendingOrder,
+  setDescendingOrder,
+  counties,
+  setCounties
+) => {
   counties.sort((a, b) => {
     if (a.name > b.name) {
-        return descendingOrder ? -1 : 1;
+      return descendingOrder ? -1 : 1
     }
     if (b.name > a.name) {
-        return descendingOrder ? 1 : -1;
+      return descendingOrder ? 1 : -1
     }
-    return 0;
-  });
+    return 0
+  })
   setCounties([...counties])
   setDescendingOrder(!descendingOrder)
 }
@@ -65,21 +70,39 @@ const transformerCountyData = edges => {
   return countiesArray.sort((a, b) => b.total - a.total)
 }
 
-const CountiesHeader = ({descendingOrder, setDescendingOrder, counties, setCounties}) => {
+const CountiesHeader = ({
+  descendingOrder,
+  setDescendingOrder,
+  counties,
+  setCounties,
+}) => {
   return (
     <>
       <div key="select-county" className="table-header">
         Select
       </div>
       <div key="county-header" className="clickable-table-header table-header">
-        <button href="#" onClick={() => {sortByCountyName(descendingOrder, setDescendingOrder, counties, setCounties)}}>
+        <button
+          href="#"
+          onClick={() => {
+            sortByCountyName(
+              descendingOrder,
+              setDescendingOrder,
+              counties,
+              setCounties
+            )
+          }}
+        >
           COUNTY
         </button>
       </div>
       <div key="total-header" className="clickable-table-header table-header">
         TOTAL
       </div>
-      <div key="new-cases-header" className="clickable-table-header table-header">
+      <div
+        key="new-cases-header"
+        className="clickable-table-header table-header"
+      >
         NEW
       </div>
       <div key="chart-header" className="table-header">
@@ -99,7 +122,7 @@ const CountyRow = ({ county, index, add, remove }) => {
             type="checkbox"
             checked={checked}
             onChange={event => {
-              event.target.checked ? add(index) : remove(index)
+              event.target.checked ? add(county.name) : remove(county.name)
               setChecked(event.target.checked)
             }}
           />
@@ -143,7 +166,12 @@ const IndexPage = ({ data }) => {
       <SEO title="Home" />
       <div className="container">
         <div className="table">
-          <CountiesHeader descendingOrder={descendingOrder} setDescendingOrder={setDescendingOrder} counties={counties} setCounties={setCounties}/>
+          <CountiesHeader
+            descendingOrder={descendingOrder}
+            setDescendingOrder={setDescendingOrder}
+            counties={counties}
+            setCounties={setCounties}
+          />
           {counties.map((county, index) => {
             return (
               <CountyRow
