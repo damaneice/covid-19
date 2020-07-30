@@ -1,0 +1,51 @@
+name: Node.js CI
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.head_ref }}
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm install
+    - run: npm run download-data
+    - name: Get current time
+      uses: 1466587594/get-current-time@v1
+      id: current-time
+      with:
+        format: YYYYMMDD-HH
+        utcOffset: "+08:00"
+    - name: Use current time
+       env:
+         F_TIME: "${{ steps.current-time.outputs.formattedTime }}"
+       run: echo $F_TIME
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v2
+      with:
+        commit-message: Update Covid case data ${{ F_TIME }}
+        title: Update Covid case data
+        body: |
+          Download new data
+        labels: automated pr
+        branch: add-updated-data-${{ F_TIME }}
+    - name: Commit changes
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: Update Covid case data
+        file_pattern: src/data
+        commit_user_name: Damon Maneice
+        commit_author: damaneice@gmail.com
