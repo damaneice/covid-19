@@ -139,7 +139,7 @@ const CountiesHeader = ({ counties, setCounties }) => {
           NEW
         </button>
       </div>
-      <div key="chart-header" className="table-header">
+      <div key="chart-header" className="chart-header table-header">
         <p>7 DAY ROLLING AVERAGE</p>
       </div>
     </>
