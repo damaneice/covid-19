@@ -64,6 +64,25 @@ const sortByTotalCases = (
   setDescendingOrder(!descendingOrder)
 }
 
+const sortByNewCases = (
+  descendingOrder,
+  setDescendingOrder,
+  counties,
+  setCounties
+) => {
+  counties.sort((a, b) => {
+    if (a.newCases > b.newCases) {
+      return descendingOrder ? -1 : 1
+    }
+    if (b.newCases > a.newCases) {
+      return descendingOrder ? 1 : -1
+    }
+    return 0
+  })
+  setCounties([...counties])
+  setDescendingOrder(!descendingOrder)
+}
+
 const transformerCountyData = edges => {
   const counties = {}
   edges.forEach(edge => {
@@ -128,7 +147,7 @@ const CountiesHeader = ({ counties, setCounties }) => {
       <div key="new-cases-header" className="table-header">
         <button
           onClick={() => {
-            sortByCountyName(
+            sortByNewCases(
               descendingOrder,
               setDescendingOrder,
               counties,
