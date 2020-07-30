@@ -56,7 +56,6 @@ const countyCaseDataTransformer = data => {
       counties[edge.node.COUNTY] = { newCases: 0, total: 0, chart: [] }
     }
   })
-
   return counties
 }
 // percentage of tests that were positive
