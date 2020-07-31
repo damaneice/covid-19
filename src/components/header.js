@@ -36,7 +36,7 @@ const Header = ({ siteTitle }) => {
             Home
           </Link>
           <Link activeClassName="active" to="/hospitalizations">
-            Hospitalizations{" "}
+            Hospitalizations
           </Link>
         </div>
         {showMenu && (
@@ -44,8 +44,8 @@ const Header = ({ siteTitle }) => {
             <Link activeClassName="active" to="/">
               Home
             </Link>
-            <Link activeClassName="" to="/hospitalizations">
-              Hospitalizations{" "}
+            <Link activeClassName="active" to="/hospitalizations">
+              Hospitalizations
             </Link>
           </div>
         )}
