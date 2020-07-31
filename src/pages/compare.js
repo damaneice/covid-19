@@ -99,7 +99,7 @@ const ComparePage = ({ data }) => {
 
   return (
     <Layout>
-      <SEO title="Home" />
+      <SEO title="Compare" />
       <div
         style={{
           marginTop: "16px",
