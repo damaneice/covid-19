@@ -8,7 +8,7 @@ import SEO from "../components/seo"
 import "./home.css"
 
 const hospitalizationsTransformer = data => {
-  const { edges } = data.allCovid19HospitalizationsXlsxLine
+  const { edges } = data.allCovid19HospitalizationsCsvSheet1
   const deaths = []
   const edDischarges = []
   const inpatients = []
@@ -59,7 +59,7 @@ const HospitalizationsPage = ({ data }) => {
       }
     }
   )
-  console.log(hospitalizations)
+
   return (
     <Layout>
       <SEO title="Hospitalizations" />
@@ -84,16 +84,16 @@ const HospitalizationsPage = ({ data }) => {
 
 export const query = graphql`
   query HospitalizationsPageQuery {
-    allCovid19HospitalizationsXlsxLine {
+    allCovid19HospitalizationsCsvSheet1 {
       edges {
         node {
           Date(formatString: "Y-MM-DD")
+          Critical_Care
           Deaths
           ED_Discharges
           Inpatients
           New_Cases
           Ventilators
-          Critical_Care
         }
       }
     }
