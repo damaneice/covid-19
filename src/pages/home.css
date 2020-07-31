@@ -34,6 +34,10 @@
   float: right;
 }
 
+.mobile-menu-icon {
+  display: none;
+}
+
 @media screen and (max-width: 500px) {
   .header a {
     float: none;
@@ -42,6 +46,20 @@
   }
   .header-right {
     float: none;
+    display: none;
+  }
+  .mobile-menu-icon {
+    float: right;
+    display: block;
+    margin-top: 8px;
+    background-color: rebeccapurple;
+    border: none;
+  }
+  .mobile-menu-icon > div {
+    width: 35px;
+    height: 4px;
+    background-color: white;
+    margin: 6px 0;
   }
 }
 
