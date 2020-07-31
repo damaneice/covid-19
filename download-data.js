@@ -63,10 +63,20 @@ const downloadData = async link => {
     baseURL + cumulativeDataPageLink
   )
   $ = cheerio.load(cumulativeDataPage)
-  // const casesByCountyByDateLink = $("a[href*='/documents/coronavirus/Cases_by_County_and_Date']").attr('href')
-  // downloadXLSXFile(baseURL + casesByCountyByDateLink, "src/data/Cases_by_County_and_Date.xlsx")
-  // const diagnosticTestsByResultAndCountyLink = $("a[href*='/documents/coronavirus/Diagnostic_Tests_by_Result_and_County']").attr('href')
-  // downloadXLSXFile(baseURL + diagnosticTestsByResultAndCountyLink, "src/data/Diagnostic_Tests_by_Result_and_County.xlsx")
+  const casesByCountyByDateLink = $(
+    "a[href*='/documents/coronavirus/Cases_by_County_and_Date']"
+  ).attr("href")
+  downloadXLSXFile(
+    baseURL + casesByCountyByDateLink,
+    "src/data/Cases_by_County_and_Date.xlsx"
+  )
+  const diagnosticTestsByResultAndCountyLink = $(
+    "a[href*='/documents/coronavirus/Diagnostic_Tests_by_Result_and_County']"
+  ).attr("href")
+  downloadXLSXFile(
+    baseURL + diagnosticTestsByResultAndCountyLink,
+    "src/data/Diagnostic_Tests_by_Result_and_County.xlsx"
+  )
   const dataAboutPlacesLink = $(
     "a[href*='/coronavirus/']:contains('Data About Places')"
   ).attr("href")
