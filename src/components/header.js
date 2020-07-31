@@ -1,29 +1,28 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
-import React from "react"
+import React, { useState } from "react"
 
-const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
+const Header = ({ siteTitle }) => {
+  const [showMenu, setShowMenu] = useState(false)
+  return (
+    <header
       style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-        display: "flex",
-        flexDirection: "row",
-        flexWrap: "wrap",
-        justifyContent: "center",
-        alignItems: "center",
-        fontFamily: "avenir",
+        marginBottom: `1.45rem`,
       }}
     >
-      <h1 style={{ margin: 0 }}>
+      <div className="header">
+        <button
+          className="mobile-menu-icon"
+          onClick={() => {
+            setShowMenu(!showMenu)
+          }}
+        >
+          <div></div>
+          <div></div>
+          <div></div>
+        </button>
         <Link
+          className="title"
           to="/"
           style={{
             color: `white`,
@@ -32,10 +31,28 @@ const Header = ({ siteTitle }) => (
         >
           {siteTitle}
         </Link>
-      </h1>
-    </div>
-  </header>
-)
+        <div className="header-right">
+          <Link activeClassName="active" to="/">
+            Home
+          </Link>
+          <Link activeClassName="active" to="/hospitalizations">
+            Hospitalizations
+          </Link>
+        </div>
+        {showMenu && (
+          <div>
+            <Link activeClassName="active" to="/">
+              Home
+            </Link>
+            <Link activeClassName="active" to="/hospitalizations">
+              Hospitalizations
+            </Link>
+          </div>
+        )}
+      </div>
+    </header>
+  )
+}
 
 Header.propTypes = {
   siteTitle: PropTypes.string,
