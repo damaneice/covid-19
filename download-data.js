@@ -29,8 +29,8 @@ const downloadData = async (link) => {
     const dataPage = await downloadPage(baseURL + dataPageLink);
     $ = cheerio.load(dataPage)
     const casesByCountyByDateLink = $("a[href*='/documents/coronavirus/Cases_by_County_and_Date']").attr('href')
-    downloadXLSXFile(baseURL + casesByCountyByDateLink, "src/data/Cases_by_County_and_Date.xlsx")
+    await downloadXLSXFile(baseURL + casesByCountyByDateLink, "src/data/Cases_by_County_and_Date.xlsx")
     const diagnosticTestsByResultAndCountyLink = $("a[href*='/documents/coronavirus/Diagnostic_Tests_by_Result_and_County']").attr('href')
-    downloadXLSXFile(baseURL + diagnosticTestsByResultAndCountyLink, "src/data/Diagnostic_Tests_by_Result_and_County.xlsx")
+    await downloadXLSXFile(baseURL + diagnosticTestsByResultAndCountyLink, "src/data/Diagnostic_Tests_by_Result_and_County.xlsx")
 }
 downloadData(`${baseURL}/coronavirus`)
