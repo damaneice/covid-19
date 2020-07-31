@@ -30,9 +30,9 @@ jobs:
         format: YYYYMMDD-HH
         utcOffset: "+08:00"
     - name: Use current time
-       env:
-         F_TIME: "${{ steps.current-time.outputs.formattedTime }}"
-       run: echo $F_TIME
+      env:
+        F_TIME: "${{ steps.current-time.outputs.formattedTime }}"
+        run: echo $F_TIME
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v2
       with:
