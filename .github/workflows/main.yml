@@ -37,7 +37,7 @@ jobs:
         body: |
           Download new data
         labels: automated pr
-        branch: add-updated-data-${{ F_TIME }}
+        branch: add-updated-data-${{ steps.current-time.outputs.formattedTime }}
     - name: Commit changes
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
