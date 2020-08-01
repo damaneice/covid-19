@@ -57,8 +57,8 @@ const downloadData = async link => {
     "a[href*='/coronavirus/']:contains('See Cumulative Data')"
   ).attr("href")
   const stats = $(".stat-container").find(".stats-text")
-  const newCases = $(stats[2]).text().replace(/,/g, "")
-  const newDeaths = $(stats[3]).text().replace(/,/g, "")
+  const newCases = $(stats[2]).text().replace(/,/g, "").replace(/\*/g, "")
+  const newDeaths = $(stats[3]).text().replace(/,/g, "").replace(/\*/g, "")
   const cumulativeDataPage = await downloadPage(
     baseURL + cumulativeDataPageLink
   )
