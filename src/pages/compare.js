@@ -41,19 +41,18 @@ const creatPositivityChartData = county => {
 }
 
 const countyCaseDataTransformer = data => {
-  const { edges } = data.allCasesByCountyAndDateXlsxData
+  const { edges } = data.allCasesByCountyAndDateCsvSheet1
   const counties = {}
   edges.forEach(edge => {
-    if (counties[edge.node.COUNTY]) {
-      counties[edge.node.COUNTY].total =
-        counties[edge.node.COUNTY].total + parseInt(edge.node.Cases)
-      counties[edge.node.COUNTY].newCases = edge.node.Cases
-      counties[edge.node.COUNTY].chart.push({
-        cases: edge.node.Cases,
-        date: edge.node.Date,
+    if (counties[edge.node.county]) {
+      counties[edge.node.county].total = parseInt(edge.node.cases)
+      counties[edge.node.county].newCases = edge.node.newCases
+      counties[edge.node.county].chart.push({
+        cases: edge.node.newCases,
+        date: edge.node.date,
       })
     } else {
-      counties[edge.node.COUNTY] = { newCases: 0, total: 0, chart: [] }
+      counties[edge.node.county] = { newCases: 0, total: 0, chart: [] }
     }
   })
   return counties
@@ -131,15 +130,13 @@ const ComparePage = ({ data }) => {
 
 export const query = graphql`
   query CompareQuery {
-    allCasesByCountyAndDateXlsxData(
-      filter: { COUNTY: { ne: "MDOC" }, CASE_STATUS: { ne: "Probable" } }
-    ) {
+    allCasesByCountyAndDateCsvSheet1 {
       edges {
         node {
-          COUNTY
-          Cases
-          Date(formatString: "Y-MM-DD")
-          CASE_STATUS
+          county
+          cases
+          date(formatString: "Y-MM-DD")
+          newCases
         }
       }
     }

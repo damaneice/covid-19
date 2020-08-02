@@ -1,8 +1,10 @@
 const axios = require("axios")
 const cheerio = require("cheerio")
 const fs = require("fs")
+const XLSX = require("xlsx")
 const baseURL = "https://www.michigan.gov"
 const updateData = require("./update-spreadsheet")
+const downloadNYTData = require("./download-nyt-data")
 
 const downloadPage = async link => {
   const response = await axios(link)
@@ -22,6 +24,14 @@ const downloadXLSXFile = (url, dataPath) =>
           .on("error", e => reject(e))
       })
   )
+
+const writeFile = (path, data, opts = "utf8") =>
+  new Promise((resolve, reject) => {
+    fs.writeFile(path, data, opts, err => {
+      if (err) reject(err)
+      else resolve()
+    })
+  })
 
 const downloadAboutPlacesData = async dataAboutPlacesLink => {
   const dataAboutPlacesPage = await downloadPage(baseURL + dataAboutPlacesLink)
@@ -63,13 +73,6 @@ const downloadData = async link => {
     baseURL + cumulativeDataPageLink
   )
   $ = cheerio.load(cumulativeDataPage)
-  const casesByCountyByDateLink = $(
-    "a[href*='/documents/coronavirus/Cases_by_County_and_Date']"
-  ).attr("href")
-  downloadXLSXFile(
-    baseURL + casesByCountyByDateLink,
-    "src/data/Cases_by_County_and_Date.xlsx"
-  )
   const diagnosticTestsByResultAndCountyLink = $(
     "a[href*='/documents/coronavirus/Diagnostic_Tests_by_Result_and_County']"
   ).attr("href")
@@ -81,6 +84,9 @@ const downloadData = async link => {
     "a[href*='/coronavirus/']:contains('Data About Places')"
   ).attr("href")
   const metrics = await downloadAboutPlacesData(dataAboutPlacesLink)
-  updateData(newCases, newDeaths, metrics)
+  await updateData(newCases, newDeaths, metrics)
+  await downloadNYTData(
+    "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv"
+  )
 }
 downloadData(`${baseURL}/coronavirus`)
