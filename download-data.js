@@ -24,6 +24,14 @@ const downloadXLSXFile = (url, dataPath) =>
       })
   )
 
+const writeFile = (path, data, opts = "utf8") =>
+  new Promise((resolve, reject) => {
+    fs.writeFile(path, data, opts, err => {
+      if (err) reject(err)
+      else resolve()
+    })
+  })
+
 const downloadAboutPlacesData = async dataAboutPlacesLink => {
   const dataAboutPlacesPage = await downloadPage(baseURL + dataAboutPlacesLink)
   $ = cheerio.load(dataAboutPlacesPage)
@@ -72,9 +80,10 @@ const downloadData = async link => {
     "src/data/Cases_by_County_and_Date.xlsx"
   )
   const workBook = XLSX.readFile("src/data/Cases_by_County_and_Date.xlsx")
-  XLSX.writeFile(workBook, "src/data/Cases_by_County_and_Date.csv", {
-    bookType: "csv",
-  })
+  const workSheet = workBook.Sheets[workBook.SheetNames[0]]
+  const csv = XLSX.utils.sheet_to_csv(workSheet)
+
+  await writeFile("src/data/Cases_by_County_and_Date.csv", csv)
   const diagnosticTestsByResultAndCountyLink = $(
     "a[href*='/documents/coronavirus/Diagnostic_Tests_by_Result_and_County']"
   ).attr("href")
