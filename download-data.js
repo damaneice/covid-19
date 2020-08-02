@@ -1,6 +1,7 @@
 const axios = require("axios")
 const cheerio = require("cheerio")
 const fs = require("fs")
+const XLSX = require("xlsx")
 const baseURL = "https://www.michigan.gov"
 const updateData = require("./update-spreadsheet")
 
@@ -66,10 +67,14 @@ const downloadData = async link => {
   const casesByCountyByDateLink = $(
     "a[href*='/documents/coronavirus/Cases_by_County_and_Date']"
   ).attr("href")
-  downloadXLSXFile(
+  await downloadXLSXFile(
     baseURL + casesByCountyByDateLink,
     "src/data/Cases_by_County_and_Date.xlsx"
   )
+  const workBook = XLSX.readFile("src/data/Cases_by_County_and_Date.xlsx")
+  XLSX.writeFile(workBook, "src/data/Cases_by_County_and_Date.csv", {
+    bookType: "csv",
+  })
   const diagnosticTestsByResultAndCountyLink = $(
     "a[href*='/documents/coronavirus/Diagnostic_Tests_by_Result_and_County']"
   ).attr("href")
