@@ -86,16 +86,15 @@ const sortByNewCases = (
 const transformerCountyData = edges => {
   const counties = {}
   edges.forEach(edge => {
-    if (counties[edge.node.COUNTY]) {
-      counties[edge.node.COUNTY].total =
-        counties[edge.node.COUNTY].total + parseInt(edge.node.Cases)
-      counties[edge.node.COUNTY].newCases = edge.node.Cases
-      counties[edge.node.COUNTY].chart.push({
-        cases: edge.node.Cases,
-        date: edge.node.Date,
+    if (counties[edge.node.county]) {
+      counties[edge.node.county].total = edge.node.cases
+      counties[edge.node.county].newCases = edge.node.newCases
+      counties[edge.node.county].chart.push({
+        cases: edge.node.newCases,
+        date: edge.node.date,
       })
     } else {
-      counties[edge.node.COUNTY] = { newCases: 0, total: 0, chart: [] }
+      counties[edge.node.county] = { newCases: 0, total: 0, chart: [] }
     }
   })
   const countiesArray = Object.keys(counties).map(county => {
@@ -210,7 +209,7 @@ const IndexPage = ({ data }) => {
       ...selectedCounties.slice(index + 1),
     ])
   }
-  const { edges } = data.allCasesByCountyAndDateXlsxData
+  const { edges } = data.allCasesByCountyAndDateCsvSheet1
   const [counties, setCounties] = useState(transformerCountyData(edges))
 
   return (
@@ -249,15 +248,13 @@ const IndexPage = ({ data }) => {
 
 export const query = graphql`
   query HomepageQuery {
-    allCasesByCountyAndDateXlsxData(
-      filter: { COUNTY: { ne: "MDOC" }, CASE_STATUS: { ne: "Probable" } }
-    ) {
+    allCasesByCountyAndDateCsvSheet1 {
       edges {
         node {
-          COUNTY
-          Cases
-          Date(formatString: "Y-MM-DD")
-          CASE_STATUS
+          county
+          cases
+          date(formatString: "Y-MM-DD")
+          newCases
         }
       }
     }
