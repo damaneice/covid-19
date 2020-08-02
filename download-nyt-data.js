@@ -25,9 +25,24 @@ const readFile = path =>
     })
   })
 
+const removeFile = path => {
+  new Promise((resolve, reject) => {
+    fs.unlink(path, err => {
+      if (err) {
+        console.log(`${err}`)
+        reject(err)
+      } else {
+        console.log(`${path} removed`)
+        resolve()
+      }
+    })
+  })
+}
+
 const downloadData = async link => {
-  await downloadFile(link, "us-counties.csv")
-  const data = await readFile("us-counties.csv")
+  const usCountiesFileNanme = "us-counties.csv"
+  await downloadFile(link, usCountiesFileNanme)
+  const data = await readFile(usCountiesFileNanme)
   const list = await neatCsv(data)
 
   const michiganCounties = list.filter(row => {
@@ -49,6 +64,7 @@ const downloadData = async link => {
 
   const csv = new ObjectsToCsv(michiganCounties)
   await csv.toDisk("src/data/cases-by-county-and-date.csv")
+  await removeFile(usCountiesFileNanme)
 }
 downloadData(
   "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv"
