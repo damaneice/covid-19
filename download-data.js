@@ -4,6 +4,7 @@ const fs = require("fs")
 const XLSX = require("xlsx")
 const baseURL = "https://www.michigan.gov"
 const updateData = require("./update-spreadsheet")
+const downloadNYTData = require("./download-nyt-data")
 
 const downloadPage = async link => {
   const response = await axios(link)
@@ -72,18 +73,6 @@ const downloadData = async link => {
     baseURL + cumulativeDataPageLink
   )
   $ = cheerio.load(cumulativeDataPage)
-  const casesByCountyByDateLink = $(
-    "a[href*='/documents/coronavirus/Cases_by_County_and_Date']"
-  ).attr("href")
-  await downloadXLSXFile(
-    baseURL + casesByCountyByDateLink,
-    "src/data/Cases_by_County_and_Date.xlsx"
-  )
-  const workBook = XLSX.readFile("src/data/Cases_by_County_and_Date.xlsx")
-  const workSheet = workBook.Sheets[workBook.SheetNames[0]]
-  const csv = XLSX.utils.sheet_to_csv(workSheet)
-
-  await writeFile("src/data/Cases_by_County_and_Date.csv", csv)
   const diagnosticTestsByResultAndCountyLink = $(
     "a[href*='/documents/coronavirus/Diagnostic_Tests_by_Result_and_County']"
   ).attr("href")
@@ -95,6 +84,9 @@ const downloadData = async link => {
     "a[href*='/coronavirus/']:contains('Data About Places')"
   ).attr("href")
   const metrics = await downloadAboutPlacesData(dataAboutPlacesLink)
-  updateData(newCases, newDeaths, metrics)
+  await updateData(newCases, newDeaths, metrics)
+  await downloadNYTData(
+    "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv"
+  )
 }
 downloadData(`${baseURL}/coronavirus`)

@@ -39,7 +39,7 @@ const removeFile = path => {
   })
 }
 
-const downloadData = async link => {
+const downloadNYTData = async link => {
   const usCountiesFileNanme = "us-counties.csv"
   await downloadFile(link, usCountiesFileNanme)
   const data = await readFile(usCountiesFileNanme)
@@ -66,6 +66,4 @@ const downloadData = async link => {
   await csv.toDisk("src/data/cases-by-county-and-date.csv")
   await removeFile(usCountiesFileNanme)
 }
-downloadData(
-  "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv"
-)
+module.exports = downloadNYTData
