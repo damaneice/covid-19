@@ -17,14 +17,6 @@ const downloadFile = (url, dataPath) =>
       })
   )
 
-const writeFile = (path, data, opts = "utf8") =>
-  new Promise((resolve, reject) => {
-    fs.writeFile(path, data, opts, err => {
-      if (err) reject(err)
-      else resolve()
-    })
-  })
-
 const readFile = path =>
   new Promise((resolve, reject) => {
     fs.readFile(path, async (err, data) => {
@@ -37,8 +29,13 @@ const downloadData = async link => {
   await downloadFile(link, "us-counties.csv")
   const data = await readFile("us-counties.csv")
   const list = await neatCsv(data)
+
+  const michiganCounties = list.filter(row => {
+    return row.state.toLowerCase() === "michigan"
+  })
+
   const counties = {}
-  list.forEach(item => {
+  michiganCounties.forEach(item => {
     if (counties[item.county]) {
       const items = counties[item.county]
       const previousItem = items[items.length - 1]
@@ -50,7 +47,7 @@ const downloadData = async link => {
     }
   })
 
-  const csv = new ObjectsToCsv(list)
+  const csv = new ObjectsToCsv(michiganCounties)
   await csv.toDisk("src/data/cases-by-county-and-date.csv")
 }
 downloadData(
