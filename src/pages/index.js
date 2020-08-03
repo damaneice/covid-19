@@ -2,6 +2,7 @@ import React, { useState } from "react"
 
 import * as d3 from "d3"
 import { graphql } from "gatsby"
+import moment from "moment"
 import Layout from "../components/layout"
 import LineChart from "../components/linechart"
 import SEO from "../components/seo"
@@ -211,11 +212,14 @@ const IndexPage = ({ data }) => {
   }
   const { edges } = data.allCasesByCountyAndDateCsvSheet1
   const [counties, setCounties] = useState(transformerCountyData(edges))
-
+  const updatedDate = edges[edges.length - 1].node.date
   return (
     <Layout>
       <SEO title="Home" />
       <div className="container">
+        <div className="updated-date">
+          <p>Updated {moment(updatedDate).format("dddd, MMMM Do, YYYY")}</p>
+        </div>
         <div className="table">
           <CountiesHeader counties={counties} setCounties={setCounties} />
           {counties.map(county => {

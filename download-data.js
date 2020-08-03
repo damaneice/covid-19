@@ -66,9 +66,6 @@ const downloadData = async link => {
   const cumulativeDataPageLink = $(
     "a[href*='/coronavirus/']:contains('See Cumulative Data')"
   ).attr("href")
-  const stats = $(".stat-container").find(".stats-text")
-  const newCases = $(stats[2]).text().replace(/,/g, "").replace(/\*/g, "")
-  const newDeaths = $(stats[3]).text().replace(/,/g, "").replace(/\*/g, "")
   const cumulativeDataPage = await downloadPage(
     baseURL + cumulativeDataPageLink
   )
@@ -84,9 +81,7 @@ const downloadData = async link => {
     "a[href*='/coronavirus/']:contains('Data About Places')"
   ).attr("href")
   const metrics = await downloadAboutPlacesData(dataAboutPlacesLink)
-  await updateData(newCases, newDeaths, metrics)
-  await downloadNYTData(
-    "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv"
-  )
+  await downloadNYTData()
+  await updateData(metrics)
 }
 downloadData(`${baseURL}/coronavirus`)

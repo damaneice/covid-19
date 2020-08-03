@@ -3,6 +3,7 @@ import React from "react"
 import Chart from "../components/chart"
 import * as d3 from "d3"
 import { graphql } from "gatsby"
+import moment from "moment"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import "./home.css"
@@ -49,6 +50,11 @@ const createChartData = hospitalization => {
   })
 }
 
+const updatedDate = data => {
+  const edges = data.allCovid19HospitalizationsCsvSheet1.edges
+  return edges[edges.length - 1].node.Date
+}
+
 const HospitalizationsPage = ({ data }) => {
   const hospitalizationsTypes = hospitalizationsTransformer(data)
   const hospitalizations = Object.keys(hospitalizationsTypes).map(
@@ -63,6 +69,9 @@ const HospitalizationsPage = ({ data }) => {
   return (
     <Layout>
       <SEO title="Hospitalizations" />
+      <div className="updated-date">
+        <p>Updated {moment(updatedDate(data)).format("dddd, MMMM Do, YYYY")}</p>
+      </div>
       <div
         style={{
           marginTop: "16px",
