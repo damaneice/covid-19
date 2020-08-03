@@ -39,7 +39,36 @@ const removeFile = path => {
   })
 }
 
-const downloadNYTData = async link => {
+const downloadNYTStateData = async link => {
+  const usStatesFileNanme = "us-states.csv"
+  await downloadFile(link, usStatesFileNanme)
+  const data = await readFile(usStatesFileNanme)
+  const list = await neatCsv(data)
+
+  const michiganRows = list.filter(row => {
+    return row.state.toLowerCase() === "michigan"
+  })
+  const states = {}
+  // console.log(michiganRows)
+  michiganRows.forEach(item => {
+    if (states[item.state]) {
+      const items = states[item.state]
+      const previousItem = items[items.length - 1]
+      item.newCases = parseInt(item.cases) - parseInt(previousItem.cases)
+      item.newDeaths = parseInt(item.deaths) - parseInt(previousItem.deaths)
+      states[item.state].push(item)
+    } else {
+      item.newCases = parseInt(item.cases)
+      item.newDeaths = parseInt(item.deaths)
+      states[item.state] = [item]
+    }
+  })
+  const csv = new ObjectsToCsv(michiganRows)
+  await csv.toDisk("src/data/state-cases-by-date.csv")
+  await removeFile(usStatesFileNanme)
+}
+
+const downloadNYTCountyData = async link => {
   const usCountiesFileNanme = "us-counties.csv"
   await downloadFile(link, usCountiesFileNanme)
   const data = await readFile(usCountiesFileNanme)
@@ -55,9 +84,11 @@ const downloadNYTData = async link => {
       const items = counties[item.county]
       const previousItem = items[items.length - 1]
       item.newCases = parseInt(item.cases) - parseInt(previousItem.cases)
+      item.newDeaths = parseInt(item.deaths) - parseInt(previousItem.deaths)
       counties[item.county].push(item)
     } else {
       item.newCases = parseInt(item.cases)
+      item.newDeaths = parseInt(item.deaths)
       counties[item.county] = [item]
     }
   })
@@ -65,5 +96,14 @@ const downloadNYTData = async link => {
   const csv = new ObjectsToCsv(michiganCounties)
   await csv.toDisk("src/data/cases-by-county-and-date.csv")
   await removeFile(usCountiesFileNanme)
+}
+
+const downloadNYTData = async () => {
+  await downloadNYTCountyData(
+    "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv"
+  )
+  await downloadNYTStateData(
+    "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv"
+  )
 }
 module.exports = downloadNYTData
