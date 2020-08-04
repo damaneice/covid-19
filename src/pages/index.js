@@ -5,7 +5,6 @@ import { graphql } from "gatsby"
 import moment from "moment"
 import Layout from "../components/layout"
 import LineChart from "../components/linechart"
-import Map from "../components/map"
 import SEO from "../components/seo"
 import "./home.css"
 
@@ -221,10 +220,6 @@ const IndexPage = ({ data }) => {
         <div className="updated-date">
           <p>Updated {moment(updatedDate).format("dddd, MMMM Do, YYYY")}</p>
         </div>
-        <Map
-          name="Michigan"
-          margin={{ top: 20, bottom: 80, right: 5, left: 40 }}
-        />
         <div className="table">
           <CountiesHeader counties={counties} setCounties={setCounties} />
           {counties.map(county => {

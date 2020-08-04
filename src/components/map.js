@@ -1,9 +1,12 @@
 import * as d3 from "d3"
+import useWindow from "../components/useWindow"
 import React, { useEffect, useRef } from "react"
 
 const Map = ({ margin, name }) => {
-  const width = 400,
-    height = 300
+  const size = useWindow()
+  const width = size.width + margin.left > 600 ? 600 : 300
+  const height = size.width + margin.left > 600 ? 400 : 200
+
   const divRef = useRef()
   useEffect(() => {
     async function fetchJSON() {
@@ -19,8 +22,12 @@ const Map = ({ margin, name }) => {
           .translate([width / 2, height / 2])
           .fitSize([width, height], data)
       )
+      const svgContainer = d3.select(divRef.current)
 
-      d3.select(divRef.current)
+      //This is used to existing svg elements on resize
+      svgContainer.selectAll("svg").remove()
+
+      svgContainer
         .append("svg")
         .attr("width", width + margin.left)
         .attr("height", height + margin.bottom)
@@ -45,7 +52,7 @@ const Map = ({ margin, name }) => {
         })
     }
     fetchJSON()
-  }, [margin, name])
+  }, [margin, name, width, height])
 
   return <div style={{ textAlign: "center" }} ref={divRef}></div>
 }
