@@ -1,30 +1,46 @@
-import React from "react"
-
+import React, { useState } from "react"
+import { graphql } from "gatsby"
 import Layout from "../components/layout"
-import Map from "../components/map"
+import CaseRateMap from "../components/caseRateMap"
+import TotalCasesMap from "../components/totalCasesMap"
+import moment from "moment"
 import SEO from "../components/seo"
 import "./home.css"
+
+const updatedDate = data => {
+  const edges = data.allCasesByCountyAndDateCsvSheet1.edges
+  return edges[edges.length - 1].node.date
+}
 
 const countyCaseDataTransformer = data => {
   const { edges } = data.allCasesByCountyAndDateCsvSheet1
   const counties = {}
   edges.forEach(edge => {
     if (counties[edge.node.county]) {
-      counties[edge.node.county].newCases.push(parseInt(edge.node.newCases))
+      counties[edge.node.county].cases = edge.node.cases
+      counties[edge.node.county].chart.push({
+        newCases: parseInt(edge.node.newCases),
+        cases: parseInt(edge.node.cases),
+        date: edge.node.date,
+      })
     } else {
-      counties[edge.node.county] = { rateOfChange: 0, newCases: [] }
+      counties[edge.node.county] = {
+        rateOfChange: 0,
+        cases: 0,
+        chart: [{ newCases: 0, cases: 0 }],
+      }
     }
   })
   Object.keys(counties).forEach(county => {
     //last 14 elements
-    const mostRecent = counties[county].newCases.slice(-14)
+    const mostRecent = counties[county].chart.slice(0).slice(-14)
     const previousRollingCases = []
     const currentRollingCases = []
-    mostRecent.forEach((cases, index) => {
+    mostRecent.forEach((item, index) => {
       if (index < 7) {
-        previousRollingCases.push(cases)
+        previousRollingCases.push(item.newCases)
       } else {
-        currentRollingCases.push(cases)
+        currentRollingCases.push(item.newCases)
       }
     })
     let previousRollingCasesTotal = previousRollingCases.reduce(
@@ -49,9 +65,14 @@ const countyCaseDataTransformer = data => {
 
 const HighlightsPage = ({ data }) => {
   const counties = countyCaseDataTransformer(data)
+  const [showCaseRate, setShowCaseRate] = useState(true)
+  const [showTotalCases, setShowTotalCases] = useState(false)
   return (
     <Layout>
       <SEO title="Highlights" />
+      <div className="updated-date">
+        <p>Updated {moment(updatedDate(data)).format("dddd, MMMM Do, YYYY")}</p>
+      </div>
       <div
         style={{
           marginTop: "16px",
@@ -61,11 +82,26 @@ const HighlightsPage = ({ data }) => {
           fontFamily: "avenir",
         }}
       >
-        <Map
-          counties={counties}
-          name="Michigan"
-          margin={{ top: 20, bottom: 80, right: 5, left: 40 }}
-        />
+        {showCaseRate && <CaseRateMap counties={counties} />}
+        {showTotalCases && <TotalCasesMap counties={counties} />}
+        <div>
+          <button
+            onClick={() => {
+              setShowCaseRate(true)
+              setShowTotalCases(false)
+            }}
+          >
+            CASE GROWTH RATE
+          </button>
+          <button
+            onClick={() => {
+              setShowCaseRate(false)
+              setShowTotalCases(true)
+            }}
+          >
+            TOTAL CASES
+          </button>
+        </div>
       </div>
     </Layout>
   )
@@ -77,7 +113,9 @@ export const query = graphql`
       edges {
         node {
           county
+          cases
           newCases
+          date(formatString: "Y-MM-DD")
         }
       }
     }

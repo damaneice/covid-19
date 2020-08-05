@@ -1,40 +1,8 @@
 import * as d3 from "d3"
 import useWindow from "../components/useWindow"
 import React, { useEffect, useRef } from "react"
-import Legend from "./legend"
 
-const colors = [
-  "rgb(235, 100, 52)",
-  "rgb(235, 158, 52)",
-  "rgb(235, 198, 52)",
-  "rgb(235, 232, 52)",
-  "rgb(201, 235, 52)",
-  "rgb(143, 235, 52)",
-  "rgb(120, 235, 52)",
-]
-
-const getColor = rateOfChage => {
-  let color = colors[3]
-  if (rateOfChage > 15) {
-    color = colors[0]
-  } else if (rateOfChage <= 15 && rateOfChage > 10) {
-    color = colors[1]
-  } else if (rateOfChage <= 10 && rateOfChage > 5) {
-    color = colors[2]
-  } else if (rateOfChage <= 5 && rateOfChage > 0) {
-    color = colors[3]
-  } else if (rateOfChage <= 5 && rateOfChage > 0) {
-    color = colors[3]
-  } else if (rateOfChage <= 0 && rateOfChage > -5) {
-    color = colors[4]
-  } else if (rateOfChage <= -5 && rateOfChage > -10) {
-    color = colors[5]
-  } else {
-    color = colors[6]
-  }
-  return color
-}
-const Map = ({ counties, margin, name }) => {
+const Map = ({ counties, getColor, margin, name }) => {
   const size = useWindow()
   const width = size.width + margin.left > 600 ? 600 : 300
   const height = size.width + margin.left > 600 ? 400 : 200
@@ -64,8 +32,11 @@ const Map = ({ counties, margin, name }) => {
         .enter()
         .append("path")
         .attr("fill", function (d) {
-          return getColor(counties[d.properties["NAME"]].rateOfChange)
+          return getColor(counties[d.properties["NAME"]])
         })
+        .attr("stroke", "#000")
+        .attr("stroke-width", 0.25)
+        .attr("stroke-dasharray", 1)
         .attr("d", path)
         .on("mouseenter", function (d) {
           d3.select(this)
@@ -79,17 +50,10 @@ const Map = ({ counties, margin, name }) => {
         })
     }
     fetchJSON()
-  }, [counties, margin, name, width, height])
+  }, [counties, getColor, margin, name, width, height])
 
   return (
     <div style={{ textAlign: "center" }}>
-      <Legend name={"-15%"} fill={colors[6]} />
-      <Legend name={"-10%"} fill={colors[5]} />
-      <Legend name={"-5%"} fill={colors[4]} />
-      <Legend name={"0%"} fill={colors[3]} />
-      <Legend name={"5%"} fill={colors[2]} />
-      <Legend name={"10%"} fill={colors[1]} />
-      <Legend name={"15%"} fill={colors[0]} />
       <div ref={divRef}></div>
     </div>
   )
