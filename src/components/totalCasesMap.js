@@ -19,7 +19,7 @@ const getColor = county => {
       break
     }
   }
-  console.log(color)
+
   return color
 }
 const TotalCasesMap = ({ counties }) => {
