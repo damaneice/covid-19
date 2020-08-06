@@ -3,6 +3,8 @@ import React, { useState } from "react"
 import * as d3 from "d3"
 import { graphql } from "gatsby"
 import moment from "moment"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faSort } from "@fortawesome/free-solid-svg-icons"
 import Layout from "../components/layout"
 import LineChart from "../components/linechart"
 import SEO from "../components/seo"
@@ -128,6 +130,7 @@ const CountiesHeader = ({ counties, setCounties }) => {
           }}
         >
           COUNTY
+          <FontAwesomeIcon className="ml-2" icon={faSort} />
         </button>
       </div>
       <div key="total-header" className="table-header">
@@ -142,6 +145,7 @@ const CountiesHeader = ({ counties, setCounties }) => {
           }}
         >
           TOTAL
+          <FontAwesomeIcon className="ml-2" icon={faSort} />
         </button>
       </div>
       <div key="new-cases-header" className="table-header">
@@ -156,6 +160,7 @@ const CountiesHeader = ({ counties, setCounties }) => {
           }}
         >
           NEW
+          <FontAwesomeIcon className="ml-2" icon={faSort} />
         </button>
       </div>
       <div key="chart-header" className="chart-header table-header">
