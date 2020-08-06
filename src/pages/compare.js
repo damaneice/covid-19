@@ -1,7 +1,9 @@
 import React from "react"
 
-import Chart from "../components/chart"
-import * as d3 from "d3"
+import TotalCasesChart from "../components/totalCasesChart"
+import DailyCasesChart from "../components/dailyCasesChart"
+import RollingAverageCasesChart from "../components/rollingAverageCasesChart"
+import PositivityChart from "../components/positivityChart"
 import { graphql } from "gatsby"
 import moment from "moment"
 import Layout from "../components/layout"
@@ -9,61 +11,6 @@ import SEO from "../components/seo"
 import { useLocation } from "@reach/router"
 import queryString from "query-string"
 import "./home.css"
-
-const createTotalCaseChartData = county => {
-  const chartData = []
-  for (let i = 0; i < county.chart.length; i++) {
-    chartData.push({
-      x: i,
-      y: county.chart[i].totalCases,
-      date: d3.timeParse("%Y-%m-%d")(county.chart[i].date),
-    })
-  }
-  return chartData
-}
-
-const createDailyCaseChartData = county => {
-  const chartData = []
-  for (let i = 0; i < county.chart.length; i++) {
-    chartData.push({
-      x: i,
-      y: county.chart[i].cases,
-      date: d3.timeParse("%Y-%m-%d")(county.chart[i].date),
-    })
-  }
-  return chartData
-}
-
-const createCaseChartData = county => {
-  const chartData = []
-  let subset = []
-  for (let i = 0; i < county.chart.length; i++) {
-    subset.push(county.chart[i])
-    if ((i + 1) % 7 === 0 || i === county.chart.length - 1) {
-      let total = subset.reduce((acc, current) => acc + current.cases, 0)
-      chartData.push({
-        value: total / subset.length,
-        date: d3.timeParse("%Y-%m-%d")(county.chart[i].date),
-      })
-      subset = []
-    }
-  }
-  return chartData.map((y, index) => {
-    return { x: index, y: y.value, date: y.date }
-  })
-}
-
-const creatPositivityChartData = county => {
-  const chartData = []
-  for (let i = 0; i < county.chart.length; i++) {
-    chartData.push({
-      x: i,
-      y: county.chart[i].positivityPercent,
-      date: d3.timeParse("%Y-%m-%d")(county.chart[i].date),
-    })
-  }
-  return chartData
-}
 
 const countyCaseDataTransformer = data => {
   const { edges } = data.allCasesByCountyAndDateCsvSheet1
@@ -83,22 +30,6 @@ const countyCaseDataTransformer = data => {
   })
   return counties
 }
-// percentage of tests that were positive
-const positiveTestPercentageTransformer = data => {
-  const { edges } = data.allDiagnosticTestsByResultAndCountyXlsxData
-  const counties = {}
-  edges.forEach(edge => {
-    if (counties[edge.node.COUNTY]) {
-      counties[edge.node.COUNTY].chart.push({
-        positivityPercent: (edge.node.Positive / edge.node.Total) * 100,
-        date: edge.node.MessageDate,
-      })
-    } else {
-      counties[edge.node.COUNTY] = { chart: [] }
-    }
-  })
-  return counties
-}
 
 const updatedDate = data => {
   const edges = data.allCasesByCountyAndDateCsvSheet1.edges
@@ -109,39 +40,10 @@ const ComparePage = ({ data }) => {
   const location = useLocation()
   const result = queryString.parse(location.search)
   const counties = countyCaseDataTransformer(data)
-  const countiesPositivity = positiveTestPercentageTransformer(data)
+
   const selectedCountyNames = result.selection
     ? result.selection.split(",")
     : []
-  const selectedRollingAverageCounties = selectedCountyNames.map(name => {
-    return {
-      name: name,
-      values: createCaseChartData(counties[name]),
-    }
-  })
-
-  const selectedDailyCounties = selectedCountyNames.map(name => {
-    return {
-      name: name,
-      values: createDailyCaseChartData(counties[name]),
-    }
-  })
-
-  const selectedTotalCaseCounties = selectedCountyNames.map(name => {
-    return {
-      name: name,
-      values: createTotalCaseChartData(counties[name]),
-    }
-  })
-
-  const selectedPositivityCounties = selectedRollingAverageCounties.map(
-    county => {
-      return {
-        name: county.name,
-        values: creatPositivityChartData(countiesPositivity[county.name]),
-      }
-    }
-  )
 
   return (
     <Layout>
@@ -158,37 +60,25 @@ const ComparePage = ({ data }) => {
           fontFamily: "avenir",
         }}
       >
-        {selectedRollingAverageCounties.length > 0 && (
-          <Chart
-            name="New Cases (7-Day Moving Average)"
-            margin={{ top: 20, bottom: 80, right: 5, left: 40 }}
-            data={selectedRollingAverageCounties}
-          />
-        )}
+        <RollingAverageCasesChart
+          counties={counties}
+          selectedCountyNames={selectedCountyNames}
+        />
+        <DailyCasesChart
+          counties={counties}
+          selectedCountyNames={selectedCountyNames}
+        />
 
-        {selectedDailyCounties.length > 0 && (
-          <Chart
-            name="New Daily Cases"
-            margin={{ top: 20, bottom: 80, right: 5, left: 40 }}
-            data={selectedDailyCounties}
-          />
-        )}
+        <TotalCasesChart
+          counties={counties}
+          selectedCountyNames={selectedCountyNames}
+        />
 
-        {selectedTotalCaseCounties.length > 0 && (
-          <Chart
-            name="Total Cases per County"
-            margin={{ top: 20, bottom: 80, right: 5, left: 40 }}
-            data={selectedTotalCaseCounties}
-          />
-        )}
-
-        {selectedPositivityCounties.length > 0 && (
-          <Chart
-            name="Percentage of Tests That Were Positive"
-            margin={{ top: 20, bottom: 80, right: 5, left: 40 }}
-            data={selectedPositivityCounties}
-          />
-        )}
+        <PositivityChart
+          edges={data.allDiagnosticTestsByResultAndCountyXlsxData.edges}
+          counties={counties}
+          selectedCountyNames={selectedCountyNames}
+        />
       </div>
     </Layout>
   )
