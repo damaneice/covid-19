@@ -235,7 +235,8 @@ const IndexPage = ({ data }) => {
           })}
         </div>
       </div>
-      {selectedCounties !== defaultSelected && (
+
+      {JSON.stringify(selectedCounties) !== JSON.stringify(defaultSelected) && (
         <div id="footer">
           <div id="inner">
             <a
