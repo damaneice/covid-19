@@ -1,6 +1,6 @@
 import React from "react"
 import * as d3 from "d3"
-import ChartWithLegend from "./ChartWithLegend"
+import ChartWithLegend from "./chartWithLegend"
 
 const createTotalCaseChartData = county => {
   const chartData = []
