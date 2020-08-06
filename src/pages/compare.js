@@ -10,6 +10,20 @@ import { useLocation } from "@reach/router"
 import queryString from "query-string"
 import "./home.css"
 
+const createDailyCaseChartData = county => {
+  const chartData = []
+  for (let i = 0; i < county.chart.length; i++) {
+    chartData.push({
+      value: county.chart[i].cases,
+      date: d3.timeParse("%Y-%m-%d")(county.chart[i].date),
+    })
+  }
+
+  return chartData.map((y, index) => {
+    return { x: index, y: y.value, date: y.date }
+  })
+}
+
 const createCaseChartData = county => {
   const chartData = []
   let subset = []
@@ -88,19 +102,28 @@ const ComparePage = ({ data }) => {
   const selectedCountyNames = result.selection
     ? result.selection.split(",")
     : []
-  const selectedCounties = selectedCountyNames.map(name => {
+  const selectedRollingAverageCounties = selectedCountyNames.map(name => {
     return {
       name: name,
       values: createCaseChartData(counties[name]),
     }
   })
 
-  const selectedPositivityCounties = selectedCounties.map(county => {
+  const selectedDailyCounties = selectedCountyNames.map(name => {
     return {
-      name: county.name,
-      values: creatPositivityChartData(countiesPositivity[county.name]),
+      name: name,
+      values: createDailyCaseChartData(counties[name]),
     }
   })
+
+  const selectedPositivityCounties = selectedRollingAverageCounties.map(
+    county => {
+      return {
+        name: county.name,
+        values: creatPositivityChartData(countiesPositivity[county.name]),
+      }
+    }
+  )
 
   return (
     <Layout>
@@ -117,11 +140,19 @@ const ComparePage = ({ data }) => {
           fontFamily: "avenir",
         }}
       >
-        {selectedCounties.length > 0 && (
+        {selectedRollingAverageCounties.length > 0 && (
           <Chart
             name="New Cases (7-Day Moving Average)"
             margin={{ top: 20, bottom: 80, right: 5, left: 40 }}
-            data={selectedCounties}
+            data={selectedRollingAverageCounties}
+          />
+        )}
+
+        {selectedDailyCounties.length > 0 && (
+          <Chart
+            name="New Daily Cases"
+            margin={{ top: 20, bottom: 80, right: 5, left: 40 }}
+            data={selectedDailyCounties}
           />
         )}
 
