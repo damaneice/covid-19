@@ -1,6 +1,6 @@
 import React from "react"
 import * as d3 from "d3"
-import Chart from "./chart"
+import ChartWithLegend from "./ChartWithLegend"
 
 const createCasesChartData = county => {
   const chartData = []
@@ -67,7 +67,7 @@ const PositivityChart = ({ edges, counties, selectedNames }) => {
   return (
     <div>
       {selectedCounties.length > 0 && (
-        <Chart
+        <ChartWithLegend
           name="Percentage of Tests That Were Positive"
           margin={{ top: 20, bottom: 80, right: 5, left: 40 }}
           data={selectedCounties}

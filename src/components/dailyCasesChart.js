@@ -1,6 +1,6 @@
 import React from "react"
 import * as d3 from "d3"
-import Chart from "./chart"
+import ChartWithLegend from "./ChartWithLegend"
 
 const createDailyCasesChartData = county => {
   const chartData = []
@@ -25,7 +25,7 @@ const DailyCasesChart = ({ counties, selectedNames }) => {
   return (
     <div>
       {selectedDailyCounties.length > 0 && (
-        <Chart
+        <ChartWithLegend
           name="New Daily Cases by County"
           margin={{ top: 20, bottom: 80, right: 5, left: 40 }}
           data={selectedDailyCounties}

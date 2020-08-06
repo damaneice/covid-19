@@ -1,29 +1,17 @@
 import * as d3 from "d3"
 import React, { useEffect, useRef } from "react"
-import Legend from "./legend"
 
-const stringToColor = name => {
-  let hash = 0
-  for (let i = 0; i < name.length; i++) {
-    hash = name.charCodeAt(i) + ((hash << 5) - hash)
-  }
-  let color = "#"
-  for (let i = 0; i < 3; i++) {
-    let value = (hash >> (i * 8)) & 0xff
-    color += ("00" + value.toString(16)).substr(-2)
-  }
-  return color
-}
-
-const Chart = ({ data, margin, name }) => {
+const Chart = ({ data, margin, name, stringToColor }) => {
   const svgWidth = 600,
     height = 220
   const divRef = useRef()
   const svgRef = useRef()
 
   useEffect(() => {
-    var svgElement = d3
-      .select(divRef.current)
+    //This is used to existing svg elements on resize
+    const svgContainer = d3.select(divRef.current)
+    svgContainer.selectAll("svg").remove()
+    const svgElement = svgContainer
       .append("svg")
       .attr("width", svgWidth + margin.left)
       .attr("height", height + margin.bottom)
@@ -31,7 +19,7 @@ const Chart = ({ data, margin, name }) => {
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
-    var x = d3
+    const x = d3
       .scaleTime()
       .domain(
         d3.extent(data[0].values, function (d) {
@@ -49,7 +37,7 @@ const Chart = ({ data, margin, name }) => {
       .style("text-anchor", "end")
       .style("font-size", 12)
 
-    var y = d3
+    const y = d3
       .scaleLinear()
       .domain([
         0,
@@ -65,7 +53,8 @@ const Chart = ({ data, margin, name }) => {
         ),
       ])
       .range([height, 0])
-    var svgAxisY = d3.select(svgRef.current)
+    const svgAxisY = d3.select(svgRef.current)
+    svgAxisY.selectAll("g").remove()
     svgAxisY
       .attr("height", height + margin.bottom)
       .attr("class", "chart_width")
@@ -185,17 +174,10 @@ const Chart = ({ data, margin, name }) => {
           return "translate(" + mouse[0] + "," + pos.y + ")"
         })
       })
-  }, [data, margin, name])
+  }, [data, margin, name, stringToColor])
 
   return (
     <div>
-      <div className="chart_name">{name}</div>
-      <div>
-        {data.map(county => {
-          const color = stringToColor(county.name)
-          return <Legend key={color} name={county.name} fill={color} />
-        })}
-      </div>
       <div className="compare_chart chart_width">
         <svg
           style={{ position: "absolute", pointerEvents: "none", zIndex: 1 }}

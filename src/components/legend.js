@@ -1,8 +1,23 @@
-import React from "react"
+import React, { useState } from "react"
 
-const Legend = ({ name, fill }) => {
+const Legend = ({ name, fill, toggleCounty }) => {
+  const [active, setActive] = useState(true)
   return (
-    <div style={{ display: "inline-block", marginRight: "10px" }}>
+    <button
+      className={`chart-legend ${active ? "" : "unselected"}`}
+      onClick={() => {
+        if (toggleCounty(active)) {
+          setActive(!active)
+        }
+      }}
+      style={{
+        border: "none",
+        background: "transparent",
+        cursor: "pointer",
+        display: "inline-block",
+        marginRight: "10px",
+      }}
+    >
       <svg
         width="15"
         height="15"
@@ -26,7 +41,7 @@ const Legend = ({ name, fill }) => {
       >
         {name}
       </span>
-    </div>
+    </button>
   )
 }
 
