@@ -1,5 +1,6 @@
 import * as d3 from "d3"
 import React, { useEffect, useRef } from "react"
+import Legend from "./legend"
 
 const stringToColor = name => {
   let hash = 0
@@ -12,36 +13,6 @@ const stringToColor = name => {
     color += ("00" + value.toString(16)).substr(-2)
   }
   return color
-}
-
-const Legend = ({ name, fill }) => {
-  return (
-    <div style={{ display: "inline-block", marginRight: "10px" }}>
-      <svg
-        width="15"
-        height="15"
-        style={{ display: "inline-block", verticalAlign: "middle" }}
-      >
-        <rect
-          width="15"
-          height="15"
-          style={{
-            fill: fill,
-          }}
-        />
-        Sorry, your browser does not support inline SVG.
-      </svg>
-      <span
-        style={{
-          marginLeft: "5px",
-          verticalAlign: "middle",
-          display: "inline-block",
-        }}
-      >
-        {name}
-      </span>
-    </div>
-  )
 }
 
 const Chart = ({ data, margin, name }) => {
