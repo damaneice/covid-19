@@ -1,6 +1,6 @@
 import React from "react"
 
-import Chart from "../components/chart"
+import ChartWithLegend from "../components/chartWithLegend"
 import * as d3 from "d3"
 import { graphql } from "gatsby"
 import moment from "moment"
@@ -81,7 +81,7 @@ const HospitalizationsPage = ({ data }) => {
           fontFamily: "avenir",
         }}
       >
-        <Chart
+        <ChartWithLegend
           name="COVID Hospitalizations in Michigan"
           margin={{ top: 20, bottom: 80, right: 5, left: 40 }}
           data={hospitalizations}
