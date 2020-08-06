@@ -32,7 +32,7 @@ const CaseRateMap = ({ counties }) => {
           return (
             <Legend
               key={rateOfChageColor.threadhold}
-              name={rateOfChageColor.threadhold}
+              name={`${rateOfChageColor.threadhold}%`}
               fill={rateOfChageColor.value}
             />
           )

@@ -18,6 +18,7 @@ const countyCaseDataTransformer = data => {
   edges.forEach(edge => {
     if (counties[edge.node.county]) {
       counties[edge.node.county].cases = edge.node.cases
+      counties[edge.node.county].name = edge.node.county
       counties[edge.node.county].chart.push({
         newCases: parseInt(edge.node.newCases),
         cases: parseInt(edge.node.cases),
@@ -82,10 +83,15 @@ const HighlightsPage = ({ data }) => {
           fontFamily: "avenir",
         }}
       >
-        {showCaseRate && <CaseRateMap counties={counties} />}
-        {showTotalCases && <TotalCasesMap counties={counties} />}
-        <div>
+        <div style={{ display: showCaseRate ? "block" : "none" }}>
+          <CaseRateMap counties={counties} />
+        </div>
+        <div style={{ display: showTotalCases ? "block" : "none" }}>
+          <TotalCasesMap counties={counties} />
+        </div>
+        <div style={{ textAlign: "center" }}>
           <button
+            className={`case-map-button ${showCaseRate ? "active" : ""}`}
             onClick={() => {
               setShowCaseRate(true)
               setShowTotalCases(false)
@@ -94,6 +100,7 @@ const HighlightsPage = ({ data }) => {
             CASE GROWTH RATE
           </button>
           <button
+            className={`case-map-button ${showTotalCases ? "active" : ""}`}
             onClick={() => {
               setShowCaseRate(false)
               setShowTotalCases(true)

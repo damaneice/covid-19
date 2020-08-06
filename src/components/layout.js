@@ -49,11 +49,10 @@ const Layout = ({ children }) => {
           justifyContent: "center",
           alignItems: "center",
           fontFamily: "avenir",
+          marginBottom: "20px",
         }}
       >
-        <span style={{ "marginRight": "4px" }}>
-          Data taken from the MDHHS Coronavirus website.
-        </span>
+        <span>Data taken from the MDHHS Coronavirus website.</span>
         <a href="https://www.michigan.gov/coronavirus">
           www.michigan.gov/coronavirus
         </a>

@@ -3,11 +3,11 @@ import Legend from "./legend"
 import Map from "./map"
 
 const totalCaseColors = [
-  { threadhold: 100000, value: "#1059a1" },
-  { threadhold: 10000, value: "#3585bf" },
+  { threadhold: 15000, value: "#1059a1" },
+  { threadhold: 7500, value: "#3585bf" },
   { threadhold: 1000, value: "#6badd5" },
-  { threadhold: 100, value: "#a9cfe5" },
-  { threadhold: 10, value: "#d6e5f4" },
+  { threadhold: 150, value: "#a9cfe5" },
+  { threadhold: 50, value: "#d6e5f4" },
   { threadhold: 0, value: "#f7fbff" },
 ]
 
@@ -19,7 +19,6 @@ const getColor = county => {
       break
     }
   }
-
   return color
 }
 const TotalCasesMap = ({ counties }) => {
