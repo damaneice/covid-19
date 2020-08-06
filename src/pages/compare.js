@@ -4,6 +4,10 @@ import TotalCasesChart from "../components/totalCasesChart"
 import DailyCasesChart from "../components/dailyCasesChart"
 import RollingAverageCasesChart from "../components/rollingAverageCasesChart"
 import PositivityChart from "../components/positivityChart"
+import {
+  countyCaseDataTransformer,
+  stateCaseDataTransformer,
+} from "../util/dataTransformers"
 import { graphql } from "gatsby"
 import moment from "moment"
 import Layout from "../components/layout"
@@ -11,25 +15,6 @@ import SEO from "../components/seo"
 import { useLocation } from "@reach/router"
 import queryString from "query-string"
 import "./home.css"
-
-const countyCaseDataTransformer = data => {
-  const { edges } = data.allCasesByCountyAndDateCsvSheet1
-  const counties = {}
-  edges.forEach(edge => {
-    if (counties[edge.node.county]) {
-      counties[edge.node.county].total = parseInt(edge.node.cases)
-      counties[edge.node.county].newCases = edge.node.newCases
-      counties[edge.node.county].chart.push({
-        cases: edge.node.newCases,
-        date: edge.node.date,
-        totalCases: parseInt(edge.node.cases),
-      })
-    } else {
-      counties[edge.node.county] = { newCases: 0, total: 0, chart: [] }
-    }
-  })
-  return counties
-}
 
 const updatedDate = data => {
   const edges = data.allCasesByCountyAndDateCsvSheet1.edges
@@ -40,11 +25,12 @@ const ComparePage = ({ data }) => {
   const location = useLocation()
   const result = queryString.parse(location.search)
   const counties = countyCaseDataTransformer(data)
-
+  const state = stateCaseDataTransformer(data)
   const selectedCountyNames = result.selection
     ? result.selection.split(",")
     : []
-
+  const keys = { ...counties, ...state }
+  console.log(keys)
   return (
     <Layout>
       <SEO title="Compare" />
@@ -61,24 +47,24 @@ const ComparePage = ({ data }) => {
         }}
       >
         <RollingAverageCasesChart
-          counties={counties}
+          counties={keys}
           selectedCountyNames={selectedCountyNames}
         />
         <DailyCasesChart
-          counties={counties}
+          counties={keys}
           selectedCountyNames={selectedCountyNames}
         />
 
         <TotalCasesChart
-          counties={counties}
+          counties={keys}
           selectedCountyNames={selectedCountyNames}
         />
 
-        <PositivityChart
+        {/* <PositivityChart
           edges={data.allDiagnosticTestsByResultAndCountyXlsxData.edges}
-          counties={counties}
+          counties={keys}
           selectedCountyNames={selectedCountyNames}
-        />
+        /> */}
       </div>
     </Layout>
   )
@@ -93,6 +79,17 @@ export const query = graphql`
           cases
           date(formatString: "Y-MM-DD")
           newCases
+        }
+      }
+    }
+    allStateCasesByDateCsvSheet1 {
+      edges {
+        node {
+          date
+          cases
+          newCases
+          newDeaths
+          state
         }
       }
     }
