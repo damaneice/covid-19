@@ -38,12 +38,19 @@
   display: none;
 }
 
+.chart-legend {
+  border-radius: 4px;
+  border: 2px solid rebeccapurple;
+  margin: 2px;
+}
+
 .chart-legend:hover {
   opacity: 0.7;
 }
 
 .chart-legend.unselected {
   opacity: 0.5;
+  border: 2px solid rgb(166, 86, 247);
 }
 
 @media screen and (max-width: 500px) {

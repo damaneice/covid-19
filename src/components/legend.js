@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 
-const Legend = ({ name, fill, toggleCounty }) => {
+const ButtonLegend = ({ children, toggleCounty }) => {
   const [active, setActive] = useState(true)
   return (
     <button
@@ -11,13 +11,19 @@ const Legend = ({ name, fill, toggleCounty }) => {
         }
       }}
       style={{
-        border: "none",
         background: "transparent",
         cursor: "pointer",
         display: "inline-block",
-        marginRight: "10px",
       }}
     >
+      {children}
+    </button>
+  )
+}
+
+const DefaultLegend = ({ name, fill }) => {
+  return (
+    <>
       <svg
         width="15"
         height="15"
@@ -41,7 +47,21 @@ const Legend = ({ name, fill, toggleCounty }) => {
       >
         {name}
       </span>
-    </button>
+    </>
+  )
+}
+
+const Legend = ({ name, fill, toggleCounty }) => {
+  return (
+    <>
+      {toggleCounty ? (
+        <ButtonLegend toggleCounty={toggleCounty}>
+          <DefaultLegend name={name} fill={fill} />
+        </ButtonLegend>
+      ) : (
+        <DefaultLegend name={name} fill={fill} />
+      )}
+    </>
   )
 }
 

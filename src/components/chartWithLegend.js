@@ -21,6 +21,7 @@ const ChartWithLegend = ({ data, margin, name }) => {
     <div>
       <div className="chart_name">{name}</div>
       <div>
+        <span style={{ marginRight: "4px" }}>Filter:</span>
         {data.map(county => {
           const color = stringToColor(county.name)
           return (
