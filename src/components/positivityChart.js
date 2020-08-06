@@ -49,9 +49,9 @@ const positiveTestPercentageTransformer = edges => {
   return counties
 }
 
-const PositivityChart = ({ edges, counties, selectedCountyNames }) => {
+const PositivityChart = ({ edges, counties, selectedNames }) => {
   const countiesPositivity = positiveTestPercentageTransformer(edges)
-  const selectedRollingAverageCounties = selectedCountyNames.map(name => {
+  const selectedRollingAverageCounties = selectedNames.map(name => {
     return {
       name: name,
       values: createCasesChartData(counties[name]),

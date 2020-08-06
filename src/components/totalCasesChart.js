@@ -14,8 +14,8 @@ const createTotalCaseChartData = county => {
   return chartData
 }
 
-const TotalCasesChart = ({ counties, selectedCountyNames }) => {
-  const selectedTotalCaseCounties = selectedCountyNames.map(name => {
+const TotalCasesChart = ({ counties, selectedNames }) => {
+  const selectedTotalCaseCounties = selectedNames.map(name => {
     return {
       name: name,
       values: createTotalCaseChartData(counties[name]),

@@ -21,8 +21,8 @@ const createCasesChartData = county => {
   })
 }
 
-const RollingAverageCasesChart = ({ counties, selectedCountyNames }) => {
-  const selectedCounties = selectedCountyNames.map(name => {
+const RollingAverageCasesChart = ({ counties, selectedNames }) => {
+  const selectedCounties = selectedNames.map(name => {
     return {
       name: name,
       values: createCasesChartData(counties[name]),

@@ -14,8 +14,8 @@ const createDailyCasesChartData = county => {
   return chartData
 }
 
-const DailyCasesChart = ({ counties, selectedCountyNames }) => {
-  const selectedDailyCounties = selectedCountyNames.map(name => {
+const DailyCasesChart = ({ counties, selectedNames }) => {
+  const selectedDailyCounties = selectedNames.map(name => {
     return {
       name: name,
       values: createDailyCasesChartData(counties[name]),

@@ -26,11 +26,8 @@ const ComparePage = ({ data }) => {
   const result = queryString.parse(location.search)
   const counties = countyCaseDataTransformer(data)
   const state = stateCaseDataTransformer(data)
-  const selectedCountyNames = result.selection
-    ? result.selection.split(",")
-    : []
+  const selectedNames = result.selection ? result.selection.split(",") : []
   const keys = { ...counties, ...state }
-  console.log(keys)
   return (
     <Layout>
       <SEO title="Compare" />
@@ -48,23 +45,17 @@ const ComparePage = ({ data }) => {
       >
         <RollingAverageCasesChart
           counties={keys}
-          selectedCountyNames={selectedCountyNames}
+          selectedNames={selectedNames}
         />
-        <DailyCasesChart
-          counties={keys}
-          selectedCountyNames={selectedCountyNames}
-        />
+        <DailyCasesChart counties={keys} selectedNames={selectedNames} />
 
-        <TotalCasesChart
-          counties={keys}
-          selectedCountyNames={selectedCountyNames}
-        />
+        <TotalCasesChart counties={keys} selectedNames={selectedNames} />
 
-        {/* <PositivityChart
+        <PositivityChart
           edges={data.allDiagnosticTestsByResultAndCountyXlsxData.edges}
           counties={keys}
-          selectedCountyNames={selectedCountyNames}
-        /> */}
+          selectedNames={selectedNames.filter(name => name !== "Michigan")} //remove Michigan from Positivity Chart
+        />
       </div>
     </Layout>
   )
@@ -85,7 +76,7 @@ export const query = graphql`
     allStateCasesByDateCsvSheet1 {
       edges {
         node {
-          date
+          date(formatString: "Y-MM-DD")
           cases
           newCases
           newDeaths
