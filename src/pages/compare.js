@@ -10,18 +10,28 @@ import { useLocation } from "@reach/router"
 import queryString from "query-string"
 import "./home.css"
 
+const createTotalCaseChartData = county => {
+  const chartData = []
+  for (let i = 0; i < county.chart.length; i++) {
+    chartData.push({
+      x: i,
+      y: county.chart[i].totalCases,
+      date: d3.timeParse("%Y-%m-%d")(county.chart[i].date),
+    })
+  }
+  return chartData
+}
+
 const createDailyCaseChartData = county => {
   const chartData = []
   for (let i = 0; i < county.chart.length; i++) {
     chartData.push({
-      value: county.chart[i].cases,
+      x: i,
+      y: county.chart[i].cases,
       date: d3.timeParse("%Y-%m-%d")(county.chart[i].date),
     })
   }
-
-  return chartData.map((y, index) => {
-    return { x: index, y: y.value, date: y.date }
-  })
+  return chartData
 }
 
 const createCaseChartData = county => {
@@ -65,6 +75,7 @@ const countyCaseDataTransformer = data => {
       counties[edge.node.county].chart.push({
         cases: edge.node.newCases,
         date: edge.node.date,
+        totalCases: parseInt(edge.node.cases),
       })
     } else {
       counties[edge.node.county] = { newCases: 0, total: 0, chart: [] }
@@ -116,6 +127,13 @@ const ComparePage = ({ data }) => {
     }
   })
 
+  const selectedTotalCaseCounties = selectedCountyNames.map(name => {
+    return {
+      name: name,
+      values: createTotalCaseChartData(counties[name]),
+    }
+  })
+
   const selectedPositivityCounties = selectedRollingAverageCounties.map(
     county => {
       return {
@@ -153,6 +171,14 @@ const ComparePage = ({ data }) => {
             name="New Daily Cases"
             margin={{ top: 20, bottom: 80, right: 5, left: 40 }}
             data={selectedDailyCounties}
+          />
+        )}
+
+        {selectedTotalCaseCounties.length > 0 && (
+          <Chart
+            name="Total Cases per County"
+            margin={{ top: 20, bottom: 80, right: 5, left: 40 }}
+            data={selectedTotalCaseCounties}
           />
         )}
 
