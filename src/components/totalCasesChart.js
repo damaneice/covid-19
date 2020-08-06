@@ -1,6 +1,6 @@
 import React from "react"
 import * as d3 from "d3"
-import Chart from "./chart"
+import ChartWithLegend from "./chartWithLegend"
 
 const createTotalCaseChartData = county => {
   const chartData = []
@@ -14,8 +14,8 @@ const createTotalCaseChartData = county => {
   return chartData
 }
 
-const TotalCasesChart = ({ counties, selectedCountyNames }) => {
-  const selectedTotalCaseCounties = selectedCountyNames.map(name => {
+const TotalCasesChart = ({ counties, selectedNames }) => {
+  const selectedTotalCaseCounties = selectedNames.map(name => {
     return {
       name: name,
       values: createTotalCaseChartData(counties[name]),
@@ -25,7 +25,7 @@ const TotalCasesChart = ({ counties, selectedCountyNames }) => {
   return (
     <div>
       {selectedTotalCaseCounties.length > 0 && (
-        <Chart
+        <ChartWithLegend
           name="Total Cases by County"
           margin={{ top: 20, bottom: 80, right: 5, left: 50 }}
           data={selectedTotalCaseCounties}

@@ -1,6 +1,6 @@
 import React from "react"
 import * as d3 from "d3"
-import Chart from "./chart"
+import ChartWithLegend from "./chartWithLegend"
 
 const createDailyCasesChartData = county => {
   const chartData = []
@@ -14,8 +14,8 @@ const createDailyCasesChartData = county => {
   return chartData
 }
 
-const DailyCasesChart = ({ counties, selectedCountyNames }) => {
-  const selectedDailyCounties = selectedCountyNames.map(name => {
+const DailyCasesChart = ({ counties, selectedNames }) => {
+  const selectedDailyCounties = selectedNames.map(name => {
     return {
       name: name,
       values: createDailyCasesChartData(counties[name]),
@@ -25,7 +25,7 @@ const DailyCasesChart = ({ counties, selectedCountyNames }) => {
   return (
     <div>
       {selectedDailyCounties.length > 0 && (
-        <Chart
+        <ChartWithLegend
           name="New Daily Cases by County"
           margin={{ top: 20, bottom: 80, right: 5, left: 40 }}
           data={selectedDailyCounties}

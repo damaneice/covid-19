@@ -1,8 +1,29 @@
-import React from "react"
+import React, { useState } from "react"
 
-const Legend = ({ name, fill }) => {
+const ButtonLegend = ({ children, toggleCounty }) => {
+  const [active, setActive] = useState(true)
   return (
-    <div style={{ display: "inline-block", marginRight: "10px" }}>
+    <button
+      className={`chart-legend ${active ? "" : "unselected"}`}
+      onClick={() => {
+        if (toggleCounty(active)) {
+          setActive(!active)
+        }
+      }}
+      style={{
+        background: "transparent",
+        cursor: "pointer",
+        display: "inline-block",
+      }}
+    >
+      {children}
+    </button>
+  )
+}
+
+const DefaultLegend = ({ name, fill }) => {
+  return (
+    <>
       <svg
         width="15"
         height="15"
@@ -26,7 +47,21 @@ const Legend = ({ name, fill }) => {
       >
         {name}
       </span>
-    </div>
+    </>
+  )
+}
+
+const Legend = ({ name, fill, toggleCounty }) => {
+  return (
+    <>
+      {toggleCounty ? (
+        <ButtonLegend toggleCounty={toggleCounty}>
+          <DefaultLegend name={name} fill={fill} />
+        </ButtonLegend>
+      ) : (
+        <DefaultLegend name={name} fill={fill} />
+      )}
+    </>
   )
 }
 

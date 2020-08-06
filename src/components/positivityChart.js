@@ -1,6 +1,6 @@
 import React from "react"
 import * as d3 from "d3"
-import Chart from "./chart"
+import ChartWithLegend from "./chartWithLegend"
 
 const createCasesChartData = county => {
   const chartData = []
@@ -49,9 +49,9 @@ const positiveTestPercentageTransformer = edges => {
   return counties
 }
 
-const PositivityChart = ({ edges, counties, selectedCountyNames }) => {
+const PositivityChart = ({ edges, counties, selectedNames }) => {
   const countiesPositivity = positiveTestPercentageTransformer(edges)
-  const selectedRollingAverageCounties = selectedCountyNames.map(name => {
+  const selectedRollingAverageCounties = selectedNames.map(name => {
     return {
       name: name,
       values: createCasesChartData(counties[name]),
@@ -67,7 +67,7 @@ const PositivityChart = ({ edges, counties, selectedCountyNames }) => {
   return (
     <div>
       {selectedCounties.length > 0 && (
-        <Chart
+        <ChartWithLegend
           name="Percentage of Tests That Were Positive"
           margin={{ top: 20, bottom: 80, right: 5, left: 40 }}
           data={selectedCounties}

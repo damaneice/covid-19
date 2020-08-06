@@ -198,7 +198,8 @@ const CountyRow = ({ county, add, remove }) => {
 }
 
 const IndexPage = ({ data }) => {
-  const [selectedCounties, setSelectedCounties] = useState([])
+  const defaultSelected = ["Michigan"]
+  const [selectedCounties, setSelectedCounties] = useState(defaultSelected)
 
   const add = countyIndex =>
     setSelectedCounties([...selectedCounties, countyIndex])
@@ -234,7 +235,7 @@ const IndexPage = ({ data }) => {
           })}
         </div>
       </div>
-      {selectedCounties.length > 0 && (
+      {selectedCounties !== defaultSelected && (
         <div id="footer">
           <div id="inner">
             <a
