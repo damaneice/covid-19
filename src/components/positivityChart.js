@@ -51,6 +51,11 @@ const positiveTestPercentageTransformer = edges => {
 
 const PositivityChart = ({ edges, counties, selectedNames }) => {
   const countiesPositivity = positiveTestPercentageTransformer(edges)
+  const countyNamesMapping = {
+    "St. Clair": "St Clair",
+    "St. Joseph": "St Joseph",
+  }
+
   const selectedRollingAverageCounties = selectedNames.map(name => {
     return {
       name: name,
@@ -58,9 +63,10 @@ const PositivityChart = ({ edges, counties, selectedNames }) => {
     }
   })
   const selectedCounties = selectedRollingAverageCounties.map(county => {
+    const nameFix = countyNamesMapping[county.name] || county.name
     return {
-      name: county.name,
-      values: createPositivityChartData(countiesPositivity[county.name]),
+      name: nameFix,
+      values: createPositivityChartData(countiesPositivity[nameFix]),
     }
   })
 
