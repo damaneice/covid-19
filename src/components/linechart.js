@@ -15,7 +15,7 @@ const getMinY = data => {
 }
 
 const getMaxY = data => {
-  return data.reduce((max, p) => (p.y > max ? p.y : max), data[0].y)
+  return data.reduce((max, p) => (p.y > max ? p.y : max), data[0].y) || 20
 }
 // GET SVG COORDINATES
 const getSvgX = (data, x) => {
