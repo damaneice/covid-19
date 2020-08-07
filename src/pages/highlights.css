@@ -1,0 +1,54 @@
+.state-figures {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 450px;
+  background-color: rgb(245, 245, 245);
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 50px;
+}
+.figures-header {
+  border-right: 1px solid rgb(190, 190, 190);
+  font-size: 12px;
+}
+
+.figures-cell {
+  padding: 8px;
+}
+
+.figures-cases {
+  color: rgb(235, 158, 2);
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.figures-deaths {
+  color: rgb(75, 33, 114);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.percent-increase {
+  color: rgb(216, 8, 8);
+}
+.percent-decrease {
+  color: rgb(50, 172, 13);
+}
+.font-sm {
+  font-size: 8px;
+}
+.figures-cell p {
+  margin: 0;
+  background-color: rgb(245, 245, 245);
+  text-align: center;
+}
+
+.border-top {
+  border-top: 1px solid rgb(190, 190, 190);
+}
+
+@media screen and (max-width: 450px) {
+  .state-figures {
+    width: 300px;
+  }
+}
