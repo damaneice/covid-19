@@ -8,7 +8,7 @@ const createCasesChartData = county => {
   for (let i = 0; i < county.chart.length; i++) {
     subset.push(county.chart[i])
     if ((i + 1) % 7 === 0 || i === county.chart.length - 1) {
-      let total = subset.reduce((acc, current) => acc + current.cases, 0)
+      let total = subset.reduce((acc, current) => acc + current.newCases, 0)
       chartData.push({
         value: total / subset.length,
         date: d3.timeParse("%Y-%m-%d")(county.chart[i].date),

@@ -3,15 +3,16 @@ export const countyCaseDataTransformer = data => {
   const counties = {}
   edges.forEach(edge => {
     if (counties[edge.node.county]) {
-      counties[edge.node.county].total = parseInt(edge.node.cases)
+      counties[edge.node.county].cases = parseInt(edge.node.cases)
       counties[edge.node.county].newCases = edge.node.newCases
       counties[edge.node.county].chart.push({
-        cases: edge.node.newCases,
+        newCases: edge.node.newCases,
+        newDeaths: edge.node.newDeaths,
         date: edge.node.date,
         totalCases: parseInt(edge.node.cases),
       })
     } else {
-      counties[edge.node.county] = { newCases: 0, total: 0, chart: [] }
+      counties[edge.node.county] = { newCases: 0, cases: 0, chart: [] }
     }
   })
 
@@ -23,15 +24,16 @@ export const stateCaseDataTransformer = data => {
   const state = {}
   edges.forEach(edge => {
     if (state[edge.node.state]) {
-      state[edge.node.state].total = parseInt(edge.node.cases)
+      state[edge.node.state].cases = parseInt(edge.node.cases)
       state[edge.node.state].newCases = edge.node.newCases
       state[edge.node.state].chart.push({
-        cases: edge.node.newCases,
+        newCases: edge.node.newCases,
+        newDeaths: edge.node.newDeaths,
         date: edge.node.date,
         totalCases: parseInt(edge.node.cases),
       })
     } else {
-      state[edge.node.state] = { newCases: 0, total: 0, chart: [] }
+      state[edge.node.state] = { newCases: 0, cases: 0, chart: [] }
     }
   })
 
