@@ -27,7 +27,11 @@ const DefaultLegend = ({ name, fill }) => {
       <svg
         width="15"
         height="15"
-        style={{ display: "inline-block", verticalAlign: "middle" }}
+        style={{
+          display: "inline-block",
+          marginLeft: "10px",
+          verticalAlign: "middle",
+        }}
       >
         <rect
           width="15"
