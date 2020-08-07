@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header renders correctly 1`] = `
+<header
+  style={
+    Object {
+      "marginBottom": "1.45rem",
+    }
+  }
+>
+  <div
+    className="header"
+  >
+    <button
+      className="mobile-menu-icon"
+      onClick={[Function]}
+    >
+      <div />
+      <div />
+      <div />
+    </button>
+    <a
+      aria-current="page"
+      className="title"
+      href="/"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      style={
+        Object {
+          "color": "white",
+          "textDecoration": "none",
+        }
+      }
+    >
+      Default Starter
+    </a>
+    <div
+      className="header-right"
+    >
+      <a
+        aria-current="page"
+        className="active"
+        href="/"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        style={Object {}}
+      >
+        Home
+      </a>
+      <a
+        href="/highlights"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+      >
+        Highlights
+      </a>
+      <a
+        href="/hospitalizations"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+      >
+        Hospitalizations
+      </a>
+    </div>
+  </div>
+</header>
+`;
