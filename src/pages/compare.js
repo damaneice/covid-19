@@ -2,6 +2,7 @@ import React from "react"
 
 import TotalCasesChart from "../components/totalCasesChart"
 import DailyCasesChart from "../components/dailyCasesChart"
+import DailyDeathsChart from "../components/dailyDeathsChart"
 import RollingAverageCasesChart from "../components/rollingAverageCasesChart"
 import PositivityChart from "../components/positivityChart"
 import {
@@ -48,7 +49,7 @@ const ComparePage = ({ data }) => {
           selectedNames={selectedNames}
         />
         <DailyCasesChart counties={keys} selectedNames={selectedNames} />
-
+        <DailyDeathsChart counties={keys} selectedNames={selectedNames} />
         <TotalCasesChart counties={keys} selectedNames={selectedNames} />
 
         <PositivityChart
@@ -70,6 +71,7 @@ export const query = graphql`
           cases
           date(formatString: "Y-MM-DD")
           newCases
+          newDeaths
         }
       }
     }
