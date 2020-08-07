@@ -6,6 +6,7 @@ import TotalCasesMap from "../components/totalCasesMap"
 import moment from "moment"
 import SEO from "../components/seo"
 import "./home.css"
+import "./highlights.css"
 
 const updatedDate = data => {
   const edges = data.allCasesByCountyAndDateCsvSheet1.edges
@@ -64,10 +65,31 @@ const countyCaseDataTransformer = data => {
   return counties
 }
 
+const computeStateFigures = data => {
+  const mostRecent = data.allStateCasesByDateCsvSheet1.edges[0].node
+  const previous = data.allStateCasesByDateCsvSheet1.edges[1].node
+  const changeOfCases = mostRecent.newCases - previous.newCases
+  const changeOfDeaths = mostRecent.newDeaths - previous.newDeaths
+  const percentOfCasesChange = (changeOfCases / mostRecent.newCases) * 100
+  const percentOfDeathsChange = (changeOfDeaths / mostRecent.newDeaths) * 100
+  return {
+    changeOfCases,
+    changeOfDeaths,
+    percentOfCasesChange,
+    percentOfDeathsChange,
+    deaths: mostRecent.deaths,
+    newDeaths: mostRecent.newDeaths,
+    cases: mostRecent.cases,
+    newCases: mostRecent.newCases,
+  }
+}
+
 const HighlightsPage = ({ data }) => {
   const counties = countyCaseDataTransformer(data)
   const [showCaseRate, setShowCaseRate] = useState(true)
   const [showTotalCases, setShowTotalCases] = useState(false)
+  const stateFigures = computeStateFigures(data)
+
   return (
     <Layout>
       <SEO title="Highlights" />
@@ -109,6 +131,55 @@ const HighlightsPage = ({ data }) => {
             TOTAL CASES
           </button>
         </div>
+        <div style={{ marginTop: "50px" }}>
+          <h4>STATE FIGURES</h4>
+        </div>
+        <div className="state-figures">
+          <div className="figures-cell figures-header">
+            <p>CASES</p>
+          </div>
+          <div className="figures-cell figures-cases">
+            <p>{stateFigures.cases}</p>
+          </div>
+          <div className="figures-cell figures-header border-top">
+            <p style={{ paddingTop: "12px" }}>NEW CASES</p>
+          </div>
+          <div className="figures-cell figures-cases border-top">
+            <p>{stateFigures.newCases}</p>
+            <p
+              className={
+                stateFigures.changeOfCases >= 0
+                  ? "percent-increase"
+                  : "percent-decrease"
+              }
+            >
+              <span>{stateFigures.changeOfCases >= 0 ? "+" : "-"}</span>
+              {stateFigures.percentOfCasesChange.toFixed(1)}%
+            </p>
+          </div>
+          <div className="figures-cell figures-header border-top">
+            <p>DEATHS</p>
+          </div>
+          <div className="figures-cell figures-deaths border-top">
+            <p>{stateFigures.deaths}</p>
+          </div>
+          <div className="figures-cell figures-header border-top">
+            <p style={{ paddingTop: "12px" }}>NEW DEATHS</p>
+          </div>
+          <div className="figures-cell figures-deaths border-top">
+            <p>{stateFigures.newDeaths}</p>
+            <p
+              className={
+                stateFigures.changeOfDeaths >= 0
+                  ? "percent-increase"
+                  : "percent-decrease"
+              }
+            >
+              <span>{stateFigures.changeOfDeaths >= 0 ? "+" : "-"}</span>
+              {stateFigures.percentOfDeathsChange.toFixed(1)}%
+            </p>
+          </div>
+        </div>
       </div>
     </Layout>
   )
@@ -123,6 +194,20 @@ export const query = graphql`
           cases
           newCases
           date(formatString: "Y-MM-DD")
+        }
+      }
+    }
+    allStateCasesByDateCsvSheet1(
+      limit: 2
+      sort: { order: DESC, fields: date }
+    ) {
+      edges {
+        node {
+          cases
+          deaths
+          newCases
+          newDeaths
+          date
         }
       }
     }

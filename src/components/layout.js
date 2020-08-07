@@ -52,7 +52,7 @@ const Layout = ({ children }) => {
           marginBottom: "5px",
         }}
       >
-        <span style={{ textAlign: "center" }}>
+        <span style={{ textAlign: "center", marginBottom: "25px" }}>
           Data taken from the
           <a
             style={{ marginLeft: "4px", marginRight: "4px" }}
