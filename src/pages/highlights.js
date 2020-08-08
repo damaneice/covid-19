@@ -13,12 +13,35 @@ const updatedDate = data => {
   return edges[edges.length - 1].node.date
 }
 
+const percentOfChange = (newvalue, previousValue) => {
+  const change = newvalue - previousValue
+  return (change / newvalue) * 100 || 0
+}
+
 const countyCaseDataTransformer = data => {
   const { edges } = data.allCasesByCountyAndDateCsvSheet1
   const counties = {}
+
   edges.forEach(edge => {
     if (counties[edge.node.county]) {
+      counties[edge.node.county].previousCases =
+        counties[edge.node.county].newCases
+
+      counties[edge.node.county].newCases = edge.node.newCases
+      counties[edge.node.county].percentOfDailyCasesChange = percentOfChange(
+        edge.node.newCases,
+        counties[edge.node.county].previousCases
+      )
+      counties[edge.node.county].previousDeaths =
+        counties[edge.node.county].newDeaths
+
+      counties[edge.node.county].newDeaths = edge.node.newDeaths
+      counties[edge.node.county].percentOfDailyDeathsChange = percentOfChange(
+        edge.node.newDeaths,
+        counties[edge.node.county].previousDeaths
+      )
       counties[edge.node.county].cases = edge.node.cases
+      counties[edge.node.county].deaths = edge.node.deaths
       counties[edge.node.county].name = edge.node.county
       counties[edge.node.county].chart.push({
         newCases: parseInt(edge.node.newCases),
@@ -33,6 +56,7 @@ const countyCaseDataTransformer = data => {
       }
     }
   })
+
   Object.keys(counties).forEach(county => {
     //last 14 elements
     const mostRecent = counties[county].chart.slice(0).slice(-14)
@@ -61,7 +85,6 @@ const countyCaseDataTransformer = data => {
     counties[county].rateOfChange =
       100 * (currentRollingAverage / previousRollingAverage - 1)
   })
-
   return counties
 }
 
@@ -70,8 +93,14 @@ const computeStateFigures = data => {
   const previous = data.allStateCasesByDateCsvSheet1.edges[1].node
   const changeOfCases = mostRecent.newCases - previous.newCases
   const changeOfDeaths = mostRecent.newDeaths - previous.newDeaths
-  const percentOfCasesChange = (changeOfCases / mostRecent.newCases) * 100
-  const percentOfDeathsChange = (changeOfDeaths / mostRecent.newDeaths) * 100
+  const percentOfCasesChange = percentOfChange(
+    mostRecent.newCases,
+    previous.newCases
+  )
+  const percentOfDeathsChange = percentOfChange(
+    mostRecent.newDeaths,
+    previous.newDeaths
+  )
   return {
     changeOfCases,
     changeOfDeaths,
@@ -84,11 +113,90 @@ const computeStateFigures = data => {
   }
 }
 
+const computeCountyFigures = counties => {
+  const countyNames = Object.keys(counties)
+  let highlighedCountyName = countyNames[0]
+  countyNames.forEach(name => {
+    if (
+      counties[name].changeOfCases >
+      counties[highlighedCountyName].changeOfCases
+    ) {
+      highlighedCountyName = name
+    }
+  })
+  const county = counties[highlighedCountyName]
+  return {
+    name: highlighedCountyName,
+    changeOfCases: county.newCases - county.previousCases,
+    changeOfDeaths: county.newDeaths - county.previousDeaths,
+    percentOfCasesChange: county.percentOfDailyCasesChange,
+    percentOfDeathsChange: county.percentOfDailyDeathsChange,
+    deaths: county.deaths,
+    newDeaths: county.newDeaths,
+    cases: county.cases,
+    newCases: county.newCases,
+  }
+}
+
+const StatsSection = props => {
+  const { data, name } = props
+  return (
+    <>
+      <div className="stats-section-name">
+        <h4>{name}</h4>
+      </div>
+      <div className="state-figures">
+        <div className="figures-cell figures-header">
+          <p>CASES</p>
+        </div>
+        <div className="figures-cell figures-cases">
+          <p>{data.cases}</p>
+        </div>
+        <div className="figures-cell figures-header border-top">
+          <p style={{ paddingTop: "12px" }}>NEW CASES</p>
+        </div>
+        <div className="figures-cell figures-cases border-top">
+          <p>{data.newCases}</p>
+          <p
+            className={
+              data.changeOfCases >= 0 ? "percent-increase" : "percent-decrease"
+            }
+          >
+            <span>{data.changeOfCases >= 0 ? "+" : "-"}</span>
+            {data.percentOfCasesChange.toFixed(1)}%
+          </p>
+        </div>
+        <div className="figures-cell figures-header border-top">
+          <p>DEATHS</p>
+        </div>
+        <div className="figures-cell figures-deaths border-top">
+          <p>{data.deaths}</p>
+        </div>
+        <div className="figures-cell figures-header border-top">
+          <p style={{ paddingTop: "12px" }}>NEW DEATHS</p>
+        </div>
+        <div className="figures-cell figures-deaths border-top">
+          <p>{data.newDeaths}</p>
+          <p
+            className={
+              data.changeOfDeaths >= 0 ? "percent-increase" : "percent-decrease"
+            }
+          >
+            <span>{data.changeOfDeaths >= 0 ? "+" : "-"}</span>
+            {data.percentOfDeathsChange.toFixed(1)}%
+          </p>
+        </div>
+      </div>
+    </>
+  )
+}
+
 const HighlightsPage = ({ data }) => {
   const counties = countyCaseDataTransformer(data)
   const [showCaseRate, setShowCaseRate] = useState(true)
   const [showTotalCases, setShowTotalCases] = useState(false)
   const stateFigures = computeStateFigures(data)
+  const countyFigures = computeCountyFigures(counties)
 
   return (
     <Layout>
@@ -111,7 +219,7 @@ const HighlightsPage = ({ data }) => {
         <div style={{ display: showTotalCases ? "block" : "none" }}>
           <TotalCasesMap counties={counties} />
         </div>
-        <div style={{ textAlign: "center" }}>
+        <div style={{ textAlign: "center", marginBottom: "20px" }}>
           <button
             className={`case-map-button ${showCaseRate ? "active" : ""}`}
             onClick={() => {
@@ -131,55 +239,11 @@ const HighlightsPage = ({ data }) => {
             TOTAL CASES
           </button>
         </div>
-        <div style={{ marginTop: "50px" }}>
-          <h4>STATE FIGURES</h4>
-        </div>
-        <div className="state-figures">
-          <div className="figures-cell figures-header">
-            <p>CASES</p>
-          </div>
-          <div className="figures-cell figures-cases">
-            <p>{stateFigures.cases}</p>
-          </div>
-          <div className="figures-cell figures-header border-top">
-            <p style={{ paddingTop: "12px" }}>NEW CASES</p>
-          </div>
-          <div className="figures-cell figures-cases border-top">
-            <p>{stateFigures.newCases}</p>
-            <p
-              className={
-                stateFigures.changeOfCases >= 0
-                  ? "percent-increase"
-                  : "percent-decrease"
-              }
-            >
-              <span>{stateFigures.changeOfCases >= 0 ? "+" : "-"}</span>
-              {stateFigures.percentOfCasesChange.toFixed(1)}%
-            </p>
-          </div>
-          <div className="figures-cell figures-header border-top">
-            <p>DEATHS</p>
-          </div>
-          <div className="figures-cell figures-deaths border-top">
-            <p>{stateFigures.deaths}</p>
-          </div>
-          <div className="figures-cell figures-header border-top">
-            <p style={{ paddingTop: "12px" }}>NEW DEATHS</p>
-          </div>
-          <div className="figures-cell figures-deaths border-top">
-            <p>{stateFigures.newDeaths}</p>
-            <p
-              className={
-                stateFigures.changeOfDeaths >= 0
-                  ? "percent-increase"
-                  : "percent-decrease"
-              }
-            >
-              <span>{stateFigures.changeOfDeaths >= 0 ? "+" : "-"}</span>
-              {stateFigures.percentOfDeathsChange.toFixed(1)}%
-            </p>
-          </div>
-        </div>
+        <StatsSection data={stateFigures} name={"State Figures"} />
+        <StatsSection
+          data={countyFigures}
+          name={`${countyFigures.name} County has the greatest increase in cases`}
+        />
       </div>
     </Layout>
   )
@@ -192,7 +256,9 @@ export const query = graphql`
         node {
           county
           cases
+          deaths
           newCases
+          newDeaths
           date(formatString: "Y-MM-DD")
         }
       }

@@ -5,8 +5,14 @@
   background-color: rgb(245, 245, 245);
   font-size: 16px;
   font-weight: 700;
-  margin-bottom: 50px;
+  margin-bottom: 25px;
 }
+.stats-section-name {
+  margin-top: 20px;
+  padding: 0 10px;
+  width: 450px;
+}
+
 .figures-header {
   border-right: 1px solid rgb(190, 190, 190);
   font-size: 12px;
@@ -50,5 +56,10 @@
 @media screen and (max-width: 450px) {
   .state-figures {
     width: 300px;
+  }
+
+  .stats-section-name {
+    width: 300px;
+    padding: 0 10px;
   }
 }
