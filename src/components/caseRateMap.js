@@ -9,11 +9,15 @@ const CaseRateMap = ({ counties }) => {
       {rateOfChangeColors
         .slice(0)
         .reverse()
-        .map(rateOfChangeColor => {
+        .map((rateOfChangeColor, index) => {
+          const name =
+            index === rateOfChangeColors.length - 1
+              ? ` >${rateOfChangeColor.threadhold}%`
+              : `${rateOfChangeColor.threadhold}%`
           return (
             <Legend
               key={rateOfChangeColor.threadhold}
-              name={`${rateOfChangeColor.threadhold}%`}
+              name={name}
               fill={rateOfChangeColor.value}
             />
           )

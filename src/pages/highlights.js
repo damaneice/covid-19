@@ -59,11 +59,11 @@ const countyCaseDataTransformer = data => {
 
   Object.keys(counties).forEach(county => {
     //last 14 elements
-    const mostRecent = counties[county].chart.slice(0).slice(-14)
+    const mostRecent = counties[county].chart.slice(0).slice(-6)
     const previousRollingCases = []
     const currentRollingCases = []
     mostRecent.forEach((item, index) => {
-      if (index < 7) {
+      if (index < 3) {
         previousRollingCases.push(item.newCases)
       } else {
         currentRollingCases.push(item.newCases)
