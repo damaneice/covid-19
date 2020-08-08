@@ -11,19 +11,19 @@ export const rateOfChangeColors = [
 export const getCaseRateColor = county => {
   let color = rateOfChangeColors[6].value
   const rateOfChange = county.rateOfChange
-  if (rateOfChange >= 15) {
+  if (rateOfChange > 15) {
     color = rateOfChangeColors[0].value
-  } else if (15 > rateOfChange && rateOfChange >= 10) {
+  } else if (15 >= rateOfChange && rateOfChange > 10) {
     color = rateOfChangeColors[1].value
-  } else if (10 > rateOfChange && rateOfChange >= 5) {
+  } else if (10 >= rateOfChange && rateOfChange > 5) {
     color = rateOfChangeColors[2].value
-  } else if (5 > rateOfChange && rateOfChange >= 0) {
+  } else if (5 >= rateOfChange && rateOfChange > 0) {
     color = rateOfChangeColors[3].value
-  } else if (0 > rateOfChange && rateOfChange >= -5) {
+  } else if (0 >= rateOfChange && rateOfChange > -5) {
     color = rateOfChangeColors[4].value
-  } else if (-5 > rateOfChange && rateOfChange >= -10) {
+  } else if (-5 >= rateOfChange && rateOfChange > -10) {
     color = rateOfChangeColors[5].value
-  } else if (-10 > rateOfChange && rateOfChange >= -15) {
+  } else if (-10 >= rateOfChange && rateOfChange > -15) {
     color = rateOfChangeColors[6].value
   }
 
