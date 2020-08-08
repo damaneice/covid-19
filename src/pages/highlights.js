@@ -242,7 +242,7 @@ const HighlightsPage = ({ data }) => {
         <StatsSection data={stateFigures} name={"State Figures"} />
         <StatsSection
           data={countyFigures}
-          name={`${countyFigures.name} County has the highest increase`}
+          name={`${countyFigures.name} County has the greatest increase in cases`}
         />
       </div>
     </Layout>
