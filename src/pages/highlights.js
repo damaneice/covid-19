@@ -28,6 +28,8 @@ const countyCaseDataTransformer = data => {
         counties[edge.node.county].newCases
 
       counties[edge.node.county].newCases = edge.node.newCases
+      counties[edge.node.county].changeOfDailyCases =
+        edge.node.newCases - counties[edge.node.county].previousCases
       counties[edge.node.county].percentOfDailyCasesChange = percentOfChange(
         edge.node.newCases,
         counties[edge.node.county].previousCases
@@ -40,6 +42,8 @@ const countyCaseDataTransformer = data => {
         edge.node.newDeaths,
         counties[edge.node.county].previousDeaths
       )
+      counties[edge.node.county].changeOfDailyDeaths =
+        edge.node.newDeathss - counties[edge.node.county].previousDeaths
       counties[edge.node.county].cases = edge.node.cases
       counties[edge.node.county].deaths = edge.node.deaths
       counties[edge.node.county].name = edge.node.county
@@ -118,8 +122,9 @@ const computeCountyFigures = counties => {
   let highlighedCountyName = countyNames[0]
   countyNames.forEach(name => {
     if (
-      counties[name].changeOfCases >
-      counties[highlighedCountyName].changeOfCases
+      counties[name].changeOfDailyCases >
+        counties[highlighedCountyName].changeOfDailyCases &&
+      name !== "Unknown"
     ) {
       highlighedCountyName = name
     }
@@ -162,7 +167,7 @@ const StatsSection = props => {
               data.changeOfCases >= 0 ? "percent-increase" : "percent-decrease"
             }
           >
-            <span>{data.changeOfCases >= 0 ? "+" : "-"}</span>
+            <span>{data.changeOfCases >= 0 ? "+" : ""}</span>
             {data.percentOfCasesChange.toFixed(1)}%
           </p>
         </div>
@@ -182,7 +187,7 @@ const StatsSection = props => {
               data.changeOfDeaths >= 0 ? "percent-increase" : "percent-decrease"
             }
           >
-            <span>{data.changeOfDeaths >= 0 ? "+" : "-"}</span>
+            <span>{data.changeOfDeaths >= 0 ? "+" : ""}</span>
             {data.percentOfDeathsChange.toFixed(1)}%
           </p>
         </div>
