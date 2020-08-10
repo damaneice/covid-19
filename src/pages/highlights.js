@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import CaseRateMap from "../components/caseRateMap"
-import TotalCasesMap from "../components/totalCasesMap"
+import CaseDotMap from "../components/CaseDotMap"
 import moment from "moment"
 import SEO from "../components/seo"
 import "./home.css"
@@ -219,11 +219,14 @@ const HighlightsPage = ({ data }) => {
         }}
       >
         <div style={{ display: showCaseRate ? "block" : "none" }}>
+          <CaseDotMap
+            margin={{ top: 20, bottom: 80, right: 5, left: 40 }}
+            counties={counties}
+          />
+        </div>
+        {/* <div style={{ display: showCaseRate ? "block" : "none" }}>
           <CaseRateMap counties={counties} />
-        </div>
-        <div style={{ display: showTotalCases ? "block" : "none" }}>
-          <TotalCasesMap counties={counties} />
-        </div>
+        </div> */}
         <div style={{ textAlign: "center", marginBottom: "20px" }}>
           <button
             className={`case-map-button ${showCaseRate ? "active" : ""}`}
