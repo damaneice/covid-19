@@ -143,19 +143,6 @@ const computeCountyFigures = counties => {
   }
 }
 
-const groupRecordsByDate = data => {
-  const records = {}
-  const edges = data.allCasesByCountyAndDateCsvSheet1.edges
-  edges.forEach(edge => {
-    if (records[edge.node.date]) {
-      records[edge.node.date].push(edge.node)
-    } else {
-      records[edge.node.date] = [edge.node]
-    }
-  })
-  return records
-}
-
 const StatsSection = props => {
   const { data, name } = props
   return (
@@ -233,8 +220,8 @@ const HighlightsPage = ({ data }) => {
       >
         <div style={{ display: showCaseRate ? "block" : "none" }}>
           <CaseDotMap
-            casesByDate={groupRecordsByDate(data)}
-            margin={{ top: 20, bottom: 80, right: 5, left: 40 }}
+            recordsByDate={data.allCasesByCountyAndDateCsvSheet1.edges}
+            margin={{ top: 20, bottom: 20, right: 5, left: 40 }}
             counties={counties}
           />
         </div>
@@ -273,7 +260,7 @@ const HighlightsPage = ({ data }) => {
 
 export const query = graphql`
   query HighlightsQuery {
-    allCasesByCountyAndDateCsvSheet1 {
+    allCasesByCountyAndDateCsvSheet1(sort: { fields: date, order: ASC }) {
       edges {
         node {
           county
