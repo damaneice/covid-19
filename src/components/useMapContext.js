@@ -13,7 +13,16 @@ const useMapContext = (width, height) => {
         .fitSize([width, height], data)
 
       const path = d3.geoPath().projection(projection)
-      setMapContext({ data: data, path: path, projection: projection })
+      const countiesFeatures = {}
+      data.features.forEach(feature => {
+        countiesFeatures[feature.properties["NAME"]] = feature
+      })
+      setMapContext({
+        countiesFeatures: countiesFeatures,
+        data,
+        path: path,
+        projection: projection,
+      })
     }
     fetchJSON()
   }, [width, height])

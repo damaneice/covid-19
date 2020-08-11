@@ -24,10 +24,30 @@ const generatePoint = feature => {
   return point
 }
 
-const drawPoints = (features, projection) => {
+const drawPoints = (casesOnDate, countiesFeatures, projection) => {
+  const pointsPerCase = 10
+  const countyCaseTracking = {}
   const points = []
-  features.forEach(feature => {
-    points.push(generatePoint(feature))
+  //   cases: 1
+  // county: "Charlevoix"
+  // date: "2020-03-16"
+  // deaths: 0
+  // newCases: 0
+  // newDeaths: 0
+  casesOnDate.forEach(item => {
+    if (countiesFeatures[item.county]) {
+      const rollOverCases = countyCaseTracking[item.county]
+        ? countyCaseTracking[item.county].rollOverCases
+        : 0
+      const casesToCreatePoints = rollOverCases + item.newCases
+      const numberOfPointsToCreate = casesToCreatePoints / pointsPerCase
+      countyCaseTracking[item.county] = {
+        rollOverCases: casesToCreatePoints % pointsPerCase,
+      }
+      for (let i = 0; i < numberOfPointsToCreate; i++) {
+        points.push(generatePoint(countiesFeatures[item.county]))
+      }
+    }
   })
   d3.select(".michigan-map")
     .selectAll("myCircles")
@@ -41,34 +61,32 @@ const drawPoints = (features, projection) => {
       return projection([d[0], d[1]])[1]
     })
     .attr("r", 1)
-    .style("fill", "69b3a2")
-    .attr("stroke", "#69b3a2")
+    .style("fill", "rgb(235, 158, 2)")
     .attr("stroke-width", 0.1)
     .attr("fill-opacity", 0.35)
 }
 
-const CaseDotMap = ({ counties, margin }) => {
+const CaseDotMap = ({ casesByDate, counties, margin }) => {
   const size = useWindow()
   const width = size.width + margin.left > 600 ? 600 : 300
   const height = size.width + margin.left > 600 ? 400 : 200
   const mapContext = useMapContext(width, height)
-
   return (
     <div style={{ textAlign: "center" }}>
-      <Legend name="1 dot for 10 cases" fill="rgb(120, 235, 2)" />
+      <Legend name="1 dot for 10 cases" fill="rgb(235, 158, 2)" />
       {mapContext && (
         <Map
           features={mapContext.data.features}
           path={mapContext.path}
           counties={counties}
           getColor={() => {
-            return "#000099"
+            return "rgb(75, 33, 114)"
           }}
           name="Michigan"
           margin={margin}
           width={width}
           height={height}
-          stroke="#F5F5F5"
+          stroke="rgb(166, 86, 247)"
         />
       )}
 
@@ -76,8 +94,20 @@ const CaseDotMap = ({ counties, margin }) => {
         onClick={() => {
           const features = mapContext.data.features
           const projection = mapContext.projection
-
-          drawPoints(features, projection)
+          const dates = Object.keys(casesByDate)
+          let ticks = 0
+          const interval = setInterval(() => {
+            if (ticks >= dates.length) {
+              clearInterval(interval)
+            } else {
+              drawPoints(
+                casesByDate[dates[ticks]],
+                mapContext.countiesFeatures,
+                projection
+              )
+            }
+            ticks++
+          }, 200)
         }}
       >
         Generate
