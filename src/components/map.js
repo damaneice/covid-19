@@ -12,7 +12,6 @@ const Map = ({
   stroke = "#000",
 }) => {
   const divRef = useRef()
-
   const svgContainer = d3.select(divRef.current)
 
   //This is used to existing svg elements on resize

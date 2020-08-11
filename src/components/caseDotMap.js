@@ -1,11 +1,11 @@
 import * as d3 from "d3"
+import { sliderBottom } from "d3-simple-slider"
 import React, { useEffect, useState } from "react"
 import moment from "moment"
 import Legend from "./legend"
 import useMapContext from "./useMapContext"
 import useWindow from "./useWindow"
 import Map from "./map"
-import "rc-slider/assets/index.css"
 
 const randomUniform = (min, max) => Math.random() * (max - min) + min
 
@@ -50,7 +50,6 @@ const drawPoints = (casesOnDate, countiesFeatures, projection) => {
   })
 
   const svg = d3.select(".michigan-map")
-  svg.selectAll("text").remove()
   svg
     .selectAll("myCircles")
     .data(points)
@@ -62,19 +61,11 @@ const drawPoints = (casesOnDate, countiesFeatures, projection) => {
     .attr("cy", function (d) {
       return projection([d[0], d[1]])[1]
     })
+    .attr("class", `dots-${casesOnDate[0].date}`)
     .attr("r", 1)
     .style("fill", "rgb(235, 158, 2)")
     .attr("stroke-width", 0.1)
     .attr("fill-opacity", 0.35)
-
-  svg.selectAll("text").attr("transform", "translate(-5,0)")
-
-  svg
-    .append("text")
-    .text(casesOnDate[0].date)
-    .attr("y", 300)
-    .attr("dx", 250)
-    .style("text-anchor", "end")
 }
 
 const groupRecordsByDate = records => {
@@ -90,93 +81,102 @@ const groupRecordsByDate = records => {
   })
   return groupedRecords
 }
-// const marks = {
-//   0: <strong>0°C</strong>,
-//   26: "26°C",
-//   37: "37°C",
-//   50: "50°C",
-//   100: {
-//     style: {
-//       color: "red",
-//     },
-//     label: <strong>100°C</strong>,
-//   },
-// }
+
+const Slider = ({ recordsByDate, mapContext, width }) => {
+  useEffect(() => {
+    const casesByDate = groupRecordsByDate(recordsByDate)
+    const dates = Object.keys(casesByDate)
+    d3.select("#timelapse-slider").select("svg").remove()
+    const sliderValues = dates.map(date => moment(date, "MMM D").toDate())
+    let previousDate = sliderValues[0]
+    var slider = sliderBottom()
+      .min(sliderValues[0])
+      .max(d3.max(sliderValues))
+      .width(width - 100)
+      .displayValue(false)
+      .on("onchange", val => {
+        const sliderDate = moment(val).format("MMM D")
+        if (casesByDate[sliderDate]) {
+          if (moment(previousDate).isBefore(moment(val))) {
+            const projection = mapContext.projection
+            drawPoints(
+              casesByDate[sliderDate],
+              mapContext.countiesFeatures,
+              projection
+            )
+          } else {
+            d3.selectAll(`.dots-${moment(val).format("Y-MM-DD")}`).remove()
+          }
+        }
+        previousDate = val
+        d3.select("#value").text(sliderDate)
+      })
+
+    d3.select("#timelapse-slider")
+      .append("svg")
+      .attr("width", width)
+      .attr("height", 100)
+      .append("g")
+      .attr("transform", "translate(30,30)")
+      .call(slider)
+
+    let index = 0
+
+    const timelapse = setInterval(() => {
+      if (index < dates.length) {
+        slider.value(moment(dates[index], "MMM D").toDate())
+        index++
+      } else {
+        clearInterval(timelapse)
+      }
+    }, 300)
+    console.log(timelapse)
+    return () => {
+      clearInterval(timelapse)
+    }
+  })
+
+  return (
+    <>
+      <p id="value"></p>
+      <div id="timelapse-slider"></div>
+    </>
+  )
+}
 
 const CaseDotMap = ({ recordsByDate, counties, margin }) => {
   const size = useWindow()
   const width = size.width + margin.left > 600 ? 600 : 300
   const height = size.width + margin.left > 600 ? 400 : 200
   const mapContext = useMapContext(width, height)
-  const casesByDate = groupRecordsByDate(recordsByDate)
-  const dates = Object.keys(casesByDate)
-  const marks = {}
-  dates.forEach((date, index) => {
-    if (index % 5 === 0) {
-      marks[index] = date
-    }
-  })
-  let sliderIndex = 0
 
   return (
-    <div style={{ textAlign: "center" }}>
-      <Legend name={"1 dot for 10 cases"} fill="rgb(235, 158, 2)" />
+    <>
       {mapContext && (
-        <Map
-          features={mapContext.data.features}
-          path={mapContext.path}
-          counties={counties}
-          getColor={() => {
-            return "rgb(75, 33, 114)"
-          }}
-          name="Michigan"
-          margin={margin}
-          width={width}
-          height={height}
-          stroke="rgb(166, 86, 247)"
-        />
-      )}
-      <form>
-        <input
-          type="range"
-          defaultValue="0"
-          min="0"
-          max="21"
-          onChange={event => {
-            const projection = mapContext.projection
-            drawPoints(
-              casesByDate[dates[sliderIndex]],
-              mapContext.countiesFeatures,
-              projection
-            )
-            sliderIndex = event.target.value
-          }}
-          style={{ width: "300px" }}
-        />
-      </form>
-      <button
-        onClick={() => {
-          const projection = mapContext.projection
-          drawPoints(
-            casesByDate[dates[sliderIndex]],
-            mapContext.countiesFeatures,
-            projection
-          )
+        <div style={{ textAlign: "center" }}>
+          <Legend name={"1 dot for 10 cases"} fill="rgb(235, 158, 2)" />
+          <Map
+            features={mapContext.data.features}
+            path={mapContext.path}
+            counties={counties}
+            getColor={() => {
+              return "rgb(75, 33, 114)"
+            }}
+            name="Michigan"
+            margin={margin}
+            width={width}
+            height={height}
+            stroke="rgb(166, 86, 247)"
+          />
 
-          sliderIndex = sliderIndex + 1
-        }}
-        // }, 200)
-      >
-        Generate
-      </button>
-      <button
-        onClick={() => {
-          d3.selectAll(".dot-2020-03-10").remove()
-        }}
-      >
-        undo
-      </button>{" "}
-    </div>
+          <Slider
+            width={width}
+            recordsByDate={recordsByDate}
+            mapContext={mapContext}
+          />
+        </div>
+      )}
+    </>
   )
 }
 
