@@ -94,22 +94,11 @@ const Slider = ({ recordsByDate, mapContext, width }) => {
       .max(d3.max(sliderValues))
       .width(width - 100)
       .displayValue(false)
+      .on("start", val => {
+        sliderStart()
+      })
       .on("onchange", val => {
-        const sliderDate = moment(val).format("MMM D")
-        if (casesByDate[sliderDate]) {
-          if (moment(previousDate).isBefore(moment(val))) {
-            const projection = mapContext.projection
-            drawPoints(
-              casesByDate[sliderDate],
-              mapContext.countiesFeatures,
-              projection
-            )
-          } else {
-            d3.selectAll(`.dots-${moment(val).format("Y-MM-DD")}`).remove()
-          }
-        }
-        previousDate = val
-        d3.select("#value").text(sliderDate)
+        sliderOnChange(val)
       })
 
     d3.select("#timelapse-slider")
@@ -130,7 +119,27 @@ const Slider = ({ recordsByDate, mapContext, width }) => {
         clearInterval(timelapse)
       }
     }, 300)
-    console.log(timelapse)
+    const sliderStart = () => {
+      clearInterval(timelapse)
+    }
+    const sliderOnChange = val => {
+      const sliderDate = moment(val).format("MMM D")
+      if (casesByDate[sliderDate]) {
+        if (moment(previousDate).isBefore(moment(val))) {
+          const projection = mapContext.projection
+          drawPoints(
+            casesByDate[sliderDate],
+            mapContext.countiesFeatures,
+            projection
+          )
+        } else {
+          d3.selectAll(`.dots-${moment(val).format("Y-MM-DD")}`).remove()
+        }
+      }
+      previousDate = val
+      d3.select("#value").text(sliderDate)
+    }
+
     return () => {
       clearInterval(timelapse)
     }
