@@ -109,7 +109,6 @@ const Slider = ({ recordsByDate, mapContext, width }) => {
       .call(slider)
 
     let index = 0
-
     const timelapse = setInterval(() => {
       if (index < dates.length) {
         slider.value(moment(dates[index], "MMM D").toDate())
