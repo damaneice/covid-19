@@ -48,7 +48,6 @@ const Map = ({
   return (
     <div style={{ textAlign: "center" }}>
       <div ref={divRef}></div>
-      <div>map</div>
     </div>
   )
 }
