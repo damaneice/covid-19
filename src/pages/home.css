@@ -80,9 +80,11 @@
 
 .updated-date {
   color: rebeccapurple;
+  width: 100%;
   text-align: right;
   font-weight: 600;
   font-size: 12px;
+  padding-right: 10px;
 }
 
 .filter-button-container {

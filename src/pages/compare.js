@@ -18,7 +18,9 @@ import queryString from "query-string"
 import "./home.css"
 
 const updatedDate = data => {
-  const edges = data.allCasesByCountyAndDateCsvSheet1.edges
+  const edges = data.allCasesByCountyAndDateCsvSheet1
+    ? data.allCasesByCountyAndDateCsvSheet1.edges
+    : data.allDiagnosticTestsByResultAndCountyXlsxData.edges
   return edges[edges.length - 1].node.date
 }
 
@@ -32,9 +34,6 @@ const ComparePage = ({ data }) => {
   return (
     <Layout>
       <SEO title="Compare" />
-      <div className="updated-date">
-        <p>Updated {moment(updatedDate(data)).format("dddd, MMMM Do, YYYY")}</p>
-      </div>
       <div
         style={{
           marginTop: "16px",
@@ -48,15 +47,39 @@ const ComparePage = ({ data }) => {
           counties={keys}
           selectedNames={selectedNames}
         />
+        <div className="updated-date">
+          <p>
+            Updated {moment(updatedDate(data)).format("dddd, MMMM Do, YYYY")}
+          </p>
+        </div>
         <DailyCasesChart counties={keys} selectedNames={selectedNames} />
+        <div className="updated-date">
+          <p>
+            Updated {moment(updatedDate(data)).format("dddd, MMMM Do, YYYY")}
+          </p>
+        </div>
         <DailyDeathsChart counties={keys} selectedNames={selectedNames} />
+        <div className="updated-date">
+          <p>
+            Updated {moment(updatedDate(data)).format("dddd, MMMM Do, YYYY")}
+          </p>
+        </div>
         <TotalCasesChart counties={keys} selectedNames={selectedNames} />
-
+        <div className="updated-date">
+          <p>
+            Updated {moment(updatedDate(data)).format("dddd, MMMM Do, YYYY")}
+          </p>
+        </div>
         <PositivityChart
           edges={data.allDiagnosticTestsByResultAndCountyXlsxData.edges}
           counties={keys}
           selectedNames={selectedNames.filter(name => name !== "Michigan")} //remove Michigan from Positivity Chart
         />
+        <div className="updated-date">
+          <p>
+            Updated {moment(updatedDate(data)).format("dddd, MMMM Do, YYYY")}
+          </p>
+        </div>
       </div>
     </Layout>
   )
