@@ -2,9 +2,9 @@ import * as d3 from "d3"
 import { sliderBottom } from "d3-simple-slider"
 import React, { useEffect } from "react"
 import moment from "moment"
-import Legend from "./legend"
+import Legend from "../legend"
 import useMapContext from "./useMapContext"
-import useWindow from "./useWindow"
+import useWindow from "../useWindow"
 import Map from "./map"
 
 const randomUniform = (min, max) => Math.random() * (max - min) + min
@@ -105,7 +105,7 @@ const Slider = ({ recordsByDate, mapContext, width }) => {
       .attr("width", width)
       .attr("height", 100)
       .append("g")
-      .attr("transform", "translate(30,30)")
+      .attr("transform", "translate(40,30)")
       .call(slider)
 
     let index = 0

@@ -1,8 +1,8 @@
 import React from "react"
-import Legend from "./legend"
-import { getCaseRateColor, rateOfChangeColors } from "../util/caseRateColor"
+import Legend from "../legend"
+import { getCaseRateColor, rateOfChangeColors } from "../../util/caseRateColor"
 import useMapContext from "./useMapContext"
-import useWindow from "./useWindow"
+import useWindow from "../useWindow"
 import Map from "./map"
 
 const CaseRateMap = ({ counties, margin }) => {

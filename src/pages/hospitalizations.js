@@ -1,6 +1,6 @@
 import React from "react"
 
-import ChartWithLegend from "../components/chartWithLegend"
+import ChartWithLegend from "../components/chart/chartWithLegend"
 import * as d3 from "d3"
 import { graphql } from "gatsby"
 import moment from "moment"

@@ -1,9 +1,9 @@
 import React, { useState } from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
-import CaseRateMap from "../components/caseRateMap"
-import CaseDotMap from "../components/caseDotMap"
-import TotalCasesMap from "../components/totalCasesMap"
+import CaseRateMap from "../components/map/caseRateMap"
+import CaseDotMap from "../components/map/caseDotMap"
+import TotalCasesMap from "../components/map/totalCasesMap"
 import moment from "moment"
 import SEO from "../components/seo"
 import "./home.css"
@@ -270,7 +270,7 @@ const HighlightsPage = ({ data }) => {
               setShowTimelapse(true)
             }}
           >
-            Timelapse of Cases
+            TIMELAPSE CASES
           </button>
         </div>
         <StatsSection data={stateFigures} name={"State Figures"} />

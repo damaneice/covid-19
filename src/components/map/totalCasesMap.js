@@ -1,9 +1,9 @@
 import React from "react"
-import Legend from "./legend"
+import Legend from "../legend"
 import Map from "./map"
 import useMapContext from "./useMapContext"
-import useWindow from "./useWindow"
-import { getTotalCaseColor, totalCasesColors } from "../util/totalCasesColor"
+import useWindow from "../useWindow"
+import { getTotalCaseColor, totalCasesColors } from "../../util/totalCasesColor"
 
 const TotalCasesMap = ({ counties, margin }) => {
   const size = useWindow()

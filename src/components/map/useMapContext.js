@@ -6,7 +6,7 @@ const useMapContext = (width, height) => {
 
   useEffect(() => {
     async function fetchJSON() {
-      const data = await import("../../static/michigan-counties.json")
+      const data = await import("../../../static/michigan-counties.json")
       const projection = d3.geoAlbers()
       projection
         .translate([width / 2, height / 2])

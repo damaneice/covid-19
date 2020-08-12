@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import Chart from "./chart"
-import Legend from "./legend"
+import Legend from "../legend"
 
 const stringToColor = name => {
   let hash = 0

@@ -6,7 +6,7 @@ import moment from "moment"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSort } from "@fortawesome/free-solid-svg-icons"
 import Layout from "../components/layout"
-import LineChart from "../components/linechart"
+import LineChart from "../components/chart/linechart"
 import SEO from "../components/seo"
 import "./home.css"
 
