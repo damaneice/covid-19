@@ -105,7 +105,7 @@ const Slider = ({ recordsByDate, mapContext, width }) => {
       .attr("width", width)
       .attr("height", 100)
       .append("g")
-      .attr("transform", "translate(40,30)")
+      .attr("transform", "translate(50,30)")
       .call(slider)
 
     let index = 0

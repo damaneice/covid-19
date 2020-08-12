@@ -10,6 +10,7 @@ const CaseRateMap = ({ counties, margin }) => {
   const width = size.width + margin.left > 600 ? 600 : 300
   const height = size.width + margin.left > 600 ? 400 : 200
   const mapContext = useMapContext(width, height)
+
   return (
     <>
       {mapContext && (
