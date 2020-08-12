@@ -2,7 +2,8 @@ import React, { useState } from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import CaseRateMap from "../components/caseRateMap"
-import CaseDotMap from "../components/CaseDotMap"
+import CaseDotMap from "../components/caseDotMap"
+import TotalCasesMap from "../components/totalCasesMap"
 import moment from "moment"
 import SEO from "../components/seo"
 import "./home.css"
@@ -200,6 +201,7 @@ const HighlightsPage = ({ data }) => {
   const counties = countyCaseDataTransformer(data)
   const [showCaseRate, setShowCaseRate] = useState(true)
   const [showTotalCases, setShowTotalCases] = useState(false)
+  const [showTimelapse, setShowTimelapse] = useState(false)
   const stateFigures = computeStateFigures(data)
   const countyFigures = computeCountyFigures(counties)
 
@@ -219,21 +221,33 @@ const HighlightsPage = ({ data }) => {
         }}
       >
         <div style={{ display: showCaseRate ? "block" : "none" }}>
+          <CaseRateMap
+            counties={counties}
+            margin={{ top: 20, bottom: 80, right: 5, left: 40 }}
+          />
+        </div>
+        <div style={{ display: showTotalCases ? "block" : "none" }}>
+          <TotalCasesMap
+            counties={counties}
+            margin={{ top: 20, bottom: 80, right: 5, left: 40 }}
+          />
+        </div>
+        <div style={{ display: showTimelapse ? "block" : "none" }}>
           <CaseDotMap
             recordsByDate={data.allCasesByCountyAndDateCsvSheet1.edges}
             margin={{ top: 20, bottom: 20, right: 5, left: 40 }}
             counties={counties}
           />
         </div>
-        {/* <div style={{ display: showCaseRate ? "block" : "none" }}>
-          <CaseRateMap counties={counties} />
-        </div> */}
-        <div style={{ textAlign: "center", marginBottom: "20px" }}>
+        <div
+          style={{ textAlign: "center", marginBottom: "20px", maxWidth: 600 }}
+        >
           <button
             className={`case-map-button ${showCaseRate ? "active" : ""}`}
             onClick={() => {
               setShowCaseRate(true)
               setShowTotalCases(false)
+              setShowTimelapse(false)
             }}
           >
             CASE GROWTH RATE
@@ -243,9 +257,20 @@ const HighlightsPage = ({ data }) => {
             onClick={() => {
               setShowCaseRate(false)
               setShowTotalCases(true)
+              setShowTimelapse(false)
             }}
           >
             TOTAL CASES
+          </button>
+          <button
+            className={`case-map-button ${showTimelapse ? "active" : ""}`}
+            onClick={() => {
+              setShowCaseRate(false)
+              setShowTotalCases(false)
+              setShowTimelapse(true)
+            }}
+          >
+            Timelapse of Cases
           </button>
         </div>
         <StatsSection data={stateFigures} name={"State Figures"} />

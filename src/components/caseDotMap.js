@@ -1,6 +1,6 @@
 import * as d3 from "d3"
 import { sliderBottom } from "d3-simple-slider"
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import moment from "moment"
 import Legend from "./legend"
 import useMapContext from "./useMapContext"
@@ -49,7 +49,7 @@ const drawPoints = (casesOnDate, countiesFeatures, projection) => {
     }
   })
 
-  const svg = d3.select(".michigan-map")
+  const svg = d3.select(".michigan-dot-map")
   svg
     .selectAll("myCircles")
     .data(points)
@@ -88,7 +88,6 @@ const Slider = ({ recordsByDate, mapContext, width }) => {
     const dates = Object.keys(casesByDate)
     d3.select("#timelapse-slider").select("svg").remove()
     const sliderValues = dates.map(date => moment(date, "MMM D").toDate())
-    let previousDate = sliderValues[0]
     var slider = sliderBottom()
       .min(sliderValues[0])
       .max(d3.max(sliderValues))
@@ -118,25 +117,30 @@ const Slider = ({ recordsByDate, mapContext, width }) => {
       } else {
         clearInterval(timelapse)
       }
-    }, 300)
+    }, 400)
     const sliderStart = () => {
       clearInterval(timelapse)
     }
+    const projection = mapContext.projection
+    const features = mapContext.countiesFeatures
+    drawPoints(casesByDate[dates[0]], features, projection)
+    let previousDate = dates[0]
     const sliderOnChange = val => {
       const sliderDate = moment(val).format("MMM D")
       if (casesByDate[sliderDate]) {
-        if (moment(previousDate).isBefore(moment(val))) {
-          const projection = mapContext.projection
-          drawPoints(
-            casesByDate[sliderDate],
-            mapContext.countiesFeatures,
-            projection
-          )
+        if (moment(previousDate, "MMM D").isBefore(moment(val))) {
+          drawPoints(casesByDate[sliderDate], features, projection)
+          previousDate = sliderDate
         } else {
-          d3.selectAll(`.dots-${moment(val).format("Y-MM-DD")}`).remove()
+          const index = dates.indexOf(sliderDate)
+          const dotSelectors = dates
+            .slice(index)
+            .map(date => `.dots-${moment(date, "MMM D").format("Y-MM-DD")}`)
+            .join(",")
+          d3.selectAll(dotSelectors).remove()
+          previousDate = dates[dates.indexOf(sliderDate)]
         }
       }
-      previousDate = val
       d3.select("#value").text(sliderDate)
     }
 
@@ -165,6 +169,7 @@ const CaseDotMap = ({ recordsByDate, counties, margin }) => {
         <div style={{ textAlign: "center" }}>
           <Legend name={"1 dot for 10 cases"} fill="rgb(235, 158, 2)" />
           <Map
+            selector="michigan-dot-map"
             features={mapContext.data.features}
             path={mapContext.path}
             counties={counties}

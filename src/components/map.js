@@ -9,6 +9,7 @@ const Map = ({
   margin,
   height,
   width,
+  selector,
   stroke = "#000",
 }) => {
   const divRef = useRef()
@@ -19,7 +20,7 @@ const Map = ({
 
   const svg = svgContainer
     .append("svg")
-    .attr("class", "michigan-map")
+    .attr("class", selector)
     .attr("width", width + margin.left)
     .attr("height", height + margin.bottom)
 
