@@ -44,6 +44,10 @@
   display: none;
 }
 
+.chart-legend-group {
+  max-width: 600px;
+}
+
 .chart-legend {
   border-radius: 4px;
   border: 2px solid rebeccapurple;
