@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `Michigan COVID-19 Tracker`,
+    title: `Stay Safe Michigan`,
     description: `COVID-19 Tracker for Michigan`,
     author: `@damaneice`,
   },
