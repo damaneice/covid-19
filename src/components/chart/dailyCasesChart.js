@@ -14,7 +14,7 @@ const createDailyCasesChartData = county => {
   return chartData
 }
 
-const DailyCasesChart = ({ counties, selectedNames }) => {
+const DailyCasesChart = ({ counties, selectedNames, updatedDate }) => {
   const selectedDailyCounties = selectedNames.map(name => {
     return {
       name: name,
@@ -29,6 +29,7 @@ const DailyCasesChart = ({ counties, selectedNames }) => {
           name="New Daily Cases by County"
           margin={{ top: 20, bottom: 80, right: 5, left: 40 }}
           data={selectedDailyCounties}
+          updatedDate={updatedDate}
         />
       )}
     </div>

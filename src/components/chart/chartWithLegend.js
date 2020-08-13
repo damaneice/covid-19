@@ -15,7 +15,7 @@ const stringToColor = name => {
   return color
 }
 
-const ChartWithLegend = ({ data, margin, name }) => {
+const ChartWithLegend = ({ data, margin, name, updatedDate }) => {
   const [counties, setCounties] = useState(data)
   return (
     <div>
@@ -52,6 +52,7 @@ const ChartWithLegend = ({ data, margin, name }) => {
         name={name}
         margin={margin}
         stringToColor={stringToColor}
+        updatedDate={updatedDate}
       />
     </div>
   )

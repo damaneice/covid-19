@@ -21,7 +21,7 @@ const createCasesChartData = county => {
   })
 }
 
-const RollingAverageCasesChart = ({ counties, selectedNames }) => {
+const RollingAverageCasesChart = ({ counties, selectedNames, updatedDate }) => {
   const selectedCounties = selectedNames.map(name => {
     return {
       name: name,
@@ -36,6 +36,7 @@ const RollingAverageCasesChart = ({ counties, selectedNames }) => {
           name="New Cases (7-Day Moving Average) by County"
           margin={{ top: 20, bottom: 80, right: 5, left: 40 }}
           data={selectedCounties}
+          updatedDate={updatedDate}
         />
       )}
     </div>

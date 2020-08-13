@@ -1,7 +1,7 @@
 import * as d3 from "d3"
 import React, { useEffect, useRef } from "react"
 
-const Chart = ({ data, margin, name, stringToColor }) => {
+const Chart = ({ data, margin, name, stringToColor, updatedDate }) => {
   const svgWidth = 600,
     height = 220
   const divRef = useRef()
@@ -179,6 +179,7 @@ const Chart = ({ data, margin, name, stringToColor }) => {
   return (
     <div>
       <div className="compare_chart chart_width">
+        <div className="updated-date">{`Updated ${updatedDate}`}</div>
         <svg
           style={{ position: "absolute", pointerEvents: "none", zIndex: 1 }}
           ref={svgRef}

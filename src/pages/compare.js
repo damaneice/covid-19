@@ -17,9 +17,14 @@ import { useLocation } from "@reach/router"
 import queryString from "query-string"
 import "./home.css"
 
-const updatedDate = data => {
+const updatedDateForCases = data => {
   const edges = data.allCasesByCountyAndDateCsvSheet1.edges
-  return edges[edges.length - 1].node.date
+  return moment(edges[edges.length - 1].node.date).format("MMMM Do")
+}
+
+const updatedDateForPositivityRate = data => {
+  const edges = data.allDiagnosticTestsByResultAndCountyXlsxData.edges
+  return moment(edges[edges.length - 1].node.date).format("MMMM Do")
 }
 
 const ComparePage = ({ data }) => {
@@ -32,9 +37,6 @@ const ComparePage = ({ data }) => {
   return (
     <Layout>
       <SEO title="Compare" />
-      <div className="updated-date">
-        <p>Updated {moment(updatedDate(data)).format("dddd, MMMM Do, YYYY")}</p>
-      </div>
       <div
         style={{
           marginTop: "16px",
@@ -45,14 +47,28 @@ const ComparePage = ({ data }) => {
         }}
       >
         <RollingAverageCasesChart
+          updatedDate={updatedDateForCases(data)}
           counties={keys}
           selectedNames={selectedNames}
         />
-        <DailyCasesChart counties={keys} selectedNames={selectedNames} />
-        <DailyDeathsChart counties={keys} selectedNames={selectedNames} />
-        <TotalCasesChart counties={keys} selectedNames={selectedNames} />
+        <DailyCasesChart
+          updatedDate={updatedDateForCases(data)}
+          counties={keys}
+          selectedNames={selectedNames}
+        />
+        <DailyDeathsChart
+          updatedDate={updatedDateForCases(data)}
+          counties={keys}
+          selectedNames={selectedNames}
+        />
+        <TotalCasesChart
+          updatedDate={updatedDateForCases(data)}
+          counties={keys}
+          selectedNames={selectedNames}
+        />
 
         <PositivityChart
+          updatedDate={updatedDateForPositivityRate(data)}
           edges={data.allDiagnosticTestsByResultAndCountyXlsxData.edges}
           counties={keys}
           selectedNames={selectedNames.filter(name => name !== "Michigan")} //remove Michigan from Positivity Chart
