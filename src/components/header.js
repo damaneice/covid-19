@@ -30,6 +30,7 @@ const Header = ({ siteTitle }) => {
           }}
         >
           {siteTitle}
+          <span className="short-description">COVID-19 Tracker</span>
         </Link>
         <div className="header-right">
           <Link activeClassName="active" to="/">
