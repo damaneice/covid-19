@@ -257,6 +257,7 @@
     margin: 10px;
     border: 1px solid;
   }
+
   .chart_width {
     width: 600px;
   }
@@ -266,9 +267,11 @@
   .compare_chart {
     padding: 10px;
   }
+
   .chart_width {
     max-width: 300px;
   }
+
   .table {
     grid-template-columns: repeat(4, 1fr);
   }

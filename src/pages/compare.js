@@ -1,10 +1,10 @@
 import React from "react"
 
-import TotalCasesChart from "../components/totalCasesChart"
-import DailyCasesChart from "../components/dailyCasesChart"
-import DailyDeathsChart from "../components/dailyDeathsChart"
-import RollingAverageCasesChart from "../components/rollingAverageCasesChart"
-import PositivityChart from "../components/positivityChart"
+import TotalCasesChart from "../components/chart/totalCasesChart"
+import DailyCasesChart from "../components/chart/dailyCasesChart"
+import DailyDeathsChart from "../components/chart/dailyDeathsChart"
+import RollingAverageCasesChart from "../components/chart/rollingAverageCasesChart"
+import PositivityChart from "../components/chart/positivityChart"
 import {
   countyCaseDataTransformer,
   stateCaseDataTransformer,
