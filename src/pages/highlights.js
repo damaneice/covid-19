@@ -4,6 +4,8 @@ import Layout from "../components/layout"
 import CaseRateMap from "../components/map/caseRateMap"
 import CaseDotMap from "../components/map/caseDotMap"
 import TotalCasesMap from "../components/map/totalCasesMap"
+import TotalCaseFatalitiesMap from "../components/map/totalCaseFatalitiesMap"
+
 import moment from "moment"
 import SEO from "../components/seo"
 import "./home.css"
@@ -57,6 +59,7 @@ const countyCaseDataTransformer = data => {
       counties[edge.node.county] = {
         rateOfChange: 0,
         cases: 0,
+        deaths: 0,
         chart: [{ newCases: 0, cases: 0 }],
       }
     }
@@ -201,7 +204,9 @@ const HighlightsPage = ({ data }) => {
   const counties = countyCaseDataTransformer(data)
   const [showCaseRate, setShowCaseRate] = useState(true)
   const [showTotalCases, setShowTotalCases] = useState(false)
+  const [showTotalCaseFatalities, setShowTotalCaseFatalities] = useState(false)
   const [showTimelapse, setShowTimelapse] = useState(false)
+
   const stateFigures = computeStateFigures(data)
   const countyFigures = computeCountyFigures(counties)
 
@@ -232,6 +237,12 @@ const HighlightsPage = ({ data }) => {
             margin={{ top: 20, bottom: 80, right: 5, left: 40 }}
           />
         </div>
+        <div style={{ display: showTotalCaseFatalities ? "block" : "none" }}>
+          <TotalCaseFatalitiesMap
+            counties={counties}
+            margin={{ top: 20, bottom: 80, right: 5, left: 40 }}
+          />
+        </div>
         <div style={{ display: showTimelapse ? "block" : "none" }}>
           <CaseDotMap
             recordsByDate={data.allCasesByCountyAndDateCsvSheet1.edges}
@@ -247,6 +258,7 @@ const HighlightsPage = ({ data }) => {
             onClick={() => {
               setShowCaseRate(true)
               setShowTotalCases(false)
+              setShowTotalCaseFatalities(false)
               setShowTimelapse(false)
             }}
           >
@@ -257,16 +269,31 @@ const HighlightsPage = ({ data }) => {
             onClick={() => {
               setShowCaseRate(false)
               setShowTotalCases(true)
+              setShowTotalCaseFatalities(false)
               setShowTimelapse(false)
             }}
           >
             TOTAL CASES
           </button>
           <button
+            className={`case-map-button ${
+              showTotalCaseFatalities ? "active" : ""
+            }`}
+            onClick={() => {
+              setShowCaseRate(false)
+              setShowTotalCases(false)
+              setShowTotalCaseFatalities(true)
+              setShowTimelapse(false)
+            }}
+          >
+            TOTAL FATALITIES
+          </button>
+          <button
             className={`case-map-button ${showTimelapse ? "active" : ""}`}
             onClick={() => {
               setShowCaseRate(false)
               setShowTotalCases(false)
+              setShowTotalCaseFatalities(false)
               setShowTimelapse(true)
             }}
           >
