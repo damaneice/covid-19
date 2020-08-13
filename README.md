@@ -1,4 +1,4 @@
-### Michigan Covid-19 Data (https://covid-19-michigan.netlify.app/)
+### Michigan Covid-19 Data (https://staysafemichigan.com/)
 
 This project was created to display County level Michigan COVID-19 data. The data is from the MDHHS Coronavirus website (www.michigan.gov/coronavirus) and the New York Times (https://github.com/nytimes/covid-19-data).
 
