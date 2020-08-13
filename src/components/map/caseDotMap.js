@@ -26,9 +26,13 @@ const generatePoint = feature => {
   return point
 }
 
-const drawPoints = (casesOnDate, countiesFeatures, projection) => {
+const drawPoints = (
+  casesOnDate,
+  countiesFeatures,
+  countyCaseTracking,
+  projection
+) => {
   const pointsPerCase = 10
-  const countyCaseTracking = {}
   const points = []
   casesOnDate.forEach(item => {
     if (countiesFeatures[item.county]) {
@@ -120,15 +124,22 @@ const Slider = ({ recordsByDate, mapContext, width }) => {
     const sliderStart = () => {
       clearInterval(timelapse)
     }
+
     const projection = mapContext.projection
     const features = mapContext.countiesFeatures
-    drawPoints(casesByDate[dates[0]], features, projection)
+    const countyCaseTracking = {}
+    drawPoints(casesByDate[dates[0]], features, countyCaseTracking, projection)
     let previousDate = dates[0]
     const sliderOnChange = val => {
       const sliderDate = moment(val).format("MMM D")
       if (casesByDate[sliderDate]) {
         if (moment(previousDate, "MMM D").isBefore(moment(val))) {
-          drawPoints(casesByDate[sliderDate], features, projection)
+          drawPoints(
+            casesByDate[sliderDate],
+            features,
+            countyCaseTracking,
+            projection
+          )
           previousDate = sliderDate
         } else {
           const index = dates.indexOf(sliderDate)
