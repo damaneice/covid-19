@@ -8,6 +8,11 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import "./home.css"
 
+const updatedDate = data => {
+  const edges = data.allCovid19HospitalizationsCsvSheet1.edges
+  return moment(edges[edges.length - 1].node["DATE"]).format("MMMM Do")
+}
+
 const hospitalizationsTransformer = data => {
   const { edges } = data.allCovid19HospitalizationsCsvSheet1
   const deaths = []
@@ -50,11 +55,6 @@ const createChartData = hospitalization => {
   })
 }
 
-const updatedDate = data => {
-  const edges = data.allCovid19HospitalizationsCsvSheet1.edges
-  return edges[edges.length - 1].node.Date
-}
-
 const HospitalizationsPage = ({ data }) => {
   const hospitalizationsTypes = hospitalizationsTransformer(data)
   const hospitalizations = Object.keys(hospitalizationsTypes).map(
@@ -69,9 +69,6 @@ const HospitalizationsPage = ({ data }) => {
   return (
     <Layout>
       <SEO title="Hospitalizations" />
-      <div className="updated-date">
-        <p>Updated {moment(updatedDate(data)).format("dddd, MMMM Do, YYYY")}</p>
-      </div>
       <div
         style={{
           marginTop: "16px",
@@ -85,6 +82,7 @@ const HospitalizationsPage = ({ data }) => {
           name="COVID Hospitalizations in Michigan"
           margin={{ top: 20, bottom: 80, right: 5, left: 40 }}
           data={hospitalizations}
+          updatedDate={updatedDate(data)}
         />
       </div>
     </Layout>

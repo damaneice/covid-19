@@ -49,7 +49,7 @@ const positiveTestPercentageTransformer = edges => {
   return counties
 }
 
-const PositivityChart = ({ edges, counties, selectedNames }) => {
+const PositivityChart = ({ edges, counties, selectedNames, updatedDate }) => {
   const countiesPositivity = positiveTestPercentageTransformer(edges)
   const countyNamesMapping = {
     "St. Clair": "St Clair",
@@ -77,6 +77,7 @@ const PositivityChart = ({ edges, counties, selectedNames }) => {
           name="Percentage of Tests That Were Positive"
           margin={{ top: 20, bottom: 80, right: 5, left: 40 }}
           data={selectedCounties}
+          updatedDate={updatedDate}
         />
       )}
     </div>

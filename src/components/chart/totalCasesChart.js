@@ -14,7 +14,7 @@ const createTotalCaseChartData = county => {
   return chartData
 }
 
-const TotalCasesChart = ({ counties, selectedNames }) => {
+const TotalCasesChart = ({ counties, selectedNames, updatedDate }) => {
   const selectedTotalCaseCounties = selectedNames.map(name => {
     return {
       name: name,
@@ -29,6 +29,7 @@ const TotalCasesChart = ({ counties, selectedNames }) => {
           name="Total Cases by County"
           margin={{ top: 20, bottom: 80, right: 5, left: 50 }}
           data={selectedTotalCaseCounties}
+          updatedDate={updatedDate}
         />
       )}
     </div>
