@@ -66,6 +66,7 @@ const Chart = ({ data, margin, name, stringToColor, updatedDate }) => {
       .replace(/\s/g, "")
       .replace(/\(/g, "")
       .replace(/\)/g, "")
+      .replace(/'/g, "")
       .toLowerCase()
 
     const mouseLineClass = "mouse-line" + lineClassName

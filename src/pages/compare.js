@@ -4,6 +4,8 @@ import TotalCasesChart from "../components/chart/totalCasesChart"
 import DailyCasesChart from "../components/chart/dailyCasesChart"
 import DailyDeathsChart from "../components/chart/dailyDeathsChart"
 import RollingAverageCasesChart from "../components/chart/rollingAverageCasesChart"
+import NewCasesPercentageChart from "../components/chart/newCasesPercentageChart"
+import TotalCasesPercentageChart from "../components/chart/TotalCasesPercentageChart"
 import PositivityChart from "../components/chart/positivityChart"
 import {
   countyCaseDataTransformer,
@@ -56,6 +58,11 @@ const ComparePage = ({ data }) => {
           counties={keys}
           selectedNames={selectedNames}
         />
+        <NewCasesPercentageChart
+          updatedDate={updatedDateForCases(data)}
+          counties={keys}
+          selectedNames={selectedNames.filter(name => name !== "Michigan")} //remove Michigan
+        />
         <DailyDeathsChart
           updatedDate={updatedDateForCases(data)}
           counties={keys}
@@ -66,12 +73,16 @@ const ComparePage = ({ data }) => {
           counties={keys}
           selectedNames={selectedNames}
         />
-
+        <TotalCasesPercentageChart
+          updatedDate={updatedDateForCases(data)}
+          counties={keys}
+          selectedNames={selectedNames.filter(name => name !== "Michigan")} //remove Michigan
+        />
         <PositivityChart
           updatedDate={updatedDateForPositivityRate(data)}
           edges={data.allDiagnosticTestsByResultAndCountyXlsxData.edges}
           counties={keys}
-          selectedNames={selectedNames.filter(name => name !== "Michigan")} //remove Michigan from Positivity Chart
+          selectedNames={selectedNames.filter(name => name !== "Michigan")} //remove Michigan
         />
       </div>
     </Layout>
