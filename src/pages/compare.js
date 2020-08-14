@@ -5,7 +5,7 @@ import DailyCasesChart from "../components/chart/dailyCasesChart"
 import DailyDeathsChart from "../components/chart/dailyDeathsChart"
 import RollingAverageCasesChart from "../components/chart/rollingAverageCasesChart"
 import NewCasesPercentageChart from "../components/chart/newCasesPercentageChart"
-import TotalCasesPercentageChart from "../components/chart/TotalCasesPercentageChart"
+import TotalCasesPercentageChart from "../components/chart/totalCasesPercentageChart"
 import PositivityChart from "../components/chart/positivityChart"
 import {
   countyCaseDataTransformer,
