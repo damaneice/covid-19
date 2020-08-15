@@ -33,6 +33,11 @@ exports[`Header renders correctly 1`] = `
       }
     >
       Default Starter
+      <span
+        className="short-description"
+      >
+        COVID-19 Tracker
+      </span>
     </a>
     <div
       className="header-right"
