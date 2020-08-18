@@ -18,7 +18,7 @@ const updatedDate = data => {
 
 const percentOfChange = (newvalue, previousValue) => {
   const change = newvalue - previousValue
-  return (change / newvalue) * 100 || 0
+  return newvalue !== 0 ? (change / newvalue) * 100 : 0
 }
 
 const countyCaseDataTransformer = data => {
@@ -109,6 +109,7 @@ const computeStateFigures = data => {
     mostRecent.newDeaths,
     previous.newDeaths
   )
+
   return {
     changeOfCases,
     changeOfDeaths,
