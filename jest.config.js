@@ -11,6 +11,9 @@ module.exports = {
   globals: {
     __PATH_PREFIX__: ``,
   },
+  clearMocks: true,
+  resetMocks: true,
+  restoreMocks: true,
   testURL: `http://localhost`,
   setupFiles: [`<rootDir>/loadershim.js`],
 }

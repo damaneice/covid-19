@@ -7,23 +7,24 @@ import useMapContext from "./useMapContext"
 import useWindow from "../useWindow"
 import Map from "./map"
 
-const randomUniform = (min, max) => Math.random() * (max - min) + min
+export const randomUniform = (min, max) => Math.random() * (max - min) + min
 
-const generatePoint = feature => {
-  let point = []
+export const generateDot = feature => {
+  let dot = []
   let bounds = d3.geoBounds(feature)
-  while (point.length < 1) {
+  let count = 0
+  while (dot.length < 1 && count < 10) {
     let minX = bounds[0][0]
     let maxX = bounds[1][0]
     let minY = bounds[0][1]
     let maxY = bounds[1][1]
-    let tempPoint = [randomUniform(minX, maxX), randomUniform(minY, maxY)]
-
-    if (d3.geoContains(feature, tempPoint)) {
-      point = tempPoint
+    let tempDot = [randomUniform(minX, maxX), randomUniform(minY, maxY)]
+    if (d3.geoContains(feature, tempDot)) {
+      dot = tempDot
     }
+    count++
   }
-  return point
+  return dot
 }
 
 const drawPoints = (
@@ -48,7 +49,7 @@ const drawPoints = (
       }
 
       for (let i = 0; i < numberOfPointsToCreate; i++) {
-        points.push(generatePoint(countiesFeatures[item.county]))
+        points.push(generateDot(countiesFeatures[item.county]))
       }
     }
   })
