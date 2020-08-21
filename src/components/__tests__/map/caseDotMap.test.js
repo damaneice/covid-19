@@ -1,38 +1,41 @@
-import React from "react"
+import * as d3 from "d3"
+jest.mock("d3")
+import { generateDot } from "../../map/caseDotMap"
 
 describe("Dot map", () => {
-  let mockGeoContains = () => {
-    console.log("initial")
-    return false
-  }
-  jest.mock("d3", () => ({
-    geoBounds: jest.fn(() => {
+  beforeEach(() => {
+    d3.geoBounds = jest.fn(() => {
       return [
         [-83.689384, 42.431179],
         [-83.083393, 42.888647],
       ]
-    }),
-    geoContains: jest.fn(() => {
-      return mockGeoContains()
-    }),
-  }))
-  const { generateDot } = require("../../map/caseDotMap")
+    })
+  })
 
   describe("does not generate dot", () => {
     it("fails after 10 tries", () => {
+      const features = oaklandCountyFeatures()
+      d3.geoContains = jest.fn(() => {
+        return false
+      })
+
       expect(generateDot(features).length).toEqual(0)
     })
   })
+
   describe("does generate dot", () => {
     it("inside feature bounds", () => {
-      mockGeoContains = () => {
-        console.log("override")
+      const features = oaklandCountyFeatures()
+      d3.geoContains = jest.fn(() => {
         return true
-      }
+      })
       expect(generateDot(features).length).toEqual(2)
     })
   })
-  const features = {
+})
+
+const oaklandCountyFeatures = () => {
+  return {
     type: "Feature",
     properties: {
       GEO_ID: "0500000US26125",
@@ -62,4 +65,4 @@ describe("Dot map", () => {
       ],
     },
   }
-})
+}
