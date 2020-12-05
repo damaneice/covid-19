@@ -41,7 +41,7 @@
     "babel-jest": "^26.2.2",
     "babel-preset-gatsby": "^0.5.5",
     "cheerio": "^1.0.0-rc.3",
-    "highlight.js": ">=9.18.2",
+    "highlight.js": ">=10.4.1",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^26.2.2",
     "jpeg-js": ">=0.4.0",
