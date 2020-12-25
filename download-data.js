@@ -78,7 +78,7 @@ const downloadData = async link => {
     "src/data/Diagnostic_Tests_by_Result_and_County.xlsx"
   )
   const dataAboutPlacesLink = $(
-    "a[href*='/coronavirus/']:contains('Data About')"
+    "a[href*='/coronavirus/']:contains('Hospitals')"
   ).attr("href")
   const metrics = await downloadAboutPlacesData(dataAboutPlacesLink)
   await downloadNYTData()
