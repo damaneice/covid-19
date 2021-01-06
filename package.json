@@ -37,7 +37,7 @@
     "xlsx": "^0.16.5"
   },
   "devDependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "babel-jest": "^26.2.2",
     "babel-preset-gatsby": "^0.5.5",
     "cheerio": "^1.0.0-rc.3",
