@@ -30,7 +30,7 @@ jobs:
         format: YYYYMMDDHHmm
         utcOffset: "+08:00"
     - name: Create Pull Request
-      uses: peter-evans/create-pull-request@v2
+      uses: peter-evans/create-pull-request@v3.70
       with:
         commit-message: Update Covid case data ${{ steps.current-time.outputs.formattedTime }}
         title: Update Covid case data
