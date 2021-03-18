@@ -48,6 +48,7 @@
     "node-forge": ">=0.10.0",
     "node-notifier": ">=8.0.1",
     "prettier": "2.0.5",
+    "react-dev-utils": ">=11.0.4",
     "react-test-renderer": "^16.13.1"
   },
   "keywords": [
