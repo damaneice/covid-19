@@ -32189,6 +32189,7 @@ date,county,state,fips,cases,deaths,newCases,newDeaths
 2021-04-15,Washtenaw,Michigan,26161,24399,266,292,0
 2021-04-15,Wayne,Michigan,26163,140381,4412,1314,29
 2021-04-15,Wexford,Michigan,26165,2462,33,35,3
+<<<<<<< HEAD
 2021-04-16,Alcona,Michigan,26001,631,26,13,0
 2021-04-16,Alger,Michigan,26003,632,5,2,0
 2021-04-16,Allegan,Michigan,26005,9518,124,98,0
@@ -32273,3 +32274,5 @@ date,county,state,fips,cases,deaths,newCases,newDeaths
 2021-04-16,Washtenaw,Michigan,26161,24638,266,239,0
 2021-04-16,Wayne,Michigan,26163,142132,4421,1751,9
 2021-04-16,Wexford,Michigan,26165,2486,34,24,1
+=======
+>>>>>>> main
