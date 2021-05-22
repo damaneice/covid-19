@@ -98,12 +98,50 @@ const downloadNYTCountyData = async link => {
   await removeFile(usCountiesFileNanme)
 }
 
+const downloadNYTStatePer100kData = async link => {
+  const usStatesFileNanme = "us-states-per-100k.csv"
+  await downloadFile(link, usStatesFileNanme)
+  const data = await readFile(usStatesFileNanme)
+  const list = await neatCsv(data)
+
+  const michiganRows = list.filter(row => {
+    return row.state.toLowerCase() === "michigan"
+  })
+  const states = {}
+  const csv = new ObjectsToCsv(michiganRows)
+  await csv.toDisk("src/data/state-cases-by-date-per-100k.csv")
+  await removeFile(usStatesFileNanme)
+}
+
+const downloadNYTCountyPer100kData = async link => {
+  const usCountiesFileNanme = "us-counties.csv"
+  await downloadFile(link, usCountiesFileNanme)
+  const data = await readFile(usCountiesFileNanme)
+  const list = await neatCsv(data)
+
+  const michiganCounties = list.filter(row => {
+    return row.state.toLowerCase() === "michigan"
+  })
+
+  const csv = new ObjectsToCsv(michiganCounties)
+  await csv.toDisk("src/data/cases-by-county-and-date-per-100k.csv")
+  await removeFile(usCountiesFileNanme)
+}
+
 const downloadNYTData = async () => {
   await downloadNYTCountyData(
     "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv"
   )
   await downloadNYTStateData(
     "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv"
+  )
+
+  await downloadNYTStatePer100kData(
+    "https://raw.githubusercontent.com/nytimes/covid-19-data/master/rolling-averages/us-states.csv"
+  )
+
+  await downloadNYTCountyPer100kData(
+    "https://raw.githubusercontent.com/nytimes/covid-19-data/master/rolling-averages/us-counties.csv"
   )
 }
 module.exports = downloadNYTData

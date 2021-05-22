@@ -2,6 +2,7 @@ import React from "react"
 
 import TotalCasesChart from "../components/chart/totalCasesChart"
 import DailyCasesChart from "../components/chart/dailyCasesChart"
+import CasesPer100kChart from "../components/chart/casesPer100KChart"
 import DailyDeathsChart from "../components/chart/dailyDeathsChart"
 import RollingAverageCasesChart from "../components/chart/rollingAverageCasesChart"
 import NewCasesPercentageChart from "../components/chart/newCasesPercentageChart"
@@ -9,7 +10,9 @@ import TotalCasesPercentageChart from "../components/chart/totalCasesPercentageC
 import PositivityChart from "../components/chart/positivityChart"
 import {
   countyCaseDataTransformer,
+  countyCasePer100KDataTransformer,
   stateCaseDataTransformer,
+  stateCasePer100KDataTransformer
 } from "../util/dataTransformers"
 import { graphql } from "gatsby"
 import moment from "moment"
@@ -24,6 +27,11 @@ const updatedDateForCases = data => {
   return moment(edges[edges.length - 1].node.date).format("MMMM Do")
 }
 
+const updatedDateForCasesPer100k = data => {
+  const edges = data.allCasesByCountyAndDatePer100KCsvSheet1.edges
+  return moment(edges[edges.length - 1].node.date).format("MMMM Do")
+}
+
 const updatedDateForPositivityRate = data => {
   const edges = data.allDiagnosticTestsByResultAndCountyXlsxData.edges
   return moment(edges[edges.length - 1].node.date).format("MMMM Do")
@@ -33,9 +41,13 @@ const ComparePage = ({ data }) => {
   const location = useLocation()
   const result = queryString.parse(location.search)
   const counties = countyCaseDataTransformer(data)
+  const countiesPer100K = countyCasePer100KDataTransformer(data)
   const state = stateCaseDataTransformer(data)
+  const statePer100K = stateCasePer100KDataTransformer(data)
   const selectedNames = result.selection ? result.selection.split(",") : []
   const keys = { ...counties, ...state }
+  const keysPer100K = { ...countiesPer100K, ...statePer100K }
+
   return (
     <Layout>
       <SEO title="Compare" />
@@ -56,6 +68,11 @@ const ComparePage = ({ data }) => {
         <DailyCasesChart
           updatedDate={updatedDateForCases(data)}
           counties={keys}
+          selectedNames={selectedNames}
+        />
+        <CasesPer100kChart
+          updatedDate={updatedDateForCasesPer100k(data)}
+          counties={keysPer100K}
           selectedNames={selectedNames}
         />
         <NewCasesPercentageChart
@@ -102,6 +119,16 @@ export const query = graphql`
         }
       }
     }
+    allCasesByCountyAndDatePer100KCsvSheet1 {
+      edges {
+        node {
+          county
+          cases_avg_per_100k
+          date(formatString: "Y-MM-DD")
+          deaths_avg_per_100k
+        }
+      }
+    }
     allStateCasesByDateCsvSheet1 {
       edges {
         node {
@@ -110,6 +137,16 @@ export const query = graphql`
           newCases
           newDeaths
           state
+        }
+      }
+    }
+    allStateCasesByDatePer100KCsvSheet1 {
+      edges {
+        node {
+          state
+          cases_avg_per_100k
+          date(formatString: "Y-MM-DD")
+          deaths_avg_per_100k
         }
       }
     }
