@@ -35301,7 +35301,7 @@ date,county,state,fips,cases,deaths,newCases,newDeaths
 2021-05-23,Alger,Michigan,26003,665,6,0,0
 2021-05-23,Allegan,Michigan,26005,11000,142,0,0
 2021-05-23,Alpena,Michigan,26007,2237,60,0,0
-2021-05-23,Antrim,Michigan,26009,1943,28,0,0
+2021-05-23,Antrim,Michigan,26009,1615,28,-328,0
 2021-05-23,Arenac,Michigan,26011,1197,29,0,0
 2021-05-23,Baraga,Michigan,26013,959,38,0,0
 2021-05-23,Barry,Michigan,26015,5871,66,0,0
@@ -35311,7 +35311,7 @@ date,county,state,fips,cases,deaths,newCases,newDeaths
 2021-05-23,Branch,Michigan,26023,5617,120,0,0
 2021-05-23,Calhoun,Michigan,26025,14298,295,0,0
 2021-05-23,Cass,Michigan,26027,5413,76,0,0
-2021-05-23,Charlevoix,Michigan,26029,2023,20,0,0
+2021-05-23,Charlevoix,Michigan,26029,1653,20,-370,0
 2021-05-23,Cheboygan,Michigan,26031,1916,45,0,0
 2021-05-23,Chippewa,Michigan,26033,5580,49,0,0
 2021-05-23,Clare,Michigan,26035,2436,80,0,0
@@ -35320,7 +35320,7 @@ date,county,state,fips,cases,deaths,newCases,newDeaths
 2021-05-23,Delta,Michigan,26041,4011,93,0,0
 2021-05-23,Dickinson,Michigan,26043,2724,74,0,0
 2021-05-23,Eaton,Michigan,26045,10039,206,0,0
-2021-05-23,Emmet,Michigan,26047,2824,41,0,0
+2021-05-23,Emmet,Michigan,26047,2362,41,-462,0
 2021-05-23,Genesee,Michigan,26049,41415,934,0,0
 2021-05-23,Gladwin,Michigan,26051,2287,56,0,0
 2021-05-23,Gogebic,Michigan,26053,1396,50,0,0
@@ -35365,7 +35365,7 @@ date,county,state,fips,cases,deaths,newCases,newDeaths
 2021-05-23,Ontonagon,Michigan,26131,472,21,0,0
 2021-05-23,Osceola,Michigan,26133,1927,29,0,0
 2021-05-23,Oscoda,Michigan,26135,657,29,0,0
-2021-05-23,Otsego,Michigan,26137,2762,40,0,0
+2021-05-23,Otsego,Michigan,26137,2338,40,-424,0
 2021-05-23,Ottawa,Michigan,26139,32479,417,0,0
 2021-05-23,Presque Isle,Michigan,26141,1047,34,0,0
 2021-05-23,Roscommon,Michigan,26143,1874,50,0,0
@@ -35376,7 +35376,7 @@ date,county,state,fips,cases,deaths,newCases,newDeaths
 2021-05-23,St. Clair,Michigan,26147,18234,431,6,0
 2021-05-23,St. Joseph,Michigan,26149,6153,98,0,0
 2021-05-23,Tuscola,Michigan,26157,5626,174,0,0
-2021-05-23,Unknown,Michigan,,0,13,0,0
+2021-05-23,Unknown,Michigan,,611,13,611,0
 2021-05-23,Van Buren,Michigan,26159,7025,126,0,0
 2021-05-23,Washtenaw,Michigan,26161,26896,297,0,0
 2021-05-23,Wayne,Michigan,26163,163277,4959,0,0
@@ -35385,7 +35385,7 @@ date,county,state,fips,cases,deaths,newCases,newDeaths
 2021-05-24,Alger,Michigan,26003,665,6,0,0
 2021-05-24,Allegan,Michigan,26005,11019,142,19,0
 2021-05-24,Alpena,Michigan,26007,2248,60,11,0
-2021-05-24,Antrim,Michigan,26009,1945,28,2,0
+2021-05-24,Antrim,Michigan,26009,1617,28,2,0
 2021-05-24,Arenac,Michigan,26011,1199,29,2,0
 2021-05-24,Baraga,Michigan,26013,961,38,2,0
 2021-05-24,Barry,Michigan,26015,5879,67,8,1
@@ -35395,7 +35395,7 @@ date,county,state,fips,cases,deaths,newCases,newDeaths
 2021-05-24,Branch,Michigan,26023,5625,120,8,0
 2021-05-24,Calhoun,Michigan,26025,14324,295,26,0
 2021-05-24,Cass,Michigan,26027,5418,76,5,0
-2021-05-24,Charlevoix,Michigan,26029,2035,21,12,1
+2021-05-24,Charlevoix,Michigan,26029,1661,21,8,1
 2021-05-24,Cheboygan,Michigan,26031,1920,45,4,0
 2021-05-24,Chippewa,Michigan,26033,5581,49,1,0
 2021-05-24,Clare,Michigan,26035,2442,80,6,0
@@ -35404,7 +35404,7 @@ date,county,state,fips,cases,deaths,newCases,newDeaths
 2021-05-24,Delta,Michigan,26041,4015,93,4,0
 2021-05-24,Dickinson,Michigan,26043,2727,74,3,0
 2021-05-24,Eaton,Michigan,26045,10054,209,15,3
-2021-05-24,Emmet,Michigan,26047,2830,41,6,0
+2021-05-24,Emmet,Michigan,26047,2367,41,5,0
 2021-05-24,Genesee,Michigan,26049,41459,934,44,0
 2021-05-24,Gladwin,Michigan,26051,2288,56,1,0
 2021-05-24,Gogebic,Michigan,26053,1399,50,3,0
@@ -35449,7 +35449,7 @@ date,county,state,fips,cases,deaths,newCases,newDeaths
 2021-05-24,Ontonagon,Michigan,26131,473,21,1,0
 2021-05-24,Osceola,Michigan,26133,1931,29,4,0
 2021-05-24,Oscoda,Michigan,26135,663,29,6,0
-2021-05-24,Otsego,Michigan,26137,2762,40,0,0
+2021-05-24,Otsego,Michigan,26137,2338,40,0,0
 2021-05-24,Ottawa,Michigan,26139,32526,417,47,0
 2021-05-24,Presque Isle,Michigan,26141,1047,34,0,0
 2021-05-24,Roscommon,Michigan,26143,1877,50,3,0
@@ -35460,7 +35460,7 @@ date,county,state,fips,cases,deaths,newCases,newDeaths
 2021-05-24,St. Clair,Michigan,26147,18249,431,15,0
 2021-05-24,St. Joseph,Michigan,26149,6166,98,13,0
 2021-05-24,Tuscola,Michigan,26157,5633,174,7,0
-2021-05-24,Unknown,Michigan,,0,13,0,0
+2021-05-24,Unknown,Michigan,,609,13,-2,0
 2021-05-24,Van Buren,Michigan,26159,7042,126,17,0
 2021-05-24,Washtenaw,Michigan,26161,26943,298,47,1
 2021-05-24,Wayne,Michigan,26163,163555,4960,278,1
@@ -35469,7 +35469,7 @@ date,county,state,fips,cases,deaths,newCases,newDeaths
 2021-05-25,Alger,Michigan,26003,666,6,1,0
 2021-05-25,Allegan,Michigan,26005,11032,143,13,1
 2021-05-25,Alpena,Michigan,26007,2248,60,0,0
-2021-05-25,Antrim,Michigan,26009,1945,28,0,0
+2021-05-25,Antrim,Michigan,26009,1617,28,0,0
 2021-05-25,Arenac,Michigan,26011,1199,29,0,0
 2021-05-25,Baraga,Michigan,26013,965,38,4,0
 2021-05-25,Barry,Michigan,26015,5884,67,5,0
@@ -35479,7 +35479,7 @@ date,county,state,fips,cases,deaths,newCases,newDeaths
 2021-05-25,Branch,Michigan,26023,5632,120,7,0
 2021-05-25,Calhoun,Michigan,26025,14346,296,22,1
 2021-05-25,Cass,Michigan,26027,5431,76,13,0
-2021-05-25,Charlevoix,Michigan,26029,2035,21,0,0
+2021-05-25,Charlevoix,Michigan,26029,1661,21,0,0
 2021-05-25,Cheboygan,Michigan,26031,1920,45,0,0
 2021-05-25,Chippewa,Michigan,26033,5585,49,4,0
 2021-05-25,Clare,Michigan,26035,2445,80,3,0
@@ -35488,7 +35488,7 @@ date,county,state,fips,cases,deaths,newCases,newDeaths
 2021-05-25,Delta,Michigan,26041,4017,93,2,0
 2021-05-25,Dickinson,Michigan,26043,2728,74,1,0
 2021-05-25,Eaton,Michigan,26045,10064,208,10,-1
-2021-05-25,Emmet,Michigan,26047,2830,42,0,1
+2021-05-25,Emmet,Michigan,26047,2367,42,0,1
 2021-05-25,Genesee,Michigan,26049,41484,943,25,9
 2021-05-25,Gladwin,Michigan,26051,2292,58,4,2
 2021-05-25,Gogebic,Michigan,26053,1399,50,0,0
@@ -35533,7 +35533,7 @@ date,county,state,fips,cases,deaths,newCases,newDeaths
 2021-05-25,Ontonagon,Michigan,26131,473,21,0,0
 2021-05-25,Osceola,Michigan,26133,1937,29,6,0
 2021-05-25,Oscoda,Michigan,26135,663,29,0,0
-2021-05-25,Otsego,Michigan,26137,2762,40,0,0
+2021-05-25,Otsego,Michigan,26137,2338,40,0,0
 2021-05-25,Ottawa,Michigan,26139,32548,417,22,0
 2021-05-25,Presque Isle,Michigan,26141,1046,34,-1,0
 2021-05-25,Roscommon,Michigan,26143,1877,50,0,0
@@ -35544,8 +35544,92 @@ date,county,state,fips,cases,deaths,newCases,newDeaths
 2021-05-25,St. Clair,Michigan,26147,18291,433,42,2
 2021-05-25,St. Joseph,Michigan,26149,6172,98,6,0
 2021-05-25,Tuscola,Michigan,26157,5641,174,8,0
-2021-05-25,Unknown,Michigan,,0,13,0,0
+2021-05-25,Unknown,Michigan,,617,13,8,0
 2021-05-25,Van Buren,Michigan,26159,7054,128,12,2
 2021-05-25,Washtenaw,Michigan,26161,26958,299,15,1
 2021-05-25,Wayne,Michigan,26163,163677,4976,122,16
 2021-05-25,Wexford,Michigan,26165,2873,47,2,0
+2021-05-26,Alcona,Michigan,26001,737,32,0,0
+2021-05-26,Alger,Michigan,26003,666,6,0,0
+2021-05-26,Allegan,Michigan,26005,11051,143,19,0
+2021-05-26,Alpena,Michigan,26007,2250,60,2,0
+2021-05-26,Antrim,Michigan,26009,1623,28,6,0
+2021-05-26,Arenac,Michigan,26011,1199,29,0,0
+2021-05-26,Baraga,Michigan,26013,966,38,1,0
+2021-05-26,Barry,Michigan,26015,5901,67,17,0
+2021-05-26,Bay,Michigan,26017,11199,346,11,1
+2021-05-26,Benzie,Michigan,26019,1271,34,3,0
+2021-05-26,Berrien,Michigan,26021,15443,283,22,0
+2021-05-26,Branch,Michigan,26023,5640,120,8,0
+2021-05-26,Calhoun,Michigan,26025,14357,296,11,0
+2021-05-26,Cass,Michigan,26027,5434,76,3,0
+2021-05-26,Charlevoix,Michigan,26029,1663,21,2,0
+2021-05-26,Cheboygan,Michigan,26031,1922,45,2,0
+2021-05-26,Chippewa,Michigan,26033,5585,49,0,0
+2021-05-26,Clare,Michigan,26035,2447,80,2,0
+2021-05-26,Clinton,Michigan,26037,7559,88,14,0
+2021-05-26,Crawford,Michigan,26039,987,14,0,0
+2021-05-26,Delta,Michigan,26041,4020,93,3,0
+2021-05-26,Dickinson,Michigan,26043,2729,74,1,0
+2021-05-26,Eaton,Michigan,26045,10075,208,11,0
+2021-05-26,Emmet,Michigan,26047,2368,42,1,0
+2021-05-26,Genesee,Michigan,26049,41508,943,24,0
+2021-05-26,Gladwin,Michigan,26051,2292,58,0,0
+2021-05-26,Gogebic,Michigan,26053,1400,50,1,0
+2021-05-26,Grand Traverse,Michigan,26055,6427,96,5,0
+2021-05-26,Gratiot,Michigan,26057,6941,123,5,1
+2021-05-26,Hillsdale,Michigan,26059,4376,92,7,0
+2021-05-26,Houghton,Michigan,26061,3124,42,3,0
+2021-05-26,Huron,Michigan,26063,4070,77,2,0
+2021-05-26,Ingham,Michigan,26065,24687,379,19,1
+2021-05-26,Ionia,Michigan,26067,9235,85,11,1
+2021-05-26,Iosco,Michigan,26069,1989,73,3,1
+2021-05-26,Iron,Michigan,26071,1050,51,1,0
+2021-05-26,Isabella,Michigan,26073,6291,95,11,1
+2021-05-26,Jackson,Michigan,26075,20922,307,17,0
+2021-05-26,Kalamazoo,Michigan,26077,22934,393,32,1
+2021-05-26,Kalkaska,Michigan,26079,1115,23,1,0
+2021-05-26,Kent,Michigan,26081,72561,835,106,-3
+2021-05-26,Keweenaw,Michigan,26083,175,2,0,0
+2021-05-26,Lake,Michigan,26085,626,15,1,0
+2021-05-26,Lapeer,Michigan,26087,9686,205,8,0
+2021-05-26,Leelanau,Michigan,26089,1236,18,1,0
+2021-05-26,Lenawee,Michigan,26091,10765,168,4,1
+2021-05-26,Livingston,Michigan,26093,16647,187,17,-1
+2021-05-26,Luce,Michigan,26095,1324,5,5,0
+2021-05-26,Mackinac,Michigan,26097,704,3,1,0
+2021-05-26,Macomb,Michigan,26099,99820,2416,87,-1
+2021-05-26,Manistee,Michigan,26101,1966,24,0,0
+2021-05-26,Marquette,Michigan,26103,5912,62,3,0
+2021-05-26,Mason,Michigan,26105,2119,36,2,0
+2021-05-26,Mecosta,Michigan,26107,3174,32,4,0
+2021-05-26,Menominee,Michigan,26109,2111,42,2,0
+2021-05-26,Midland,Michigan,26111,7494,90,11,2
+2021-05-26,Missaukee,Michigan,26113,1498,25,5,1
+2021-05-26,Monroe,Michigan,26115,15290,259,20,1
+2021-05-26,Montcalm,Michigan,26117,8088,116,12,0
+2021-05-26,Montmorency,Michigan,26119,608,20,3,0
+2021-05-26,Muskegon,Michigan,26121,18153,365,39,1
+2021-05-26,Newaygo,Michigan,26123,4823,66,15,0
+2021-05-26,Oakland,Michigan,26125,117495,2346,108,0
+2021-05-26,Oceana,Michigan,26127,2744,60,12,0
+2021-05-26,Ogemaw,Michigan,26129,1721,43,2,0
+2021-05-26,Ontonagon,Michigan,26131,474,21,1,0
+2021-05-26,Osceola,Michigan,26133,1940,29,3,0
+2021-05-26,Oscoda,Michigan,26135,667,29,4,0
+2021-05-26,Otsego,Michigan,26137,2339,40,1,0
+2021-05-26,Ottawa,Michigan,26139,32599,418,51,1
+2021-05-26,Presque Isle,Michigan,26141,1048,34,2,0
+2021-05-26,Roscommon,Michigan,26143,1881,50,4,0
+2021-05-26,Saginaw,Michigan,26145,22293,606,43,0
+2021-05-26,Sanilac,Michigan,26151,4237,118,7,0
+2021-05-26,Schoolcraft,Michigan,26153,431,5,1,0
+2021-05-26,Shiawassee,Michigan,26155,6377,103,9,0
+2021-05-26,St. Clair,Michigan,26147,18326,433,35,0
+2021-05-26,St. Joseph,Michigan,26149,6180,98,8,0
+2021-05-26,Tuscola,Michigan,26157,5642,174,1,0
+2021-05-26,Unknown,Michigan,,615,13,-2,0
+2021-05-26,Van Buren,Michigan,26159,7066,128,12,0
+2021-05-26,Washtenaw,Michigan,26161,26980,299,22,0
+2021-05-26,Wayne,Michigan,26163,163841,4980,164,4
+2021-05-26,Wexford,Michigan,26165,2879,47,6,0
