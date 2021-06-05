@@ -36300,7 +36300,7 @@ date,county,state,fips,cases,deaths,newCases,newDeaths
 2021-06-03,St. Clair,Michigan,26147,18396,438,2,2
 2021-06-03,St. Joseph,Michigan,26149,6215,99,7,-1
 2021-06-03,Tuscola,Michigan,26157,5657,175,1,0
-2021-06-03,Unknown,Michigan,,665,13,0,0
+2021-06-03,Unknown,Michigan,,665,15,0,2
 2021-06-03,Van Buren,Michigan,26159,7095,128,1,0
 2021-06-03,Washtenaw,Michigan,26161,27042,302,11,0
 2021-06-03,Wayne,Michigan,26163,164612,5048,104,17
