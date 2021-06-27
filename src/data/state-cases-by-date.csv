@@ -472,3 +472,4 @@ date,state,fips,cases,deaths,newCases,newDeaths
 2021-06-23,Michigan,26,997361,20900,228,3
 2021-06-24,Michigan,26,997561,20931,200,31
 2021-06-25,Michigan,26,997692,20945,131,14
+2021-06-26,Michigan,26,997692,20945,0,0
