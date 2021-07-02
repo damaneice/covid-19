@@ -38492,7 +38492,7 @@ date,geoid,county,state,cases,cases_avg,cases_avg_per_100k,deaths,deaths_avg,dea
 2021-06-29,USA-26005,Allegan,Michigan,0,1.67,1.41,1,0.29,0.24
 2021-06-29,USA-26003,Alger,Michigan,0,0.29,3.14,0,0,0
 2021-06-29,USA-26001,Alcona,Michigan,0,0,0,0,0,0
-2021-06-30,USA-26999,Unknown,Michigan,-7,0.5,,0,0.14,
+2021-06-30,USA-26999,Unknown,Michigan,-6,0.5,,-1,0.17,
 2021-06-30,USA-26165,Wexford,Michigan,1,0.29,0.85,0,0.14,0.42
 2021-06-30,USA-26163,Wayne,Michigan,47,36,2.06,0,2.43,0.14
 2021-06-30,USA-26161,Washtenaw,Michigan,0,4.57,1.24,0,0.29,0.08
