@@ -35,7 +35,7 @@
     "react-dom": "^16.14.0",
     "react-helmet": "^6.1.0",
     "trim": "^1.0.1",
-    "xlsx": "^0.16.9",
+    "xlsx": "^0.17.0",
     "xmlhttprequest-ssl": ">=1.6.2"
   },
   "devDependencies": {
