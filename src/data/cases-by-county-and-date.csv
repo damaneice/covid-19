@@ -40416,8 +40416,92 @@ date,county,state,fips,cases,deaths,newCases,newDeaths
 2021-07-22,St. Clair,Michigan,26147,18574,451,5,0
 2021-07-22,St. Joseph,Michigan,26149,6282,101,0,0
 2021-07-22,Tuscola,Michigan,26157,5689,174,0,0
-2021-07-22,Unknown,Michigan,,756,16,0,0
+2021-07-22,Unknown,Michigan,,759,16,3,0
 2021-07-22,Van Buren,Michigan,26159,7185,133,0,0
 2021-07-22,Washtenaw,Michigan,26161,27318,312,59,0
 2021-07-22,Wayne,Michigan,26163,167006,5196,0,0
 2021-07-22,Wexford,Michigan,26165,2906,48,0,0
+2021-07-23,Alcona,Michigan,26001,743,33,1,0
+2021-07-23,Alger,Michigan,26003,670,7,0,0
+2021-07-23,Allegan,Michigan,26005,11266,162,19,0
+2021-07-23,Alpena,Michigan,26007,2290,64,12,0
+2021-07-23,Antrim,Michigan,26009,1644,30,-1,0
+2021-07-23,Arenac,Michigan,26011,1223,29,4,0
+2021-07-23,Baraga,Michigan,26013,994,40,0,0
+2021-07-23,Barry,Michigan,26015,5993,70,7,0
+2021-07-23,Bay,Michigan,26017,11308,354,10,0
+2021-07-23,Benzie,Michigan,26019,1290,36,5,0
+2021-07-23,Berrien,Michigan,26021,15695,300,16,1
+2021-07-23,Branch,Michigan,26023,5848,121,34,0
+2021-07-23,Calhoun,Michigan,26025,14690,320,24,0
+2021-07-23,Cass,Michigan,26027,5544,78,22,0
+2021-07-23,Charlevoix,Michigan,26029,1696,22,2,0
+2021-07-23,Cheboygan,Michigan,26031,1942,47,4,0
+2021-07-23,Chippewa,Michigan,26033,5666,51,4,1
+2021-07-23,Clare,Michigan,26035,2493,85,1,0
+2021-07-23,Clinton,Michigan,26037,7697,95,17,0
+2021-07-23,Crawford,Michigan,26039,996,14,0,0
+2021-07-23,Delta,Michigan,26041,4073,95,10,0
+2021-07-23,Dickinson,Michigan,26043,2772,74,6,0
+2021-07-23,Eaton,Michigan,26045,10210,212,12,0
+2021-07-23,Emmet,Michigan,26047,2399,43,3,0
+2021-07-23,Genesee,Michigan,26049,41947,976,46,0
+2021-07-23,Gladwin,Michigan,26051,2313,61,2,0
+2021-07-23,Gogebic,Michigan,26053,1444,53,0,0
+2021-07-23,Grand Traverse,Michigan,26055,6542,100,18,0
+2021-07-23,Gratiot,Michigan,26057,6976,125,-1,0
+2021-07-23,Hillsdale,Michigan,26059,4427,94,12,0
+2021-07-23,Houghton,Michigan,26061,3151,43,6,0
+2021-07-23,Huron,Michigan,26063,4099,82,1,0
+2021-07-23,Ingham,Michigan,26065,25057,394,38,0
+2021-07-23,Ionia,Michigan,26067,9393,85,15,0
+2021-07-23,Iosco,Michigan,26069,2014,75,4,0
+2021-07-23,Iron,Michigan,26071,1071,53,4,0
+2021-07-23,Isabella,Michigan,26073,6363,100,11,0
+2021-07-23,Jackson,Michigan,26075,21174,326,29,2
+2021-07-23,Kalamazoo,Michigan,26077,23345,403,43,0
+2021-07-23,Kalkaska,Michigan,26079,1157,28,6,1
+2021-07-23,Kent,Michigan,26081,74208,868,110,1
+2021-07-23,Keweenaw,Michigan,26083,174,2,0,0
+2021-07-23,Lake,Michigan,26085,641,17,1,1
+2021-07-23,Lapeer,Michigan,26087,9802,215,10,0
+2021-07-23,Leelanau,Michigan,26089,1254,20,5,0
+2021-07-23,Lenawee,Michigan,26091,10900,178,11,0
+2021-07-23,Livingston,Michigan,26093,16922,198,35,0
+2021-07-23,Luce,Michigan,26095,1338,6,0,0
+2021-07-23,Mackinac,Michigan,26097,721,3,3,0
+2021-07-23,Macomb,Michigan,26099,101189,2507,174,0
+2021-07-23,Manistee,Michigan,26101,1985,25,2,0
+2021-07-23,Marquette,Michigan,26103,5951,65,4,0
+2021-07-23,Mason,Michigan,26105,2159,37,10,0
+2021-07-23,Mecosta,Michigan,26107,3226,37,0,0
+2021-07-23,Menominee,Michigan,26109,2135,43,2,-1
+2021-07-23,Midland,Michigan,26111,7627,95,7,0
+2021-07-23,Missaukee,Michigan,26113,1522,27,2,0
+2021-07-23,Monroe,Michigan,26115,15530,267,25,1
+2021-07-23,Montcalm,Michigan,26117,8213,121,1,1
+2021-07-23,Montmorency,Michigan,26119,618,20,-1,0
+2021-07-23,Muskegon,Michigan,26121,18551,383,38,1
+2021-07-23,Newaygo,Michigan,26123,4922,69,4,0
+2021-07-23,Oakland,Michigan,26125,119667,2470,288,3
+2021-07-23,Oceana,Michigan,26127,2791,60,8,0
+2021-07-23,Ogemaw,Michigan,26129,1754,43,3,0
+2021-07-23,Ontonagon,Michigan,26131,485,22,1,0
+2021-07-23,Osceola,Michigan,26133,1971,31,1,0
+2021-07-23,Oscoda,Michigan,26135,694,31,0,0
+2021-07-23,Otsego,Michigan,26137,2371,41,1,0
+2021-07-23,Ottawa,Michigan,26139,33086,442,37,0
+2021-07-23,Presque Isle,Michigan,26141,1059,34,1,0
+2021-07-23,Roscommon,Michigan,26143,1907,55,2,0
+2021-07-23,Saginaw,Michigan,26145,22671,640,46,1
+2021-07-23,Sanilac,Michigan,26151,4270,125,5,0
+2021-07-23,Schoolcraft,Michigan,26153,439,5,0,0
+2021-07-23,Shiawassee,Michigan,26155,6478,110,19,0
+2021-07-23,St. Clair,Michigan,26147,18580,453,6,2
+2021-07-23,St. Joseph,Michigan,26149,6288,101,6,0
+2021-07-23,Tuscola,Michigan,26157,5695,174,6,0
+2021-07-23,Unknown,Michigan,,758,16,-1,0
+2021-07-23,Van Buren,Michigan,26159,7205,134,20,1
+2021-07-23,Washtenaw,Michigan,26161,27318,312,0,0
+2021-07-23,Wayne,Michigan,26163,167307,5201,301,5
+2021-07-23,Wexford,Michigan,26165,2909,48,3,0
