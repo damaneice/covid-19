@@ -535,3 +535,4 @@ date,geoid,state,cases,cases_avg,cases_avg_per_100k,deaths,deaths_avg,deaths_avg
 2021-08-25,USA-26,Michigan,5002,2028,20.31,39,13.14,0.13
 2021-08-26,USA-26,Michigan,270,2041.71,20.44,0,13.14,0.13
 2021-08-27,USA-26,Michigan,4342,2004.14,20.07,73,17.86,0.18
+2021-08-28,USA-26,Michigan,0,2004.14,20.07,0,17.86,0.18
