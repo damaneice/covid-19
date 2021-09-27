@@ -47,7 +47,7 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^26.6.3",
     "jpeg-js": "^0.4.3",
-    "mixme": ">=0.5.1",
+    "mixme": ">=0.5.2",
     "node-forge": ">=0.10.0",
     "node-notifier": "^9.0.1",
     "prettier": "2.0.5",
