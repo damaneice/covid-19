@@ -39,7 +39,7 @@
     "xmlhttprequest-ssl": ">=1.6.2"
   },
   "devDependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "babel-jest": "^26.6.3",
     "babel-preset-gatsby": "^0.5.16",
     "cheerio": "^1.0.0-rc.9",
