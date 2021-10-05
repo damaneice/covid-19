@@ -46049,22 +46049,6 @@ date,county,state,fips,cases,deaths,newCases,newDeaths
 2021-09-27,Washtenaw,Michigan,26161,31034,324,171,4
 2021-09-27,Wayne,Michigan,26163,185283,5385,982,6
 2021-09-27,Wexford,Michigan,26165,3174,50,32,0
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> main
->>>>>>> main
->>>>>>> main
->>>>>>> main
->>>>>>> main
 2021-09-28,Alcona,Michigan,26001,908,39,0,0
 2021-09-28,Alger,Michigan,26003,854,7,0,0
 2021-09-28,Allegan,Michigan,26005,13137,174,0,0
@@ -46149,19 +46133,6 @@ date,county,state,fips,cases,deaths,newCases,newDeaths
 2021-09-28,Washtenaw,Michigan,26161,31113,324,79,0
 2021-09-28,Wayne,Michigan,26163,185283,5385,0,0
 2021-09-28,Wexford,Michigan,26165,3174,50,0,0
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> main
->>>>>>> main
->>>>>>> main
->>>>>>> main
 2021-09-29,Alcona,Michigan,26001,930,39,22,0
 2021-09-29,Alger,Michigan,26003,866,7,12,0
 2021-09-29,Allegan,Michigan,26005,13245,176,108,2
@@ -46246,16 +46217,6 @@ date,county,state,fips,cases,deaths,newCases,newDeaths
 2021-09-29,Washtenaw,Michigan,26161,31188,324,75,0
 2021-09-29,Wayne,Michigan,26163,186206,5404,923,19
 2021-09-29,Wexford,Michigan,26165,3232,50,58,0
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> main
->>>>>>> main
->>>>>>> main
 2021-09-30,Alcona,Michigan,26001,930,39,0,0
 2021-09-30,Alger,Michigan,26003,866,7,0,0
 2021-09-30,Allegan,Michigan,26005,13245,176,0,0
@@ -46592,3 +46553,87 @@ date,county,state,fips,cases,deaths,newCases,newDeaths
 2021-10-03,Washtenaw,Michigan,26161,31354,325,0,0
 2021-10-03,Wayne,Michigan,26163,187216,5422,0,0
 2021-10-03,Wexford,Michigan,26165,3259,50,0,0
+2021-10-04,Alcona,Michigan,26001,958,39,16,0
+2021-10-04,Alger,Michigan,26003,892,7,10,0
+2021-10-04,Allegan,Michigan,26005,13508,179,125,2
+2021-10-04,Alpena,Michigan,26007,2806,69,14,0
+2021-10-04,Antrim,Michigan,26009,2060,35,36,1
+2021-10-04,Arenac,Michigan,26011,1507,31,24,0
+2021-10-04,Baraga,Michigan,26013,1178,45,6,0
+2021-10-04,Barry,Michigan,26015,7143,77,60,1
+2021-10-04,Bay,Michigan,26017,13327,370,189,0
+2021-10-04,Benzie,Michigan,26019,1520,38,18,0
+2021-10-04,Berrien,Michigan,26021,18303,315,106,0
+2021-10-04,Branch,Michigan,26023,6919,134,34,0
+2021-10-04,Calhoun,Michigan,26025,17314,337,179,0
+2021-10-04,Cass,Michigan,26027,6663,86,43,0
+2021-10-04,Charlevoix,Michigan,26029,2219,29,49,0
+2021-10-04,Cheboygan,Michigan,26031,2481,58,30,0
+2021-10-04,Chippewa,Michigan,26033,6402,54,39,0
+2021-10-04,Clare,Michigan,26035,3188,92,73,0
+2021-10-04,Clinton,Michigan,26037,9076,103,139,0
+2021-10-04,Crawford,Michigan,26039,1163,16,9,1
+2021-10-04,Delta,Michigan,26041,5272,102,67,1
+2021-10-04,Dickinson,Michigan,26043,3642,75,44,0
+2021-10-04,Eaton,Michigan,26045,12093,231,117,2
+2021-10-04,Emmet,Michigan,26047,3033,48,54,1
+2021-10-04,Genesee,Michigan,26049,48009,1036,300,2
+2021-10-04,Gladwin,Michigan,26051,2932,66,47,0
+2021-10-04,Gogebic,Michigan,26053,1643,53,9,0
+2021-10-04,Grand Traverse,Michigan,26055,8097,111,97,3
+2021-10-04,Gratiot,Michigan,26057,7902,128,84,1
+2021-10-04,Hillsdale,Michigan,26059,5616,111,81,1
+2021-10-04,Houghton,Michigan,26061,3616,52,40,0
+2021-10-04,Huron,Michigan,26063,4524,88,25,0
+2021-10-04,Ingham,Michigan,26065,28963,435,235,3
+2021-10-04,Ionia,Michigan,26067,10861,94,134,2
+2021-10-04,Iosco,Michigan,26069,2639,86,45,0
+2021-10-04,Iron,Michigan,26071,1291,53,11,0
+2021-10-04,Isabella,Michigan,26073,8017,106,113,1
+2021-10-04,Jackson,Michigan,26075,24128,348,153,1
+2021-10-04,Kalamazoo,Michigan,26077,27594,437,220,0
+2021-10-04,Kalkaska,Michigan,26079,1546,30,30,0
+2021-10-04,Kent,Michigan,26081,86407,945,725,9
+2021-10-04,Keweenaw,Michigan,26083,221,4,4,0
+2021-10-04,Lake,Michigan,26085,836,19,9,0
+2021-10-04,Lapeer,Michigan,26087,11191,238,112,0
+2021-10-04,Leelanau,Michigan,26089,1520,23,18,1
+2021-10-04,Lenawee,Michigan,26091,13135,194,149,2
+2021-10-04,Livingston,Michigan,26093,20755,216,249,0
+2021-10-04,Luce,Michigan,26095,1473,6,9,0
+2021-10-04,Mackinac,Michigan,26097,1078,6,18,0
+2021-10-04,Macomb,Michigan,26099,114372,2609,802,1
+2021-10-04,Manistee,Michigan,26101,2324,33,14,0
+2021-10-04,Marquette,Michigan,26103,7257,72,90,1
+2021-10-04,Mason,Michigan,26105,2786,43,31,0
+2021-10-04,Mecosta,Michigan,26107,4100,41,82,0
+2021-10-04,Menominee,Michigan,26109,2982,48,58,0
+2021-10-04,Midland,Michigan,26111,9236,120,110,1
+2021-10-04,Missaukee,Michigan,26113,1734,30,15,0
+2021-10-04,Monroe,Michigan,26115,18492,290,177,1
+2021-10-04,Montcalm,Michigan,26117,9597,128,128,0
+2021-10-04,Montmorency,Michigan,26119,802,24,12,0
+2021-10-04,Muskegon,Michigan,26121,21622,412,201,0
+2021-10-04,Newaygo,Michigan,26123,5953,73,69,0
+2021-10-04,Oakland,Michigan,26125,137205,2603,890,9
+2021-10-04,Oceana,Michigan,26127,3370,66,53,0
+2021-10-04,Ogemaw,Michigan,26129,2345,46,76,0
+2021-10-04,Ontonagon,Michigan,26131,572,22,2,0
+2021-10-04,Osceola,Michigan,26133,2544,34,52,0
+2021-10-04,Oscoda,Michigan,26135,839,32,8,0
+2021-10-04,Otsego,Michigan,26137,2884,48,40,0
+2021-10-04,Ottawa,Michigan,26139,38403,480,264,3
+2021-10-04,Presque Isle,Michigan,26141,1260,35,18,0
+2021-10-04,Roscommon,Michigan,26143,2192,59,20,0
+2021-10-04,Saginaw,Michigan,26145,26251,662,190,2
+2021-10-04,Sanilac,Michigan,26151,4648,131,32,1
+2021-10-04,Schoolcraft,Michigan,26153,668,5,19,0
+2021-10-04,Shiawassee,Michigan,26155,7864,121,72,1
+2021-10-04,St. Clair,Michigan,26147,20859,493,34,0
+2021-10-04,St. Joseph,Michigan,26149,7684,112,62,1
+2021-10-04,Tuscola,Michigan,26157,6751,185,77,2
+2021-10-04,Unknown,Michigan,,947,18,0,0
+2021-10-04,Van Buren,Michigan,26159,8524,153,81,1
+2021-10-04,Washtenaw,Michigan,26161,31687,325,333,0
+2021-10-04,Wayne,Michigan,26163,188385,5428,1169,6
+2021-10-04,Wexford,Michigan,26165,3297,50,38,0
