@@ -46049,6 +46049,22 @@ date,county,state,fips,cases,deaths,newCases,newDeaths
 2021-09-27,Washtenaw,Michigan,26161,31034,324,171,4
 2021-09-27,Wayne,Michigan,26163,185283,5385,982,6
 2021-09-27,Wexford,Michigan,26165,3174,50,32,0
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> main
+>>>>>>> main
+>>>>>>> main
+>>>>>>> main
+>>>>>>> main
 2021-09-28,Alcona,Michigan,26001,908,39,0,0
 2021-09-28,Alger,Michigan,26003,854,7,0,0
 2021-09-28,Allegan,Michigan,26005,13137,174,0,0
@@ -46133,6 +46149,19 @@ date,county,state,fips,cases,deaths,newCases,newDeaths
 2021-09-28,Washtenaw,Michigan,26161,31113,324,79,0
 2021-09-28,Wayne,Michigan,26163,185283,5385,0,0
 2021-09-28,Wexford,Michigan,26165,3174,50,0,0
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> main
+>>>>>>> main
+>>>>>>> main
+>>>>>>> main
 2021-09-29,Alcona,Michigan,26001,930,39,22,0
 2021-09-29,Alger,Michigan,26003,866,7,12,0
 2021-09-29,Allegan,Michigan,26005,13245,176,108,2
@@ -46217,6 +46246,16 @@ date,county,state,fips,cases,deaths,newCases,newDeaths
 2021-09-29,Washtenaw,Michigan,26161,31188,324,75,0
 2021-09-29,Wayne,Michigan,26163,186206,5404,923,19
 2021-09-29,Wexford,Michigan,26165,3232,50,58,0
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> main
+>>>>>>> main
+>>>>>>> main
 2021-09-30,Alcona,Michigan,26001,930,39,0,0
 2021-09-30,Alger,Michigan,26003,866,7,0,0
 2021-09-30,Allegan,Michigan,26005,13245,176,0,0
