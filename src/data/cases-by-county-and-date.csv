@@ -51929,7 +51929,14 @@ date,county,state,fips,cases,deaths,newCases,newDeaths
 2021-12-06,Washtenaw,Michigan,26161,40794,365,506,4
 2021-12-06,Wayne,Michigan,26163,237193,6001,2824,24
 2021-12-06,Wexford,Michigan,26165,4686,77,52,1
+<<<<<<< HEAD
 2021-12-07,Alcona,Michigan,26001,1358,51,0,0
+=======
+<<<<<<< HEAD
+2021-12-07,Alcona,Michigan,26001,1358,51,0,0
+=======
+>>>>>>> main
+>>>>>>> main
 2021-12-07,Alger,Michigan,26003,1162,9,0,0
 2021-12-07,Allegan,Michigan,26005,18780,226,0,0
 2021-12-07,Alpena,Michigan,26007,4183,89,0,0
@@ -52097,6 +52104,7 @@ date,county,state,fips,cases,deaths,newCases,newDeaths
 2021-12-08,Washtenaw,Michigan,26161,41318,366,368,2
 2021-12-08,Wayne,Michigan,26163,240454,6063,3261,62
 2021-12-08,Wexford,Michigan,26165,4754,79,68,2
+<<<<<<< HEAD
 2021-12-09,Alcona,Michigan,26001,1363,51,0,0
 2021-12-09,Alger,Michigan,26003,1169,9,0,0
 2021-12-09,Allegan,Michigan,26005,18988,241,0,0
