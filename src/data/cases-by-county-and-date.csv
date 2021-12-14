@@ -51932,6 +51932,10 @@ date,county,state,fips,cases,deaths,newCases,newDeaths
 <<<<<<< HEAD
 2021-12-07,Alcona,Michigan,26001,1358,51,0,0
 =======
+<<<<<<< HEAD
+2021-12-07,Alcona,Michigan,26001,1358,51,0,0
+=======
+>>>>>>> main
 >>>>>>> main
 2021-12-07,Alger,Michigan,26003,1162,9,0,0
 2021-12-07,Allegan,Michigan,26005,18780,226,0,0
@@ -52100,3 +52104,88 @@ date,county,state,fips,cases,deaths,newCases,newDeaths
 2021-12-08,Washtenaw,Michigan,26161,41318,366,368,2
 2021-12-08,Wayne,Michigan,26163,240454,6063,3261,62
 2021-12-08,Wexford,Michigan,26165,4754,79,68,2
+<<<<<<< HEAD
+2021-12-09,Alcona,Michigan,26001,1363,51,0,0
+2021-12-09,Alger,Michigan,26003,1169,9,0,0
+2021-12-09,Allegan,Michigan,26005,18988,241,0,0
+2021-12-09,Alpena,Michigan,26007,4229,95,0,0
+2021-12-09,Antrim,Michigan,26009,2988,45,13,0
+2021-12-09,Arenac,Michigan,26011,2201,47,0,0
+2021-12-09,Baraga,Michigan,26013,1594,47,0,0
+2021-12-09,Barry,Michigan,26015,10092,113,0,0
+2021-12-09,Bay,Michigan,26017,18033,444,0,0
+2021-12-09,Benzie,Michigan,26019,2232,44,0,0
+2021-12-09,Berrien,Michigan,26021,23033,354,0,0
+2021-12-09,Branch,Michigan,26023,8889,152,0,0
+2021-12-09,Calhoun,Michigan,26025,23161,419,0,0
+2021-12-09,Cass,Michigan,26027,8370,108,0,0
+2021-12-09,Charlevoix,Michigan,26029,3199,45,19,0
+2021-12-09,Cheboygan,Michigan,26031,3406,78,0,0
+2021-12-09,Chippewa,Michigan,26033,7859,76,0,0
+2021-12-09,Clare,Michigan,26035,4790,121,0,0
+2021-12-09,Clinton,Michigan,26037,13078,140,0,0
+2021-12-09,Crawford,Michigan,26039,1833,20,0,0
+2021-12-09,Delta,Michigan,26041,6809,128,0,0
+2021-12-09,Dickinson,Michigan,26043,4809,88,0,0
+2021-12-09,Eaton,Michigan,26045,16940,291,0,0
+2021-12-09,Emmet,Michigan,26047,4228,55,30,0
+2021-12-09,Genesee,Michigan,26049,65350,1223,0,0
+2021-12-09,Gladwin,Michigan,26051,3865,85,0,0
+2021-12-09,Gogebic,Michigan,26053,2194,57,0,0
+2021-12-09,Grand Traverse,Michigan,26055,11434,154,0,0
+2021-12-09,Gratiot,Michigan,26057,10195,151,0,0
+2021-12-09,Hillsdale,Michigan,26059,7767,153,0,0
+2021-12-09,Houghton,Michigan,26061,5432,62,0,0
+2021-12-09,Huron,Michigan,26063,5966,111,0,0
+2021-12-09,Ingham,Michigan,26065,38405,527,0,0
+2021-12-09,Ionia,Michigan,26067,14384,132,0,0
+2021-12-09,Iosco,Michigan,26069,3637,106,0,0
+2021-12-09,Iron,Michigan,26071,1779,70,0,0
+2021-12-09,Isabella,Michigan,26073,10712,145,0,0
+2021-12-09,Jackson,Michigan,26075,32264,421,0,0
+2021-12-09,Kalamazoo,Michigan,26077,36425,503,0,0
+2021-12-09,Kalkaska,Michigan,26079,2298,43,0,0
+2021-12-09,Kent,Michigan,26081,114279,1162,0,0
+2021-12-09,Keweenaw,Michigan,26083,386,9,0,0
+2021-12-09,Lake,Michigan,26085,1279,28,0,0
+2021-12-09,Lapeer,Michigan,26087,14936,298,0,0
+2021-12-09,Leelanau,Michigan,26089,2301,36,0,0
+2021-12-09,Lenawee,Michigan,26091,18053,234,0,0
+2021-12-09,Livingston,Michigan,26093,30300,311,0,0
+2021-12-09,Luce,Michigan,26095,1787,6,0,0
+2021-12-09,Mackinac,Michigan,26097,1587,17,0,0
+2021-12-09,Macomb,Michigan,26099,148217,2971,0,0
+2021-12-09,Manistee,Michigan,26101,3051,52,0,0
+2021-12-09,Marquette,Michigan,26103,9447,93,0,0
+2021-12-09,Mason,Michigan,26105,4388,60,0,0
+2021-12-09,Mecosta,Michigan,26107,6000,75,0,0
+2021-12-09,Menominee,Michigan,26109,3987,58,0,0
+2021-12-09,Midland,Michigan,26111,12607,167,0,0
+2021-12-09,Missaukee,Michigan,26113,2137,44,0,0
+2021-12-09,Monroe,Michigan,26115,24962,342,0,0
+2021-12-09,Montcalm,Michigan,26117,12987,156,0,0
+2021-12-09,Montmorency,Michigan,26119,1297,39,0,0
+2021-12-09,Muskegon,Michigan,26121,29648,485,0,0
+2021-12-09,Newaygo,Michigan,26123,8276,116,0,0
+2021-12-09,Oakland,Michigan,26125,177385,2898,0,0
+2021-12-09,Oceana,Michigan,26127,4697,77,0,0
+2021-12-09,Ogemaw,Michigan,26129,3166,76,0,0
+2021-12-09,Ontonagon,Michigan,26131,706,25,0,0
+2021-12-09,Osceola,Michigan,26133,3682,52,0,0
+2021-12-09,Oscoda,Michigan,26135,1130,47,0,0
+2021-12-09,Otsego,Michigan,26137,4109,73,40,1
+2021-12-09,Ottawa,Michigan,26139,52064,595,0,0
+2021-12-09,Presque Isle,Michigan,26141,1657,49,0,0
+2021-12-09,Roscommon,Michigan,26143,3429,90,0,0
+2021-12-09,Saginaw,Michigan,26145,34451,741,0,0
+2021-12-09,Sanilac,Michigan,26151,6343,154,0,0
+2021-12-09,Schoolcraft,Michigan,26153,1114,7,0,0
+2021-12-09,Shiawassee,Michigan,26155,11804,157,0,0
+2021-12-09,St. Clair,Michigan,26147,28046,577,144,0
+2021-12-09,St. Joseph,Michigan,26149,10263,139,0,0
+2021-12-09,Tuscola,Michigan,26157,9324,226,0,0
+2021-12-09,Unknown,Michigan,,1613,18,-600,-2
+2021-12-09,Van Buren,Michigan,26159,11677,191,0,0
+2021-12-09,Washtenaw,Michigan,26161,41672,367,354,1
+2021-12-09,Wayne,Michigan,26163,240454,6063,0,0
+2021-12-09,Wexford,Michigan,26165,4754,79,0,0
